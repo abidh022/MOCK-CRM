@@ -1,0 +1,228 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #EDF0F4;
+    
+}
+/* headerbelowheader */
+#recBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFFFFF;
+    width: 98.76%;
+    height: 32px; 
+    padding: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.selectBox {
+    padding: 10px; 
+    font-family: sans-serif;
+    font-weight: bolder;
+    font-size: 15px;
+    cursor: pointer;
+    flex: 0.1%;/* Flex-grow, flex-shrink, flex-basis for responsiveness */
+    border: 1px solid lightgray;
+    box-shadow: 0 2px 10px rgba(52, 215, 247, 0.1);
+    transition: border-color 0.3s;
+    margin: 0 10px; /* Margin for spacing */
+    border-radius: 6px;
+}
+
+.selectBox:focus {
+    border-color: rgb(95, 136, 251);
+    box-shadow: 0 6px 20px rgba(52, 215, 247, 0.5);
+    outline: none;
+}
+    
+#createButton {
+    margin-left : 90px;
+    padding: 12px 15px;
+    background-color: #0093f7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: auto;
+    font-size: 15px;
+    flex: 0 1 auto; /* Keep the button from growing */
+}
+
+#createButton:hover ,#selectt:hover{
+    background-color: #0061ca;
+}
+
+#selectt{
+    width: 3px;
+    padding: 12px 15px;
+    border-radius: 5px;
+    border-left: none;
+    background-color: #0093f7;
+    color: white;
+    cursor: pointer;
+}
+
+#actionbtn {
+    padding: 12px  15px;
+    cursor: pointer;
+    text-align-last: center;
+    margin-right:10px ;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #EEF2F8;
+    margin: 0 10px; /* Add margin for spacing */
+    border: 1px solid #ccc;
+    flex: 1 1 5%;/* Responsive flex properties*/
+}
+
+#selectt:hover, #actionbtn:hover {
+    background-color: #f0f0f0;
+}
+
+.hidden {
+    display: none;
+}
+
+/* headerbelowheaderbelow */
+#totalRecords{
+    margin-left: 20px;
+    color :#313949;
+}
+
+.main-container {
+    display: flex;
+    height: 75vh;
+    flex-wrap: wrap
+}
+
+.left-container, .right-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    margin: 10px; 
+    padding: 10px; 
+    box-sizing: border-box;
+}
+
+.left-container{
+    width: 100%;
+    max-width: 250px;
+    /* width: 250px;  */
+}
+
+.right-container {
+    flex-grow: 1;
+    position: relative;
+    background: white;
+    overflow-y: auto; /* Ensure content is scrollable */
+    height: 100%; /* Fill available height of the parent container */
+    min-width: 0;
+    margin-top: 10px; /* Optional: Add spacing between the search bar and list */
+}
+
+.right-container::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent 0%, transparent 90%, lightgray 90%, lightgray 100%);
+    top: 0;
+    right: 0;
+    height: 100%;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    padding: 5px;
+    margin-bottom: 10px;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 1;
+}
+
+.record-list {
+    overflow-y: auto; 
+    height: calc(70vh - 50px);
+}
+
+.search-bar input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 5px;
+}
+
+.search-icon {
+    margin-left: 5px;
+    color: gray;
+}
+
+.header {
+    display: flex;
+    background: #f1f1f1;
+    padding: 10px;
+    position:relative;
+    font-size: 16px;
+}
+
+.header span {
+    flex: 1;
+    text-align: center;
+}
+
+.data-container {
+    display: flex;
+    flex-direction: column;
+    color: #404040;
+    font-size: 14px;
+}
+
+.data-row {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd; 
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+.data-row:hover{
+    background-color:#F7F9FB;
+    color: #3D92F1;
+}
+
+.data-row:last-child {
+    border-bottom: none; 
+}
+
+.data-row span {
+    flex: 3;
+    text-align: center;
+}
+
+.record-item {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    color: #404040;
+
+}
+
+.record-item input {
+    margin-right: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 10px;
+}
+

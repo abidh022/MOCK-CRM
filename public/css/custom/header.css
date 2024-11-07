@@ -1,0 +1,93 @@
+header {
+    background: #313949;
+    color: white;
+    height: 50px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+}   
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+nav ul.main-nav {
+    flex-grow: 1;
+    justify-content: flex-start;
+}
+
+nav ul.nav-icons {
+    justify-content: flex-end;
+    align-items: center;
+}
+
+nav ul li {
+    padding: 0 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    font-family: sans-serif;
+}
+
+nav ul li.crm a::before {
+    content: "";
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-image: url('/public/assets/crmlogo.png');
+    background-size: cover;
+    vertical-align: middle;
+}
+
+nav ul li a:hover::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transform: scaleX(1);
+    transition: transform 0.3s ease-in-out;
+}
+
+nav ul li a:hover {
+    padding-bottom: 3px; 
+}
+
+nav ul li a::after {
+    content: "";
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: white;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+nav ul.nav-icons li a {
+    color: white;
+    font-size: 18px;
+}
+
+nav ul.nav-icons li a:hover {
+    color: #585854;
+}

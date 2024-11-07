@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Profile - Zoho CRM</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/public/assets/ZohoCRM.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <link rel="stylesheet" href="./../../css/leads/leadProfile.css">
+    <script src="./../../js/leads/leadProfile.js" defer></script>
+  </head>
+
+  <body>
+    <custom-header></custom-header>
+    <script src="./../../js/customs/header.js"></script>
+
+    <div class="recBox">
+        <i id="back" class="fas fa-arrow-left"></i>
+            <div id="img">
+            <label id="fileInput">
+                <input  accept="image/*" />
+                <img id="uploadedImage" />
+                <svg id="personIcon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.33 0-10 1.67-10 5v2h20v-2c0-3.33-6.67-5-10-5z"/>
+                </svg>
+            </label>
+        </div>
+        <div class="b1">
+            <p id="leadName"></p>
+            <!-- a id="link" href="EditPageLayout">Edit Page Layout</a> -->
+        </div>
+        <div class="b2">
+            <button id="edit">Edit</button>
+            <input type="hidden" id="leadId" value="672b3f7dc5c1604c1fe0d5fa">
+            <button id="convert" >Convert</button>
+            <button id="delete" onclick="deleteLead()">Delete</button>
+            <button id="sendEmail" >Send Email</button>
+        </div>
+    </div>
+
+    <!-- //header below  -->
+
+     <button class="toggle-button" id="toggleButton">◄|►</button>
+    <div class="main-container" id="mainContainer">
+        <!-- Left Container -->
+        <div class="left-container" id="leftContainer">
+            <div id="related">
+                <h3>Related List</h3>
+                <ul>
+                    <li><a href="#lead-information">Lead Info</a></li>
+                    <li><a href="#notes">Notes</a></li>
+                    <li><a href="#cadences">Cadences</a></li>
+                    <li><a href="#attachments">Attachments</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#open-activities">Open Activities</a></li>
+                    <li><a href="#closed-activities">Closed Activities</a></li>
+                    <li><a href="#invited-meetings">Invited Meetings</a></li>
+                    <li><a href="#emails">Emails</a></li>
+                    <li><a href="#campaigns">Campaigns</a></li>
+                    <li><a href="#social">Social</a></li>
+                </ul>
+            </div>
+        </div>
+ <!-- Right Container -->
+            <div class="right-container" id="rightContainer">
+                <div class="button-container">
+                    <div class="indicator" id="indicator"></div>
+                    <button class="button button1" id="button1">Overview</button>
+                    <button class="button button2" id="button2">Timeline</button>
+                </div>
+            <div id="overview" class="content">
+                <div id="lead-information" class="section">
+                    <h2>Lead Information</h2>
+                    <div class="field"><label for="leadOwner">Lead Owner - </label><span id="">Abidh</span></div>
+                    <div class="field"><label for="leadName">Lead Name - </label><span id="leadN"></span></div>
+                    <div class="field"><label for="email">Email - </label><span id="email"></span></div>
+                    <div class="field"><label for="phone">Mobile - </label><span id="mobile"></span></div>
+                    <div class="field"><label for="status">Status - </label><span id="status"></span></div>
+                    <div class="field"><label for="leadStatus">Lead Status - </label><span id="leadStatus"></span></div>
+                    <div class="field"><label for="company">Company - </label><span id="company"></span></div>
+                    <div class="field"><label for="street">Street - </label><span id="street"></span></div>
+                    <div class="field"><label for="city">City - </label><span id="city"></span></div>
+                    <div class="field"><label for="state">State - </label><span id="state"></span></div>
+                    <div class="field"><label for="country">Country - </label><span id="country"></span></div>
+                    <div class="field"><label for="zipCode">Zip Code - </label><span id="zipCode"></span></div>
+                    <div class="field"><label for="description">Description - </label><span id="description"></span></div>
+                </div>
+    
+                <!-- Notes Section -->
+                <div id="notes" class="section">
+                    <h2>Notes</h2>
+                    <div class="field">Recent Last</div>
+                    <input type="text" placeholder="Add a note..." />
+                </div>
+    
+                <!-- Cadences Section -->
+                <div id="cadences" class="section">
+                    <h2>Cadences</h2>
+                    <p class="field">No records found</p>
+                    <button class="action-button">Add Cadence</button>
+                </div>
+    
+                <!-- Attachments Section -->
+                <div id="attachments" class="section">
+                    <h2>Attachments</h2>
+                    <p class="field">No Attachment</p>
+                    <button class="action-button">Attach</button>
+                </div>
+    
+                <!-- Products Section -->
+                <div id="products" class="section">
+                    <h2>Products</h2>
+                    <p class="field">No records found</p>
+                    <button class="action-button">Add Products</button>
+                </div>
+    
+                <!-- Open Activities Section -->
+                <div id="open-activities" class="section">
+                    <h2>Open Activities</h2>
+                    <p class="field">No records found</p>
+                    <button class="action-button">Add New Activity</button>
+                </div>
+    
+                <!-- Closed Activities Section -->
+                <div id="closed-activities" class="section">
+                    <h2>Closed Activities</h2>
+                    <p class="field">No records found</p>
+                </div>
+    
+                <!-- Invited Meetings Section -->
+                <div id="invited-meetings" class="section">
+                    <h2>Invited Meetings</h2>
+                    <p class="field">No records found</p>
+                </div>
+    
+                <!-- Emails Section -->
+                <div id="emails" class="section">
+                    <h2>Emails</h2>
+                    <p class="field">No records found</p>
+                    <button class="action-button">Compose Email</button>
+                </div>
+    
+                <!-- Campaigns Section -->
+                <div id="campaigns" class="section">
+                    <h2>Campaigns</h2>
+                    <p class="field">No records found</p>
+                    <button class="action-button">Add Campaign</button>
+                </div>
+    
+                <!-- Social Section -->
+                <div id="social" class="section">
+                    <h2>Social</h2>
+                    <p class="field">Associate Twitter</p>
+                    <p class="field">Associate Facebook</p>
+                    <p class="field">You cannot search a profile in Facebook. This has to be associated from the Social Tab</p>
+                </div>
+            </div>
+            <div id="timeline" class="content" style="display: none;">
+                <div id="campaigns" class="section">
+                    <h2>History</h2>
+                    <p> History
+                        0 Upcoming Automated Actions 
+                        Timeline History
+                        Oct 25, 2024
+                        01:03 PM
+                        Lead Created
+                        by Abidh Oct 25, 2024</p>
+                    </div>
+</div>
+        </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leads - Zoho CRM</title>
+    <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
+    <!-- <link rel="shortcut icon" href="/public/assets/tabCRM.png" type="image/x-icon"> -->
+    <link rel="stylesheet" href="../../css/leads/leadshome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="../../js/leads/leadshome.js" defer></script>
+    <link rel="stylesheet" href="../../css/custom/headerBelowHeader.css">
+
+</head>
+<body>
+    <custom-header></custom-header>
+    <script src="../../js/customs/header.js"></script>
+    <div id=recBox>
+        <select class="selectBox">My Leads
+            <option>My Leads</option>
+            <option>  Public Views </option>
+            <option>  All Leads </option>
+            <option> All Locked Leads</option>
+            <option>Converted Leads</option>
+            <option> Junk Leads</option>
+            <option> Mailing Labels</option>
+            <option>My Converted Leads</option>
+        </select>
+        <div id=createAndImport >
+            <button id="createButton">Create Lead</button>
+            <select id=selectt >
+                <option class="hidden">select</option>
+                <option  value="import-leads">import leads</option>
+                <option  value="import-notes">import notes</option>
+            </select>
+        </div>
+        
+        <select name="action" id='actionbtn'>
+            <option value="" class="hidden">Actions</option>
+            <option value="mass_delete">Mass Delete</option>
+            <option value="mass_update">Mass Update</option>
+            <option value="mass_convert">Mass Convert</option>
+            <option value="manage_tags">Manage Tags</option>
+            <option value="drafts">Drafts</option>
+            <option value="mass_email">Mass Email</option>
+            <option value="autoresponders">Autoresponders</option>
+            <option value="approve_leads">Approve Leads</option>
+            <option value="deduplicate_leads">Deduplicate Leads</option>
+            <option value="add_to_campaigns">Add to Campaigns</option>
+            <option value="create_client_script">Create Client Script</option>
+            <option value="export_leads">Export Leads</option>
+            <option value="zoho_sheet_view">Zoho Sheet View</option>
+        </select>
+    </div>
+</div>
+<!-- <link rel="stylesheet" href="/css/custom/headerBelowheader.css"> -->
+<!-- <header-below-header></header-below-header> -->
+    <!-- <script src="./../../js/customs/headerBelowHeader.js"></script> -->
+    <p id="totalRecords" >Total records </p>
+
+    <div class="main-container">
+        <div class="left-container">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search..." oninput="filterRecords()">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="record-list" id="recordList">
+                <!-- Records will be populated here -->
+            </div>
+        </div>
+        <div class="right-container">
+            <div class="header">
+                <input type="checkbox" id="selectAll" onclick="toggleSelectAll()">
+                <label for="selectAll"></label>
+                <span>Lead Name</span>
+                <span>Company</span>
+                <span>Email</span>
+                <span>Phone</span>
+                <span>Lead Source</span>
+            </div>
+            <div class="data-container" id="dataContainer">
+                <!-- Lead data will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+</body>
+</html> 

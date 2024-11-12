@@ -1,4 +1,4 @@
-body {
+/* body {
     margin: 0;
     font-family: sans-serif;
     background-color: #f0f0f0;
@@ -21,11 +21,11 @@ body {
     font-weight: bolder;
     font-size: 15px;
     cursor: pointer;
-    flex: 0.1%;/* Flex-grow, flex-shrink, flex-basis for responsiveness */
+    flex: 0.1%;
     border: 1px solid lightgray;
     box-shadow: 0 2px 10px rgba(52, 215, 247, 0.1);
     transition: border-color 0.3s;
-    margin: 0 10px; /* Margin for spacing */
+    margin: 0 10px; 
     border-radius: 6px;
 }
 
@@ -45,7 +45,7 @@ body {
     cursor: pointer;
     height: auto;
     font-size: 15px;
-    flex: 0 1 auto; /* Keep the button from growing */
+    flex: 0 1 auto; 
 }
 
 #createButton:hover ,#selectt:hover{
@@ -70,9 +70,9 @@ body {
     border-radius: 5px;
     font-size: 16px;
     background-color: #EEF2F8;
-    margin: 0 10px; /* Add margin for spacing */
+    margin: 0 10px; 
     border: 1px solid #ccc;
-    flex: 1 1 5%;/* Responsive flex properties*/
+    flex: 1 1 5%;
 }
 
 #selectt:hover, #actionbtn:hover {
@@ -81,4 +81,4 @@ body {
 
 .hidden {
     display: none;
-}
+} */

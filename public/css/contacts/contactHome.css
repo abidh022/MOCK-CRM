@@ -2,8 +2,8 @@ body {
     font-family: sans-serif;
     margin: 0;
     background-color: #EDF0F4;
-    
 }
+
 /* headerbelowheader */
 #recBox {
     display: flex;
@@ -55,14 +55,15 @@ body {
     background-color: #D5E3F1; /* Lighter blue when hovered */
 }
 
-.selectBox {
+.views {
     font-family: sans-serif;
     font-weight:normal;
-    font-size: 15px;
+    font-size: 13px;
     cursor: pointer;
-    width: 120px;
+    width: auto;
     height: 40px;   
-    text-align: center;
+    text-align: left;
+    padding: 5px;
     border: 1px solid lightgray;
     background-color: #EEF2F8;
     box-shadow: 0 2px 10px rgba(84, 137, 250, 0.1);
@@ -70,7 +71,7 @@ body {
     border-radius: 6px;
 }
 
-.selectBox:focus {
+.views:focus {
     border-color: rgb(95, 136, 251);
     box-shadow: 0 6px 20px rgba(52, 215, 247, 0.5);
     outline: none;
@@ -90,8 +91,7 @@ body {
     align-items: center;
 }
 
-
-#selectt{
+#importbtn{
     width: 13px;
     height: 40px;
     padding: 10px;
@@ -105,22 +105,23 @@ body {
     align-items: center;
 }
 
-#createButton:hover ,#selectt:hover{
+#createButton:hover ,#importbtn:hover{
     background-color: #0061ca;
 }
 #actionbtn {
     padding: 12px;
-    text-align: center;
+    text-align: left;
     cursor: pointer;
     border-radius: 5px;
     background-color: #EEF2F8;
     border: 1px solid #ccc;
-    width: 150px;
+    width: 10rem;
 }
 
 .hidden {
     display: none;
-} 
+}
+
 
 /* headerbelowheaderbelow */
 #totalRecords{
@@ -292,4 +293,3 @@ body {
     background: #c1c1c1;
     border-radius: 10px;
 }
-

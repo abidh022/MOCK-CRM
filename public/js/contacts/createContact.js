@@ -1,8 +1,8 @@
-//createlead/js
+//createcontact/js
 
-let leadForm=document.querySelector("#leadForm");
+let contactForm=document.querySelector("#contactForm");
 
-const leadOwner = document.querySelector("#leadOwner");
+const contactOwner = document.querySelector("#contactOwner");
 const company = document.querySelector("#company");
 const firstName = document.querySelector("#firstName");
 const lastName = document.querySelector("#lastName");
@@ -11,12 +11,12 @@ const email = document.querySelector("#email");
 const fax = document.querySelector("#fax");
 const mobile = document.querySelector("#mobile");
 const website = document.querySelector("#website");
-const leadSource = document.querySelector("#leadSource");
-const leadStatus = document.querySelector("#leadStatus");
+const contactsource = document.querySelector("#contactsource");
+const contactstatus = document.querySelector("#contactstatus");
 const industry = document.querySelector("#industry");
 const employees = document.querySelector("#employees");
 const annualRevenue = document.querySelector("#annualRevenue");
-    const skypeID = document.querySelector("#skypeID");
+const skypeID = document.querySelector("#skypeID");
 const twitter = document.querySelector("#twitter");
 const secondaryEmail = document.querySelector("#secondaryEmail");
 const street = document.querySelector("#street");
@@ -72,7 +72,7 @@ function showToast(message, isSuccess = false) {
 
 
 document.getElementById('save').addEventListener('click',async  () => {
-    leadForm.requestSubmit();
+    contactForm.requestSubmit();
 
     let isValid = true;
 
@@ -91,14 +91,14 @@ document.getElementById('save').addEventListener('click',async  () => {
         setSuccess(lastName);
     }
 
-    async function insertLead(leads) {
-        const result = await leadsCollection.insertOne(leads);
-        console.log('Lead inserted with ID:', result);
+    async function insertcontact(contacts) {
+        const result = await contactsCollection.insertOne(contacts);
+        console.log('contact inserted with ID:', result);
     }
 
     if (isValid) {
-    const leadObj = {
-        "leadOwner" : leadOwner.value,
+    const contactObj = {
+        "contactOwner" : contactOwner.value,
         "company" : company.value,
         "firstName" : firstName.value,
         "lastName" : lastName.value,
@@ -107,8 +107,8 @@ document.getElementById('save').addEventListener('click',async  () => {
         "fax" : fax.value,
         "mobile" : mobile.value,
         "website" : website.value,
-        "leadSource" : leadSource.value,
-        "leadStatus" : leadStatus.value,
+        "contactsource" : contactsource.value,
+        "contactstatus" : contactstatus.value,
         "industry" :industry.value,
         "employees" : employees.value,
         "annualRevenue" :annualRevenue.value,
@@ -122,35 +122,35 @@ document.getElementById('save').addEventListener('click',async  () => {
         "zipCode" :zipCode.value,
         "description" :description.value
     }; 
-    insertLead(leadObj);
+    insertcontact(contactObj);
 
     try {
-        const response = await fetch('/api/leads', {
+        const response = await fetch('/api/contacts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(leadObj),
+            body: JSON.stringify(contactObj),
         });
 
         if (response.ok) {
             const data = await response.json();
-            console.log(`Lead saved with ID: ${data.id}`);
-            showToast('Lead created successfully!', true); 
+            console.log(`contact saved with ID: ${data.id}`);
+            showToast('contact created successfully!', true); 
             save.disabled =true;
             document.body.classList.add('no-click');
             setTimeout(() => {
                 save.disabled = false;
                 document.body.classList.remove('no-click');
-                window.location.href = '/html/leads/leadshome.html';
+                window.location.href = '/html/contacts/contactshome.html';
             }, 2000);
         } else {
-            showToast('Failed to save lead.');
-            console.error('Failed to save lead');
+            showToast('Failed to save contact.');
+            console.error('Failed to save contact');
         }
         
     } catch (error) {
-        showToast('Error occurred while saving lead.');
+        showToast('Error occurred while saving contact.');
         console.error(' Error:', error);
     }
 }
@@ -159,17 +159,10 @@ document.getElementById('save').addEventListener('click',async  () => {
 
 });
 
-function formatRevenue(input) {
-    let value = input.value.replace(/[^0-9.]/g, '');
-    if (value) {
-        input.value = '$ ' + value;
-    } else {
-        input.value = '';
-    }
-}
+
 
 document.getElementById('btn2').addEventListener('click',async  () => {
-    leadForm.requestSubmit();
+    contactForm.requestSubmit();
 
     let isValid = true;
 
@@ -188,14 +181,14 @@ document.getElementById('btn2').addEventListener('click',async  () => {
         setSuccess(lastName);
     }
 
-    async function insertLead(leads) {
-        const result = await leadsCollection.insertOne(leads);
-        console.log('Lead inserted with ID:', result);
+    async function insertcontact(contacts) {
+        const result = await contactsCollection.insertOne(contacts);
+        console.log('contact inserted with ID:', result);
     }
 
     if (isValid) {
-    const leadObj = {
-        "leadOwner" : leadOwner.value,
+    const contactObj = {
+        "contactOwner" : contactOwner.value,
         "company" : company.value,
         "firstName" : firstName.value,
         "lastName" : lastName.value,
@@ -204,8 +197,8 @@ document.getElementById('btn2').addEventListener('click',async  () => {
         "fax" : fax.value,
         "mobile" : mobile.value,
         "website" : website.value,
-        "leadSource" : leadSource.value,
-        "leadStatus" : leadStatus.value,
+        "contactsource" : contactsource.value,
+        "contactstatus" : contactstatus.value,
         "industry" :industry.value,
         "employees" : employees.value,
         "annualRevenue" :annualRevenue.value,
@@ -219,37 +212,37 @@ document.getElementById('btn2').addEventListener('click',async  () => {
         "zipCode" :zipCode.value,
         "description" :description.value
     }; 
-    insertLead(leadObj);
+    insertcontact(contactObj);
 
     try {
-        const response = await fetch('/api/leads', {
+        const response = await fetch('/api/contacts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(leadObj),
+            body: JSON.stringify(contactObj),
         });
 
         if (response.ok) {
             const data = await response.json();
-            console.log(`Lead saved with ID: ${data.id}`);
-            showToast('Lead created successfully!', true);
+            console.log(`contact saved with ID: ${data.id}`);
+            showToast('contact created successfully!', true);
             setTimeout(() => {
-                window.location.href = '/html/leads/createLead.html';
+                window.location.href = '/html/contacts/createcontact.html';
             }, 1500);
             } else {
-                showToast('Failed to save lead.');  
-            console.error('Failed to save lead');
+                showToast('Failed to save contact.');  
+            console.error('Failed to save contact');
         }
     } catch (error) {
-        showToast('Error occurred while saving lead.');
+        showToast('Error occurred while saving contact.');
         console.error('Error:', error);
     }
 }
 
 });
 
-leadForm.addEventListener("submit",(e)=> {
+contactForm.addEventListener("submit",(e)=> {
     e.preventDefault();  
     
     if (!company.value || !lastName.value){
@@ -273,64 +266,64 @@ function setError(tag){
 document.addEventListener('DOMContentLoaded', function () {
     const editButton = document.getElementById('editBtn');
     
-    // Ensure that both the edit button and the leadId input exist
-    const leadIdElement = document.getElementById('leadId');
-    if (leadIdElement) {
-        const leadId = leadIdElement.value; // Retrieve the lead ID from the hidden input
+    // Ensure that both the edit button and the contactId input exist
+    const contactIdElement = document.getElementById('contactId');
+    if (contactIdElement) {
+        const contactId = contactIdElement.value; // Retrieve the contact ID from the hidden input
         
         // If the edit button exists, add event listener
         if (editButton) {
             editButton.addEventListener('click', () => {
-                fetch(`/api/leads/${leadId}`) // Fetch lead data by ID
+                fetch(`/api/contacts/${contactId}`) // Fetch contact data by ID
                     .then(response => response.json())
-                    .then(lead => {
-                        // Store lead data in localStorage for use on the createLead page
-                        localStorage.setItem('leadData', JSON.stringify(lead));
-                        window.location.href = '/createLead.html'; // Redirect to createLead.html
+                    .then(contact => {
+                        // Store contact data in localStorage for use on the createcontact page
+                        localStorage.setItem('contactData', JSON.stringify(contact));
+                        window.location.href = '/createcontact.html'; // Redirect to createcontact.html
                     })
-                    .catch(error => console.error('Error fetching lead:', error));
+                    .catch(error => console.error('Error fetching contact:', error));
             });
         } else {
             console.error('Edit button not found!');
         }
     } else {
-        console.error('Lead ID input element not found!');
+        console.error('contact ID input element not found!');
     }
 });
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    const lead = JSON.parse(localStorage.getItem('leadData'));
+    const contact = JSON.parse(localStorage.getItem('contactData'));
 
-    if (lead) {
-        // Populate the fields with lead data
-        document.getElementById('firstName').value = lead.firstName;
-        document.getElementById('lastName').value = lead.lastName;
+    if (contact) {
+        // Populate the fields with contact data
+        document.getElementById('firstName').value = contact.firstName;
+        document.getElementById('lastName').value = contact.lastName;
         // Add other form field populations as needed
     }
 
     // Optionally clear the localStorage data after loading
-    localStorage.removeItem('leadData');
+    localStorage.removeItem('contactData');
 });
 
 
-    // document.getElementById('leadForm').addEventListener('submit', async (event) => {
+    // document.getElementById('contactForm').addEventListener('submit', async (event) => {
     //     event.preventDefault();
-    //     const leadData = {
+    //     const contactData = {
     //         firstName: document.getElementById('firstName').value,
     //         lastName: document.getElementById('lastName').value,
     //         // other fields
     //     };
-    //     const leadId = new URLSearchParams(window.location.search).get('id');
-    //     const response = await fetch(`/api/leads/${leadId}`, {
+    //     const contactId = new URLSearchParams(window.location.search).get('id');
+    //     const response = await fetch(`/api/contacts/${contactId}`, {
     //         method: 'PUT',
     //         headers: {'Content-Type': 'application/json'},
-    //         body: JSON.stringify(leadData)
+    //         body: JSON.stringify(contactData)
     //     });
     //     if (response.ok) {
-    //         alert('Lead updated!');
-    //         window.location.href = `/leadProfile.html?id=${leadId}`;
+    //         alert('contact updated!');
+    //         window.location.href = `/contactProfile.html?id=${contactId}`;
     //     } else {
-    //         alert('Error updating lead');
+    //         alert('Error updating contact');
     //     }
     // });

@@ -22,12 +22,14 @@ const client = new MongoClient(uri, {
 });
 
 let leadsCollection;
+let contactsCollection;
 
 async function connectToDatabase() {
     try {
         await client.connect();
         const db = client.db("crm"); // Replace with your database name
         leadsCollection = db.collection("leads"); // Replace with your collection name
+        contactsCollection = db.collection("contacts");
         console.log("Connected to MongoDB!");
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);

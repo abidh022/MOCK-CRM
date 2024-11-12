@@ -4,9 +4,9 @@
   <title>Create Lead - Zoho CRM</title>
   <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
   <!-- <link rel="shortcut icon" href="/public/assets/tabCRM.png" type="image/x-icon"> -->
-  <link rel="stylesheet" href="./../../css/leads/createLead.css">
+  <link rel="stylesheet" href="./../../css/contacts/createContact.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <script src="./../../js/leads/createlead.js" defer></script>
+  <script src="./../../js/contacts/createContact.js" defer></script>
 </head>
 
 <body>
@@ -25,7 +25,7 @@
         </div>
     </div>
     <div id="img">
-        <p id="heading">Lead Image</p>
+        <p id="heading">Contact Image</p>
         <label id="fileInput">
             <input type="file" accept="image/*" />
             <img id="uploadedImage" />
@@ -36,11 +36,11 @@
     </div>
     
     <div class="form-container">
-        <p id="heading">Lead Information</p>
+        <p id="heading">Contact Information</p>
         <form id="leadForm" class="two-column-form">
             <div class="form-group">
-                <label for="leadOwner">Lead Owner</label>
-                <input type="text" id="leadOwner" name="leadOwner" value="Abidh" readonly style="cursor: not-allowed; color: #524f4f; padding-left: 20px; ">
+                <label for="contactOwner">Lead Owner</label>
+                <input type="text" id="contactOwner" name="contactOwner">
             </div>
             <div class="form-group">
                 <label for="company">Company</label>
@@ -62,26 +62,8 @@
             </div>
             <div class="form-group">
                 <label for="leadSource">Lead Source</label>
-                <select id="leadSource" name="leadSource">
-                  <option value="">-None-</option>
-                  <option value="Advertisement">Advertisement</option>
-                  <option value="Cold Call">Cold Call</option>
-                  <option value="Employee Referral">Employee Referral</option>
-                  <option value="External Referral">External Referral</option>
-                  <option value="Online Store">Online Store</option>
-                  <option value="Partner">Partner</option>
-                  <option value="Public Relations">Public Relations</option>
-                  <option value="Sales Email Alias">Sales Email Alias</option>
-                  <option value="Seminar Partner">Seminar Partner</option>
-                  <option value="Internal Seminar">Internal Seminar</option>
-                  <option value="Trade Show">Trade Show</option>
-                  <option value="Web Download">Web Download</option>
-                  <option value="Web Research">Web Research</option>
-                  <option value="Chat">Chat</option>
-                  <option value="X (Twitter)">X (Twitter)</option>
-                  <option value="Facebook">Facebook</option>
-                </select>
-              </div>
+                <input type="text" id="leadSource" name="leadSource">
+            </div>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email">
@@ -99,41 +81,12 @@
                 <input type="url" id="website" name="website">
             </div>
             <div class="form-group">
-                <label for="industry">Industry</label>
-                <select name="industry" id="industry" name="industry">
-                    <option value="">-None-</option>
-                    <option value="ASP">ASP (Application Service Provider)</option>
-                    <option value="DataTelecomOEM">Data/Telecom OEM</option>
-                    <option value="ERP">ERP (Enterprise Resource Planning)</option>
-                    <option value="GovernmentMilitary">Government/Military</option>
-                    <option value="LargeEnterprise">Large Enterprise</option>
-                    <option value="ManagementISV">Management ISV</option>
-                    <option value="MSP">MSP (Management Service Provider)</option>
-                    <option value="NetworkEquipmentEnterprise">Network Equipment Enterprise</option>
-                    <option value="NonManagementISV">Non-management ISV</option>
-                    <option value="OpticalNetworking">Optical Networking</option>
-                    <option value="ServiceProvider">Service Provider</option>
-                    <option value="SmallMediumEnterprise">Small/Medium Enterprise</option>
-                    <option value="StorageEquipment">Storage Equipment</option>
-                    <option value="StorageServiceProvider">Storage Service Provider</option>
-                    <option value="SystemsIntegrator">Systems Integrator</option>
-                    <option value="WirelessIndustry">Wireless Industry</option>
-                  </select>
-                <!-- <input type="text" id="industry" name="industry"> -->
+                <label for="leadStatus">Lead Status</label>
+                <input type="text" id="leadStatus" name="leadStatus">
             </div>
             <div class="form-group">
-                <label for="leadStatus">Lead Status</label>
-                <select name="leadStatus" id="leadStatus">
-                    <option value="">-None-</option>
-                    <option value="AttemptedToContact">Attempted to Contact</option>
-                    <option value="ContactInFuture">Contact in Future</option>
-                    <option value="Contacted">Contacted</option>
-                    <option value="JunkLead">Junk Lead</option>
-                    <option value="LostLead">Lost Lead</option>
-                    <option value="NotContacted">Not Contacted</option>
-                    <option value="PreQualified">Pre-Qualified</option>
-                    <option value="NotQualified">Not Qualified</option>
-                </select>
+                <label for="industry">Industry</label>
+                <input type="text" id="industry" name="industry">
             </div>
             <div class="form-group">
                 <label for="employees">No. of Employees</label>
@@ -141,15 +94,15 @@
             </div>
             <div class="form-group">
                 <label for="annualRevenue">Annual Revenue</label>
-                <input type="text" id="annualRevenue" name="annualRevenue" placeholder="$" oninput="formatRevenue(this)">
+                <input type="text" id="annualRevenue" name="annualRevenue">
             </div>
             <div class="form-group">
                 <label for="skypeID">Skype ID</label>
                 <input type="text" id="skypeID" name="skypeID">
             </div>
             <div class="form-group">
-                <label for="twitter">Twitter</label>    
-                <input type="text" id="twitter" name="twitter" placeholder="@">
+                <label for="twitter">Twitter</label>
+                <input type="text" id="twitter" name="twitter">
             </div>
             <div class="form-group">
                 <label for="secondaryEmail">Secondary Email</label>

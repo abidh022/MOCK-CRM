@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts - Zoho CRM</title>
+    <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> -->
+    <!-- <link rel="shortcut icon" href="/public/assets/tabCRM.png" type="image/x-icon"> -->
+    <link rel="stylesheet" href="../../css/contacts/contactHome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="../../js/contacts/contactHome.js" defer></script>
+    <!-- <link rel="stylesheet" href="../../css/custom/headerBelowHeader.css"> -->
+
+</head>
+<body>
+    <custom-header></custom-header>
+    <script src="../../js/customs/header.js"></script>
+
+    <div id=recBox>
+        <div id="left-items">
+            <button class="filterBtn">
+                <i class="fas fa-filter"></i>
+            </button>
+            <select class="views">My Leads
+                <option>All Contacts</option>
+                <option>All Locked Contacts</option>
+                <option>Mailing Labels</option>    
+                <option>My Contacts</option>    
+                <option>New Last Week</option>    
+                <option>New This Week</option>    
+                <option>Recently Created Contacts</option>    
+                <option>Recently Modified Contacts</option>    
+                <option>Unread Contacts</option>    
+                <option>Unsubscribed Contacts</option>
+            </select>
+        </div>
+        <div id="right-items">
+            <div id="createAndImport">
+                <button id="createButton">Create Contact</button>
+                <select id="importbtn">
+                    <option class="hidden">Select</option>
+                    <option value="import-leads">Import Contact</option>
+                    <option value="import-notes">Import Notes</option>
+                </select>
+            </div>
+            
+            <select name="action" id="actionbtn">
+                <option value="" class="hidden">Actions</option>
+                <option value="mass_delete">Mass Delete</option>
+                <option value="mass_update">Mass Update</option>
+                <option value="mass_convert">Mass Convert</option>
+                <option value="manage_tags">Manage Tags</option>
+                <option value="drafts">Drafts</option>
+                <option value="mass_email">Mass Email</option>
+                <option value="autoresponders">Autoresponders</option>
+                <option value="approve_leads">Approve Leads</option>
+                <option value="deduplicate_leads">Deduplicate Leads</option>
+                <option value="add_to_campaigns">Add to Campaigns</option>
+                <option value="create_client_script">Create Client Script</option>
+                <option value="export_leads">Export Leads</option>
+                <option value="zoho_sheet_view">Zoho Sheet View</option>
+            </select>
+        </div>
+    </div>
+
+    <p id="totalRecords" >Total records </p>
+
+    <div class="main-container">
+        <div class="left-container">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search..." oninput="filterRecords()">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="record-list" id="recordList">
+                <!-- Records will be populated here -->
+            </div>
+        </div>
+        <div class="right-container">
+            <div class="header">
+                <input type="checkbox" id="selectAll" onclick="toggleSelectAll()">
+                <label for="selectAll"></label>
+                <span>Contact Name</span>
+                <span>Account Name</span>
+                <span>Email</span>
+                <span>Phone</span>
+                <span>Lead Source</span>
+            </div>
+            <div class="data-container" id="dataContainer">
+                <!-- Lead data will be inserted here -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

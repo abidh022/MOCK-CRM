@@ -11,31 +11,29 @@
 
         button1.addEventListener('click', () => {
             indicator.style.left = '0';
-            overviewContent.style.display = 'block';  // Show Overview content
-            timelineContent.style.display = 'none';  // Hide Timeline content
+            overviewContent.style.display = 'block'; 
+            timelineContent.style.display = 'none';  
         });
 
         button2.addEventListener('click', () => {
             indicator.style.left = '50%';
-            overviewContent.style.display = 'none';  // Hide Overview content
-            timelineContent.style.display = 'block';  // Show Timeline content
+            overviewContent.style.display = 'none';  
+            timelineContent.style.display = 'block'; 
         });
 
-       // Ensure that the script runs after the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     const editButton = document.getElementById('edit');
 
-    // Check if the editButton and leadId element exist
     if (editButton) {
         editButton.addEventListener('click', () => {
-            const leadId = document.getElementById('leadId'); // Get the lead ID input element
+            const leadId = document.getElementById('leadId'); 
 
-            if (leadId) { // Check if leadId exists
-                const id = leadId.value; // Get the value of the leadId
+            if (leadId) { 
+                const id = leadId.value;
                 fetch(`/api/leads/${id}`)
                     .then(response => response.json())
                     .then(lead => {
-                        localStorage.setItem('leadData', JSON.stringify(lead)); // Save to localStorage
+                        localStorage.setItem('leadData', JSON.stringify(lead));
                         window.location.href = '/html/leads/createLead.html';
                     })
                     .catch(error => console.error('Error fetching lead:', error));
@@ -57,10 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
             toggleButton.addEventListener('click', () => {
                 leftContainer.classList.toggle('hidden');
                 if (leftContainer.classList.contains('hidden')) {
-                    // When left container is hidden, make right container full width
                     rightContainer.style.width = '100%';
                 } else {
-                    // When left container is visible, make right container 80% width
                     rightContainer.style.width = '80%';
                 }
             });
@@ -68,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
 // Fetch a specific lead based on the ID in the URL
 async function fetchLeadData(leadId) {
     try {
-        const response = await fetch(`/api/leads/${leadId}`); // Fetch lead data from the server using the leadId
+        const response = await fetch(`/api/leads/${leadId}`); 
         if (!response.ok) throw new Error('Lead not found');
-        return await response.json(); // Return the JSON data of the lead
+        return await response.json(); 
     } catch (error) {
         console.error('Error fetching lead data:', error);
         document.getElementById('leadName').textContent = 'Lead not found';
@@ -89,11 +85,19 @@ async function renderLeadProfile() {
             // Check if the element exists before setting the textContent
             const leadNameElement = document.getElementById('leadName');
             const leadName = document.getElementById('leadN');
+            const companyElement = document.getElementById('company');
             const emailElement = document.getElementById('email');
             const phoneElement = document.getElementById('mobile');
-            const statusElement = document.getElementById('status');
+            const faxElement = document.getElementById('fax');
             const leadStatusElement = document.getElementById('leadStatus');
-            const companyElement = document.getElementById('company');
+            const websiteElement = document.getElementById('website');
+            const leadSourceElement = document.getElementById('leadSource');
+            const annualRevenueElement = document.getElementById('annualRevenue');
+            const industryElement = document.getElementById('industry');
+            const employeesElement = document.getElementById('employees');
+            const skypeIDElement = document.getElementById('skypeID');
+            const twitterElement = document.getElementById('twitter');
+            const secondaryEmailElement = document.getElementById('secondaryEmail');
             const streetElement = document.getElementById('street');
             const cityElement = document.getElementById('city');
             const stateElement = document.getElementById('state');
@@ -101,14 +105,23 @@ async function renderLeadProfile() {
             const zipCodeElement = document.getElementById('zipCode');
             const descriptionElement = document.getElementById('description');
             
+            leadName.textContent = (leadNameElement) ? `${lead.firstName} ${lead.lastName}` : `N/A` ;
             // Safely update the elements
             if (leadNameElement) leadNameElement.textContent = `${lead.firstName} ${lead.lastName}`;
             if (leadName) leadName.textContent = `${lead.firstName} ${lead.lastName}`;
+            if (companyElement) companyElement.textContent = lead.company || 'N/A';
             if (emailElement) emailElement.textContent = lead.email || 'N/A';
             if (phoneElement) phoneElement.textContent = lead.mobile || 'N/A';
-            if (statusElement) statusElement.textContent = lead.status || 'N/A';
+            if (faxElement) faxElement.textContent = lead.fax || 'N/A';
             if (leadStatusElement) leadStatusElement.textContent = lead.leadStatus || 'N/A';
-            if (companyElement) companyElement.textContent = lead.company || 'N/A';
+            if (websiteElement) websiteElement.textContent = lead.website || 'N/A';
+            if (leadSourceElement) leadSourceElement.textContent = lead.leadSource || 'N/A';
+            if (annualRevenueElement) annualRevenueElement.textContent = lead.annualRevenue || 'N/A';
+            if (industryElement) industryElement.textContent = lead.industry || 'N/A';
+            if (employeesElement) employeesElement.textContent = lead.employees || 'N/A';
+            if (skypeIDElement) skypeIDElement.textContent = lead.skypeID || 'N/A';
+            if (twitterElement) twitterElement.textContent = lead.twitter || 'N/A';
+            if (secondaryEmailElement) secondaryEmailElement.textContent = lead.secondaryEmail || 'N/A';
             if (streetElement) streetElement.textContent = lead.street || 'N/A';
             if (cityElement) cityElement.textContent = lead.city || 'N/A';
             if (stateElement) stateElement.textContent = lead.state || 'N/A';
@@ -121,15 +134,10 @@ async function renderLeadProfile() {
     }
 }
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     const deleteButton = document.getElementById('delete');
-//     deleteButton.addEventListener('click', deleteLead);
-// });
+// console.log(leadSource);
 
 // leadProfile.js
-
 async function deleteLead() {
-    // Extract lead ID from the URL query string
     const leadId = new URLSearchParams(window.location.search).get('id');
     
     // Check if the leadId exists
@@ -138,12 +146,11 @@ async function deleteLead() {
         return;
     }
 
-    // Show confirmation dialog before proceeding with deletion
     const isConfirmed = window.confirm("Are you sure you want to delete this lead? This action cannot be undone.");
 
     if (!isConfirmed) {
         alert("Deletion cancelled.");
-        return; // If the user clicks "Cancel", stop the deletion process
+        return;
     }
 
     try {
@@ -153,7 +160,6 @@ async function deleteLead() {
         });
 
         if (response.ok) {
-            alert('Lead deleted successfully!');
             window.location.href = '/html/leads/leadshome.html';  // Redirect to home page after deletion
         } else {
             const errorData = await response.json();
@@ -165,10 +171,11 @@ async function deleteLead() {
         alert('An error occurred while deleting the lead.');
     }
 }
+// Event listener to detect the 'Delete' key press
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Delete') {
+        document.getElementById('delete').click();  // Trigger the button's click event
+    }
+});
 
-// Ensure that the script runs after the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', renderLeadProfile);
-
-// Ensure the script runs after the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', renderLeadProfile);
-

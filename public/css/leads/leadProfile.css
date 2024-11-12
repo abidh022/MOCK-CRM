@@ -38,6 +38,9 @@ body{
     box-shadow: 0 2px 5px rgba(200, 200, 200, 0.5); 
 }
 
+#convert{
+    cursor: not-allowed;
+}
 #sendEmail{
     background-color: #018BFA;
     border-radius: 6px!important;
@@ -47,7 +50,7 @@ body{
     box-shadow: 0 2px 5px rgba(200, 200, 200, 0.5); 
     font-family: var(--crm-font-semibold);  
     font-size: 16px;
-    cursor: pointer;
+    cursor: not-allowed;/*0000000000000000000000000*/
     margin-left: 10px;
     opacity: .8;
     margin-right: 20px;
@@ -96,14 +99,14 @@ body{
 /* Left container (for names) */
  .left-container {
     width: 20%;
-    height: 65vh; /* Ensure it takes full viewport height, or adjust as needed */
+    height: 65vh; 
     background-color: #FFFFFF;
     border-right: 1px solid #ccc;
     border-top: 1px solid #ccc;
     padding: 10px;
     border-radius: 13px;
     transition: width 0.3s ease;
-    overflow-y: auto; /* Enables vertical scrolling */
+    overflow-y: auto;
 }
 
 .left-container.hidden {
@@ -180,11 +183,16 @@ body{
     background-color: #FFFFFF;
 }
 
-.section h2 {
+.section h4 {
     margin-top: 0;
     color: #4b4e54;
-
 }
+h4 {
+    border-bottom: 1px solid lightgray;
+    margin: 0;
+    padding-bottom: 10px; /* Optional: Adds some space between the text and the line */
+}
+
 
 .action-button {
     border-radius: 5px; 
@@ -242,35 +250,48 @@ body{
 }
 
 #overview {
-    display: block; /* Initially show the Overview content */
+    display: block; 
 }
 
-/* Container for each field */
 .field {
-    display: flex; /* Align label and value on the same line */
-    margin-bottom: 15px; /* Space between each field */
-    align-items: center; /* Vertically align label and value */
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center; 
 }
 
-/* Styling for the label */
 .field label {
-    padding-left: 20px; /* Left padding to create space between label and the edge */
-    width: 150px; /* Define a fixed width for labels */
-    font-weight: lighter; /* Make label text bold */
-    display: inline-block; /* Keep label inline but maintain block-like structure */
+    padding-left: 20px;
+    width: 150px; 
+    font-weight: lighter; 
+    display: inline-block; 
     text-align: end;
     margin-top: 10px;
 
 }
 
-/* Styling for the span (value) */
 .field span {
-    padding-left: 20px; /* Space between label and value */
-    display: inline-block; /* Display value inline */
-    flex-grow: 1; /* Make the span take remaining space */
-    text-align: left; /* Align value text to the left */
+    padding-left: 20px; 
+    display: inline-block; 
+    flex-grow: 1; 
+    text-align: left; 
     margin-top: 15px;
+}
 
+.notes{
+    width: 80%;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 15px;
+    height: 10%;
+    border-radius: 7px;
+    box-shadow: 10px rgba(134, 235, 255, 0.1);
+    transition: border-color 0.3s;
+}
+
+.notes:focus{
+    border-color: rgb(46, 128, 236);
+        box-shadow: 0 6px 20px #B9D7F8;
+        outline: none;
 }
 
 ::-webkit-scrollbar {

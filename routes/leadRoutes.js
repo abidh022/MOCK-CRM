@@ -4,10 +4,9 @@ const express = require('express');
 const router = express.Router();
 const { ObjectId } = require('mongodb');
 // const { leadsCollection } = require('../app'); 
-const leadController = require('../controllers/leadController');
+// const leadController = require('../controllers/leadController');
 
 // Get all leads
-router.get('/', leadController.getLeads);
 router.get('/:id', async (req, res) => {
     try {
         const leadId = req.params.id; // Get the leadId from the URL parameter
@@ -23,8 +22,7 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ message: 'Server Error' });
     }
 });
-// Create a new lead
-// router.post('/', leadController.createLead);
+
 // Route to create a new lead
 router.post('/', async (req, res) => {
     try {
@@ -39,9 +37,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-
 // Update a lead by ID
-// router.put('/:id', leadController.updateLead);
 router.put('/:id', async (req, res) => {
     const leadId = req.params.id;
     const updatedData = req.body;
@@ -58,17 +54,15 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete a lead by ID
-// router.delete('/:id', leadController.deleteLead);
 router.delete('/:id', async (req, res) => {
-    const { id } = req.params; // Extract the lead ID from the URL parameter
-
-    // Ensure the ID is a valid ObjectId format
+    const { id } = req.params; 
+    //check ObjectId format is correct
     if (!ObjectId.isValid(id)) {
         return res.status(400).json({ error: 'Invalid lead ID format' });
     }
 
     try {
-        // Attempt to delete the lead from the database
+        // Attempt to delete
         const result = await req.leadsCollection.deleteOne({ _id: new ObjectId(id) });
 
         if (result.deletedCount === 1) {

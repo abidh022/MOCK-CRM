@@ -27,8 +27,8 @@ let contactsCollection;
 async function connectToDatabase() {
     try {
         await client.connect();
-        const db = client.db("crm"); // Replace with your database name
-        leadsCollection = db.collection("leads"); // Replace with your collection name
+        const db = client.db("crm"); // database name
+        leadsCollection = db.collection("leads"); //collection name
         contactsCollection = db.collection("contacts");
         console.log("Connected to MongoDB!");
     } catch (error) {
@@ -50,7 +50,7 @@ app.use(cors());
 app.post('/api/leads', async (req, res) => {
     try {
         // await client.connect();
-        const db = client.db("crm"); // Replace with your database name
+        const db = client.db("crm"); //database name
         leadsCollection = db.collection("leads");
         const leads = await leadsCollection.insertOne(req.body);
         res.status(200).json(leads);

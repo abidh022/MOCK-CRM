@@ -5,12 +5,17 @@ const logger = require('morgan');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const leadRoutes = require('./routes/leadRoutes');
 const cors = require('cors');
+require('dotenv').config();  
 
 const app = express();
 const port = 5000;
 
 // MongoDB connection setup
-const uri = "mongodb+srv://abidh22:9090@v1.gwylr.mongodb.net/crm?retryWrites=true&w=majority&appName=v1";
+const uri = process.env.MONGODB_URI;
+if (!uri) {
+    console.error("MongoDB URI is not defined. Please check your .env file.");
+    process.exit(1); // Exit the process if MongoDB URI is not found
+}
 const client = new MongoClient(uri, {
     serverApi: {
         version: ServerApiVersion.v1,

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Profile - Zoho CRM</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/tabCRM.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./../../css/leads/convert.css">
+    <script src="./../../js/leads/convert.js" defer></script>
+</head>
+
+<body>
+    <custom-header></custom-header>
+    <script src="./../../js/customs/header.js"></script>
+    <div id="recBox">
+        <i id="back" class="fas fa-arrow-left"></i>
+        <div class="b1">
+            <p id="leadName"> asdadvgahdv</p>
+        </div>
+    </div>
+    <div id="container">
+    <div class="radio-group">
+        <label>
+            <input type="radio" name="recordType" value="account" required>
+            Create New Account
+        </label>
+        <label>
+            <input type="radio" name="recordType" value="contact" required>
+            Create New Contact
+        </label>
+        <label>
+            <input type="radio" name="recordType" value="both" required>
+            Create a  new account and contact
+        </label>
+    </div>
+
+    <p>Owner of the New Records: <strong>Abidh</strong></p>
+
+    <button id="convert">Convert</button>
+    <button id="cancel">Cancel</button>
+</div>
+</body>
+</html>

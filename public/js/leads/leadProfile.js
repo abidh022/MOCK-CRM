@@ -3,6 +3,14 @@
         window.history.back();
     });        
 
+    document.getElementById('sendEmail').addEventListener('click', function(){
+        window.location.href = 'mailto:example@example.com?subject=Your Subject&body=Your message here';
+    })
+
+    document.getElementById('convert').addEventListener('click', function(){
+            window.location.href= '/html/leads/convert.html';
+    }) 
+
         const button1 = document.getElementById('button1');
         const button2 = document.getElementById('button2');
         const indicator = document.getElementById('indicator');
@@ -21,30 +29,15 @@
             timelineContent.style.display = 'block'; 
         });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const editButton = document.getElementById('edit');
-
-    if (editButton) {
-        editButton.addEventListener('click', () => {
-            const leadId = document.getElementById('leadId'); 
-
-            if (leadId) { 
-                const id = leadId.value;
-                fetch(`/api/leads/${id}`)
-                    .then(response => response.json())
-                    .then(lead => {
-                        localStorage.setItem('leadData', JSON.stringify(lead));
-                        window.location.href = '/html/leads/createLead.html';
-                    })
-                    .catch(error => console.error('Error fetching lead:', error));
+        document.getElementById('edit').addEventListener('click', async () => {
+            const leadId = new URLSearchParams(window.location.search).get('id'); // Get the lead ID from URL
+        
+            if (leadId) {
+                window.location.href = `/html/leads/createLead.html?id=${leadId}`;
             } else {
-                console.error('Lead ID input element not found!');
+                alert("Lead ID is missing.");
             }
         });
-    } else {
-        console.error('Edit button not found!');
-    }
-});
 
             const toggleButton = document.getElementById('toggleButton');
             const leftContainer = document.getElementById('leftContainer');
@@ -64,77 +57,96 @@ document.addEventListener('DOMContentLoaded', function() {
 // Fetch a specific lead based on the ID in the URL
 async function fetchLeadData(leadId) {
     try {
-        const response = await fetch(`/api/leads/${leadId}`); 
+        const response = await fetch(`/api/leads/${leadId}`);
         if (!response.ok) throw new Error('Lead not found');
-        return await response.json(); 
+        return await response.json(); // Return the lead data
     } catch (error) {
         console.error('Error fetching lead data:', error);
         document.getElementById('leadName').textContent = 'Lead not found';
     }
 }
-
-// Render lead profile data on the page
-async function renderLeadProfile() {
-    const params = new URLSearchParams(window.location.search);
-    const leadId = params.get('id'); // Get the leadId from the URL
-
-    if (leadId) {
-        const lead = await fetchLeadData(leadId); // Fetch the lead data using the ID
-
-        if (lead) {
-            // Check if the element exists before setting the textContent
-            const leadNameElement = document.getElementById('leadName');
-            const leadName = document.getElementById('leadN');
-            const companyElement = document.getElementById('company');
-            const emailElement = document.getElementById('email');
-            const phoneElement = document.getElementById('mobile');
-            const faxElement = document.getElementById('fax');
-            const leadStatusElement = document.getElementById('leadStatus');
-            const websiteElement = document.getElementById('website');
-            const leadSourceElement = document.getElementById('leadSource');
-            const annualRevenueElement = document.getElementById('annualRevenue');
-            const industryElement = document.getElementById('industry');
-            const employeesElement = document.getElementById('employees');
-            const skypeIDElement = document.getElementById('skypeID');
-            const twitterElement = document.getElementById('twitter');
-            const secondaryEmailElement = document.getElementById('secondaryEmail');
-            const streetElement = document.getElementById('street');
-            const cityElement = document.getElementById('city');
-            const stateElement = document.getElementById('state');
-            const countryElement = document.getElementById('country');
-            const zipCodeElement = document.getElementById('zipCode');
-            const descriptionElement = document.getElementById('description');
-            
-            leadName.textContent = (leadNameElement) ? `${lead.firstName} ${lead.lastName}` : `N/A` ;
-            // Safely update the elements
-            if (leadNameElement) leadNameElement.textContent = `${lead.firstName} ${lead.lastName}`;
-            if (leadName) leadName.textContent = `${lead.firstName} ${lead.lastName}`;
-            if (companyElement) companyElement.textContent = lead.company || 'N/A';
-            if (emailElement) emailElement.textContent = lead.email || 'N/A';
-            if (phoneElement) phoneElement.textContent = lead.mobile || 'N/A';
-            if (faxElement) faxElement.textContent = lead.fax || 'N/A';
-            if (leadStatusElement) leadStatusElement.textContent = lead.leadStatus || 'N/A';
-            if (websiteElement) websiteElement.textContent = lead.website || 'N/A';
-            if (leadSourceElement) leadSourceElement.textContent = lead.leadSource || 'N/A';
-            if (annualRevenueElement) annualRevenueElement.textContent = lead.annualRevenue || 'N/A';
-            if (industryElement) industryElement.textContent = lead.industry || 'N/A';
-            if (employeesElement) employeesElement.textContent = lead.employees || 'N/A';
-            if (skypeIDElement) skypeIDElement.textContent = lead.skypeID || 'N/A';
-            if (twitterElement) twitterElement.textContent = lead.twitter || 'N/A';
-            if (secondaryEmailElement) secondaryEmailElement.textContent = lead.secondaryEmail || 'N/A';
-            if (streetElement) streetElement.textContent = lead.street || 'N/A';
-            if (cityElement) cityElement.textContent = lead.city || 'N/A';
-            if (stateElement) stateElement.textContent = lead.state || 'N/A';
-            if (countryElement) countryElement.textContent = lead.country || 'N/A';
-            if (zipCodeElement) zipCodeElement.textContent = lead.zipCode || 'N/A';
-            if (descriptionElement) descriptionElement.textContent = lead.description || 'N/A';
-        } else {
-            console.error('Lead data not found');
-        }
+// Function to format an ISO string into a custom format
+function formatCustomDate(dateString) {
+    const date = new Date(dateString);
+    
+    if (isNaN(date)) {
+        return 'Invalid Date';  // If the date is invalid
     }
+    
+    // Custom format: "DD-MM-YYYY HH:mm:ss"
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    
+    return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
 }
 
-// console.log(leadSource);
+// Render the lead profile after the page loads or after an update
+async function renderLeadProfile() {
+    const params = new URLSearchParams(window.location.search);
+    const leadId = params.get('id');
+
+    if (leadId) {
+        const lead = await fetchLeadData(leadId);
+
+        if (lead) {
+            // Update the profile data on the page
+            document.getElementById('leadName').textContent = `${lead.firstName} ${lead.lastName}`;
+            document.getElementById('leadN').textContent = `${lead.firstName} ${lead.lastName}`;
+            document.getElementById('company').textContent = lead.company || 'N/A';
+            document.getElementById('email').textContent = lead.email || 'N/A';
+            document.getElementById('mobile').textContent = lead.mobile || 'N/A';
+            document.getElementById('fax').textContent = lead.fax || 'N/A';
+            document.getElementById('leadStatus').textContent = lead.leadStatus || 'N/A';
+            document.getElementById('website').textContent = lead.website || 'N/A';
+            document.getElementById('leadSource').textContent = lead.leadSource || 'N/A';
+            document.getElementById('annualRevenue').textContent = lead.annualRevenue || 'N/A';
+            document.getElementById('industry').textContent = lead.industry || 'N/A';
+            document.getElementById('employees').textContent = lead.employees || 'N/A';
+            document.getElementById('skypeID').textContent = lead.skypeID || 'N/A';
+            document.getElementById('twitter').textContent = lead.twitter || 'N/A';
+            document.getElementById('secondaryEmail').textContent = lead.secondaryEmail || 'N/A';
+            document.getElementById('street').textContent = lead.street || 'N/A';
+            document.getElementById('city').textContent = lead.city || 'N/A';
+            document.getElementById('state').textContent = lead.state || 'N/A';
+            document.getElementById('country').textContent = lead.country || 'N/A';
+            document.getElementById('zipCode').textContent = lead.zipCode || 'N/A';
+            document.getElementById('description').textContent = lead.description || 'N/A';
+             // Format and display created time and modified time
+            //  document.getElementById('dateTime').textContent = formatCustomDate(lead.dateTime);
+            //  document.getElementById('modified').textContent = formatCustomDate(lead.modified);
+
+            document.getElementById('dateTime').textContent = formatCustomDate(lead.dateTime);
+
+            const modificationHistory = lead.modifications || [];
+            const modificationList = document.getElementById('modification-history');
+            modificationList.innerHTML = '';  // Clear existing entries
+
+            // Loop through modifications and create timeline items
+            modificationHistory.forEach(modTime => {
+                const modItem = document.createElement('li');
+                modItem.classList.add('timeline-item');
+                modItem.innerHTML = `
+                    <i class="fa-solid fa-pencil timeline-icon"></i>
+                    <span>Last modified on: ${formatCustomDate(modTime)}</span>
+                `;
+                modificationList.appendChild(modItem);
+            });
+
+            // Show the modification history if any
+            const modifiedField = document.getElementById('modified');
+            if (modificationHistory.length > 0) {
+                modifiedField.style.display = 'block';
+            } else {
+                modifiedField.style.display = 'none';
+            }
+        }
+    }   
+}
+
 
 // leadProfile.js
 async function deleteLead() {
@@ -172,10 +184,12 @@ async function deleteLead() {
     }
 }
 // Event listener to detect the 'Delete' key press
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown' , function(event) {
     if (event.key === 'Delete') {
         document.getElementById('delete').click();  // Trigger the button's click event
     }
 });
+
+
 
 document.addEventListener('DOMContentLoaded', renderLeadProfile);

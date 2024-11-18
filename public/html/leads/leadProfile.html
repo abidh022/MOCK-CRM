@@ -6,8 +6,7 @@
     <title>Lead Profile - Zoho CRM</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/assets/tabCRM.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="./../../css/leads/leadProfile.css">
     <script src="./../../js/leads/leadProfile.js" defer></script>
   </head>
@@ -33,7 +32,7 @@
         </div>
         <div class="b2">
             <button id="edit">Edit</button>
-            <input type="hidden" id="leadId" value="672b3f7dc5c1604c1fe0d5fa">
+            <input type="hidden" id="leadId" value="some-lead-id">
             <button id="convert" >Convert</button>
             <button id="delete" onclick="deleteLead()">Delete</button>
             <button id="sendEmail" >Send Email</button>
@@ -173,17 +172,26 @@
                     <p class="field">You cannot search a profile in Facebook. This has to be associated from the Social Tab</p>
                 </div>
             </div>
-            <div id="timeline" class="content" style="display: none;">
+            <div id="timeline" class="content">
                 <div id="campaigns" class="section">
                     <h4>History</h4>
-                    <p> History
-                        0 Upcoming Automated Actions 
-                        Timeline History
-                        Oct 25, 2024
-                        01:03 PM
-                        Lead Created
-                        by Abidh Oct 25, 2024</p>
+                    <div class="plus">
+                        <label for="dateTime">
+                            <i class="fa-solid fa-square-plus timeline-icon"></i>Created On
+                        </label>
+                        <span id="dateTime"></span>
                     </div>
-</div>
+                    <div class="field" id="modified" style="display: none;">
+                        <label for="modified">
+                        </label>
+                        <p id="created-time">Modified History: <span id="created-time-display"></span></p>
+                        <ul id="modification-history">
+                            <!-- Modification entries will be inserted here -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            
         </body>
 </html>

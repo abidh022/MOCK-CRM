@@ -10,7 +10,7 @@ const { ObjectId } = require('mongodb');
 router.get('/:id', async (req, res) => {
     try {
         const leadId = req.params.id; // Get the leadId from the URL parameter
-        const lead = await req.leadsCollection.findOne({ _id: new ObjectId(leadId) }); // Query the database for the lead
+        const lead = await req.leadsCollection.findOne({ _id: new ObjectId(leadId) }); 
         
         if (!lead) {
             return res.status(404).json({ message: 'Lead not found' });
@@ -27,9 +27,18 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const newLead = req.body; // Expecting the lead data in the body of the POST request
-        const result = await req.leadsCollection.insertOne(newLead); // Insert the new lead into the collection
+        
+        // Set created and modified times (current timestamp)
+        const currentTime = new Date().toISOString(); // Get current time as ISO string
+        newLead.dateTime = currentTime;  // Created time
+        newLead.modified = currentTime;  // Modified time (initially the same)
+
+        // Insert the new lead into the collection
+        const result = await req.leadsCollection.insertOne(newLead); 
+        
         res.status(200).json({
-            insertedId: result.insertedId // Send the insertedId back to the client
+            insertedId: result.insertedId, // Send the insertedId back to the client
+            ...newLead // Return the lead data with created and modified times
         });
     } catch (error) {
         console.error('Error creating lead:', error);
@@ -37,19 +46,53 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Update a lead by ID
+// Update lead by ID
 router.put('/:id', async (req, res) => {
-    const leadId = req.params.id;
-    const updatedData = req.body;
     try {
-        const result = await leadsCollection.updateOne(
+        const leadId = req.params.id;
+        const updatedLead = req.body;
+
+        const currentTime = new Date().toISOString();
+
+        // Ensure that the "modified" time is updated
+        updatedLead.modified = currentTime;
+
+        // Retrieve the current modifications array from the lead
+        const lead = await req.leadsCollection.findOne({ _id: new ObjectId(leadId) });
+        
+        if (!lead) {
+            return res.status(404).json({ message: 'Lead not found' });
+        }
+
+        // If modifications already exist, push the new timestamp to the array
+        const modifications = lead.modifications || []; // Ensure array exists
+        modifications.push(currentTime); // Add the new modification timestamp
+
+        // Now, update the lead with the new modification timestamps and the updated data
+        const result = await req.leadsCollection.updateOne(
             { _id: new ObjectId(leadId) },
-            { $set: updatedData }
+            {
+                $set: {
+                    ...updatedLead, // Update the lead fields
+                    modifications: modifications, // Save the updated modifications array
+                    modified: currentTime // Update the 'modified' field as well
+                }
+            }
         );
-        if (result.modifiedCount === 1) res.status(200).send('Lead updated');
-        else res.status(404).send('Lead not found');
-    } catch (err) {
-        res.status(500).send('Error updating lead');
+
+        if (result.matchedCount === 0) {
+            return res.status(404).json({ message: 'Lead not found' });
+        }
+
+        // Return the updated lead with its id and the new modifications array
+        res.status(200).json({
+            id: leadId, 
+            ...updatedLead, // Send the updated lead data, including the new modification history
+            modifications: modifications // Return the modifications array
+        });
+    } catch (error) {
+        console.error('Error updating lead:', error);
+        res.status(500).json({ message: 'Error updating lead' });
     }
 });
 
@@ -76,7 +119,5 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-// const leadId = new URLSearchParams(window.location.search).get('id');
-// console.log('Lead ID:', leadId);
 
 module.exports = router;

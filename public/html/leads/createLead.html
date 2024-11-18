@@ -103,21 +103,21 @@
                 <select name="industry" id="industry" name="industry">
                     <option value="">-None-</option>
                     <option value="ASP">ASP (Application Service Provider)</option>
-                    <option value="DataTelecomOEM">Data/Telecom OEM</option>
+                    <option value="Data TelecomOEM">Data/Telecom OEM</option>
                     <option value="ERP">ERP (Enterprise Resource Planning)</option>
-                    <option value="GovernmentMilitary">Government/Military</option>
-                    <option value="LargeEnterprise">Large Enterprise</option>
-                    <option value="ManagementISV">Management ISV</option>
+                    <option value="Government Military">Government/Military</option>
+                    <option value="Large Enterprise">Large Enterprise</option>
+                    <option value="Management ISV">Management ISV</option>
                     <option value="MSP">MSP (Management Service Provider)</option>
-                    <option value="NetworkEquipmentEnterprise">Network Equipment Enterprise</option>
-                    <option value="NonManagementISV">Non-management ISV</option>
-                    <option value="OpticalNetworking">Optical Networking</option>
-                    <option value="ServiceProvider">Service Provider</option>
-                    <option value="SmallMediumEnterprise">Small/Medium Enterprise</option>
-                    <option value="StorageEquipment">Storage Equipment</option>
-                    <option value="StorageServiceProvider">Storage Service Provider</option>
-                    <option value="SystemsIntegrator">Systems Integrator</option>
-                    <option value="WirelessIndustry">Wireless Industry</option>
+                    <option value="Network Equipment Enterprise">Network Equipment Enterprise</option>
+                    <option value="Non Management ISV">Non-management ISV</option>
+                    <option value="Optical Networking">Optical Networking</option>
+                    <option value="Service Provider">Service Provider</option>
+                    <option value="Small Medium Enterprise">Small/Medium Enterprise</option>
+                    <option value="Storage Equipment">Storage Equipment</option>
+                    <option value="Storage Service Provider">Storage Service Provider</option>
+                    <option value="Systems Integrator">Systems Integrator</option>
+                    <option value="Wireless Industry">Wireless Industry</option>
                   </select>
                 <!-- <input type="text" id="industry" name="industry"> -->
             </div>
@@ -125,14 +125,14 @@
                 <label for="leadStatus">Lead Status</label>
                 <select name="leadStatus" id="leadStatus">
                     <option value="">-None-</option>
-                    <option value="AttemptedToContact">Attempted to Contact</option>
-                    <option value="ContactInFuture">Contact in Future</option>
+                    <option value="Attempted To Contact">Attempted to Contact</option>
+                    <option value="Contact In Future">Contact in Future</option>
                     <option value="Contacted">Contacted</option>
-                    <option value="JunkLead">Junk Lead</option>
-                    <option value="LostLead">Lost Lead</option>
-                    <option value="NotContacted">Not Contacted</option>
-                    <option value="PreQualified">Pre-Qualified</option>
-                    <option value="NotQualified">Not Qualified</option>
+                    <option value="Junk Lead">Junk Lead</option>
+                    <option value="Lost Lead">Lost Lead</option>
+                    <option value="Not Contacted">Not Contacted</option>
+                    <option value="Pre Qualified">Pre-Qualified</option>
+                    <option value="Not Qualified">Not Qualified</option>
                 </select>
             </div>
             <div class="form-group">
@@ -177,6 +177,11 @@
             <div class="form-group">
                 <label for="zipCode">Zip Code</label>
                 <input type="text" id="zipCode" name="zipCode">
+            </div>
+            <div class="form-group">
+                <label for="dateTime">Creating Date</label>
+                <input type="text" id="dateTime" readonly  style="color: #C2B9B4; cursor:not-allowed;">
+                <input type="text" id="modified" hidden>
             </div><br>
 
         </form>

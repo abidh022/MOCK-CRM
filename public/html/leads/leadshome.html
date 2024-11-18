@@ -15,54 +15,70 @@
 <body>
     <custom-header></custom-header>
     <script src="../../js/customs/header.js"></script>
-    <div id=recBox>
+    <div id="recBox">
         <div id="left-items">
             <button class="filterBtn">
-                <i class="fas fa-filter"></i> <!-- Font Awesome filter icon -->
+                <i class="fas fa-filter"></i>
             </button>
             <select class="selectBox">My Leads
                 <option>My Leads</option>
-                    <option>Public Views</option>
-                    <option>All Leads</option>
-                    <option>All Locked Leads</option>
-                    <option>Converted Leads</option>
-                    <option>Junk Leads</option>
-                    <option>Mailing Labels</option>
-                    <option>My Converted Leads</option>
-                </select>
+                <option>Public Views</option>
+                <option>All Leads</option>
+                <option>All Locked Leads</option>
+                <option>Converted Leads</option>
+                <option>Junk Leads</option>
+                <option>Mailing Labels</option>
+                <option>My Converted Leads</option>
+            </select>
+        </div>
+    
+        <div id="right-items">
+            <div id="createAndImport">
+                <button id="createButton">Create Lead</button>
             </div>
-            <div id="right-items">
-                <div id="createAndImport">
-                    <button id="createButton">Create Lead</button>
-                    <select id="selectt">
-                        <option class="hidden">Select</option>
-                        <option value="import-leads">Import Leads</option>
-                        <option value="import-notes">Import Notes</option>
-                    </select>
-                </div>
-                
-                <select name="action" id="actionbtn">
-                    <option value="" class="hidden">Actions</option>
-                    <option value="mass_delete">Mass Delete</option>
-                    <option value="mass_update">Mass Update</option>
-                    <option value="mass_convert">Mass Convert</option>
-                    <option value="manage_tags">Manage Tags</option>
-                    <option value="drafts">Drafts</option>
-                    <option value="mass_email">Mass Email</option>
-                    <option value="autoresponders">Autoresponders</option>
-                    <option value="approve_leads">Approve Leads</option>
-                    <option value="deduplicate_leads">Deduplicate Leads</option>
-                    <option value="add_to_campaigns">Add to Campaigns</option>
-                    <option value="create_client_script">Create Client Script</option>
-                    <option value="export_leads">Export Leads</option>
-                    <option value="zoho_sheet_view">Zoho Sheet View</option>
-                </select>
+    
+            <!-- Existing Action Buttons (Original ones) -->
+            <select name="action" id="actionbtn">
+                <option value="" class="hidden">Actions</option>
+                <option value="mass_delete">Mass Delete</option>
+                <option value="mass_update">Mass Update</option>
+                <option value="mass_convert">Mass Convert</option>
+                <option value="manage_tags">Manage Tags</option>
+                <option value="drafts">Drafts</option>
+                <option value="mass_email">Mass Email</option>
+                <option value="autoresponders">Autoresponders</option>
+                <option value="approve_leads">Approve Leads</option>
+                <option value="deduplicate_leads">Deduplicate Leads</option>
+                <option value="add_to_campaigns">Add to Campaigns</option>
+                <option value="create_client_script">Create Client Script</option>
+                <option value="export_leads">Export Leads</option>
+                <option value="zoho_sheet_view">Zoho Sheet View</option>
+            </select>
+    
+            <select name="Sort" id="sorting">
+                <option value=""  class="hidden">List / Sort</option>
+                <option value="date created"> Date Created</option>
+                <option value="A-Z" >↑ A-Z</option>
+                <option value="Z-A" >↓ Z-A</option>
+
+            </select>
+            <!-- Action Buttons to be shown when records are selected -->
+            <div id="action-buttons" style="display: none;">
+                <button id="runMacroBtn">Run Macro</button>
+                <button id="actionsBtn">Actions</button>
+                <button id="createTaskBtn">Create Task</button>
+                <button id="tagsBtn">Tags</button>
+                <button id="sendEmail">Send Email</button>
+                <button id="deleteSelected">Delete Leads</button>
+                <button id="clearSelection">Clear Selection</button>
             </div>
         </div>
+    </div>
+    
             <custom-loader></custom-loader>
             <script src="../../js/customs/loader.js"></script>
 
-        <p id="totalRecords" >Total records </p>
+        <p id="totalRecords" >Total records </p><span><button id="clearSelectionBtn" style="display: none;" onclick="clearSelection()">Clear Selection</button></span>
 
     <div class="main-container">
         <div class="left-container">
@@ -85,6 +101,7 @@
                 <span>Lead Source</span>
             </div>
             <div class="data-container" id="dataContainer">
+                
                 <!-- Lead data will be inserted here -->
             </div>
         </div>

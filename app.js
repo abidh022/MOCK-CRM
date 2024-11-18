@@ -52,8 +52,12 @@ app.post('/api/leads', async (req, res) => {
         // await client.connect();
         const db = client.db("crm"); //database name
         leadsCollection = db.collection("leads");
-        const leads = await leadsCollection.insertOne(req.body);
-        res.status(200).json(leads);
+        const result = await leadsCollection.insertOne(req.body);
+        
+        // Send only the insertedId in the response
+        res.status(200).json({
+            id: result.insertedId.toString()
+        });
     } catch (error) {
         console.error('Error retrieving leads:', error);
         res.status(500).send('Error retrieving leads');
@@ -70,12 +74,13 @@ app.get('/api/leads', async (req, res) => {
     }
 });
 
+
 app.use((req, res, next) => {
     req.leadsCollection = leadsCollection; // Add the leadsCollection to the request object
     next();
 });
 
-app.use('/api/leads', leadRoutes); // Use lead routes222222222222222222222222
+app.use('/api/leads', leadRoutes); // Use lead routes 
 
 
 module.exports = app;

@@ -11,40 +11,40 @@ const app = express();
 const port = 5000;
 
 
-app.use('/data/leads', leadRoutes); // Use lead routes 
 
-// MongoDB connection setup
-const uri = process.env.MONGODB_URI;
-if (!uri) {
-    console.error("MongoDB URI is not defined. Please check your .env file.");
-    process.exit(1); // Exit the process if MongoDB URI is not found
-}
-const client = new MongoClient(uri, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    },
-    socketTimeoutMS: 30000,  // Increase socket timeout to 30 seconds
-    connectTimeoutMS: 30000
-});
 
-let leadsCollection;
-let contactsCollection;
+// // MongoDB connection setup
+// const uri = process.env.MONGODB_URI;
+// if (!uri) {
+//     console.error("MongoDB URI is not defined. Please check your .env file.");
+//     process.exit(1); // Exit the process if MongoDB URI is not found
+// }
+// const client = new MongoClient(uri, {
+//     serverApi: {
+//         version: ServerApiVersion.v1,
+//         strict: true,
+//         deprecationErrors: true,
+//     },
+//     socketTimeoutMS: 30000,  // Increase socket timeout to 30 seconds
+//     connectTimeoutMS: 30000
+// });
 
-async function connectToDatabase() {
-    try {
-        await client.connect();
-        const db = client.db("crm"); // database name
-        leadsCollection = db.collection("leads"); //collection name
-        contactsCollection = db.collection("contacts");
-        console.log("Connected to MongoDB!");
-    } catch (error) {
-        console.error("Error connecting to MongoDB:", error);
-    }
-}
+// let leadsCollection;
+// let contactsCollection;
 
-connectToDatabase();
+// async function connectToDatabase() {
+//     try {
+//         await client.connect();
+//         const db = client.db("crm"); // database name
+//         leadsCollection = db.collection("leads"); //collection name
+//         contactsCollection = db.collection("contacts");
+//         console.log("Connected to MongoDB!");
+//     } catch (error) {
+//         console.error("Error connecting to MongoDB:", error);
+//     }
+// }
+
+// connectToDatabase();
 
 // Middleware
 app.use(logger('dev'));
@@ -54,34 +54,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
-// Endpoint to retrieve leads
-app.post('/data/leads', async (req, res) => {
-    try {
-        // await client.connect();
-        const db = client.db("crm"); //database name
-        leadsCollection = db.collection("leads");
-        const result = await leadsCollection.insertOne(req.body);
-        
-        // Send only the insertedId in the response
-        res.status(200).json({
-            id: result.insertedId.toString()
-        });
-    } catch (error) {
-        console.error('Error retrieving leads:', error);
-        res.status(500).send('Error retrieving leads');
-    }
-});
-//GET
-app.get('/data/leads', async (req, res) => {
-    try {
-        const leads = await leadsCollection.find().toArray(); // Fetch all leads
-        res.status(200).json(leads);
-    } catch (error) {
-        console.error('Error fetching leads:', error);
-        res.status(500).send('Error fetching leads');
-    }
-});
-
+app.use('/data/leads', leadRoutes); // Use lead routes 
 
 app.use((req, res, next) => {
     req.leadsCollection = leadsCollection; // Add the leadsCollection to the request object

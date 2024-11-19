@@ -84,7 +84,7 @@ async function renderLeads() {
         leads = await fetchLeads();
     }
     
-    console.log('Fetched Leads:', leads);
+    console.log('Fetched Leads:'+leads);
     totalRecordsElement.textContent = `Total Records: ${leads.length}`;
 
     

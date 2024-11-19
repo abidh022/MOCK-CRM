@@ -1,12 +1,46 @@
 //routes/leadRoutes.js
-
+require("dotenv").config();
 const express = require('express');
 const router = express.Router();
-const { ObjectId } = require('mongodb');
+const { ObjectId, MongoClient } = require('mongodb');
 // const { leadsCollection } = require('../app'); 
 // const leadController = require('../controllers/leadController');
 
-// Get all leads
+// MongoDB connection setup
+const uri = process.env.MONGODB_URI;
+if (!uri) {
+    console.error("MongoDB URI is not defined. Please check your .env file.");
+    process.exit(1); // Exit the process if MongoDB URI is not found
+}
+const client = new MongoClient(uri);
+let leadsCollection;
+let contactsCollection;
+
+async function connectToDatabase() {
+    try {
+        await client.connect();
+        const db = client.db("crm"); // database name
+        leadsCollection = db.collection("leads"); //collection name
+        contactsCollection = db.collection("contacts");
+        console.log("Connected to MongoDB!");
+    } catch (error) {
+        console.error("Error connecting to MongoDB:", error);
+    }
+}
+
+connectToDatabase();
+
+//getAll 
+router.get('/', async (req, res) => {
+    try {
+        const leads = await leadsCollection.find().toArray(); // Fetch all leads
+        res.status(200).json(leads);
+    } catch (error) {
+        console.error('Error fetching leads:', error);
+        res.status(500).send('Error fetching leads');
+    }
+});
+// Get By id
 router.get('/:id', async (req, res) => {
     try {
         const leadId = req.params.id; // Get the leadId from the URL parameter

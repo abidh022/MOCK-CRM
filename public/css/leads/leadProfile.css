@@ -375,16 +375,15 @@ h4 {
     border-radius: 50%;
     padding: 12px;
     margin-right: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow around the icon */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     transition: background-color 0.3s ease;
 }
 
-/* Hover effect for the pencil icon */
 .timeline-icon:hover {
-    background-color: #45a049; /* Slightly darker green when hovered */
+    background-color: #45a049;
 }
 
-/* Animation for timeline items */
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -396,7 +395,6 @@ h4 {
     }
 }
 
-/* Timeline content (icon + description) */
 .timeline-content {
     display: flex;
     align-items: center;
@@ -411,9 +409,8 @@ h4 {
     margin-left: 0px;
 }
 
-/* Optional: Style for the last item to make it distinct */
 .timeline-item:last-child .timeline-icon {
-    background-color: #FF9800; /* Change the icon color for the first item */
+    background-color: #FF9800; 
 }
 
 

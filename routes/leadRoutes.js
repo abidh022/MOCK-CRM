@@ -6,17 +6,29 @@ const { ObjectId } = require('mongodb');
 // const { leadsCollection } = require('../app'); 
 // const leadController = require('../controllers/leadController');
 
+
 // Get all leads
+router.get('/', async (req, res) => {
+    try {
+        const leads = await req.leadsCollection.find().toArray(); // Fetch all leads
+        res.status(200).json(leads);
+    } catch (error) {
+        console.error('Error fetching leads:', error);
+        res.status(500).send('Error fetching leads');
+    }
+});
+
+// Get a specific lead by ID
 router.get('/:id', async (req, res) => {
     try {
-        const leadId = req.params.id; // Get the leadId from the URL parameter
+        const leadId = req.params.id; 
         const lead = await req.leadsCollection.findOne({ _id: new ObjectId(leadId) }); 
         
         if (!lead) {
             return res.status(404).json({ message: 'Lead not found' });
         }
         
-        res.status(200).json(lead); // Return the lead data as JSON
+        res.status(200).json(lead); 
     } catch (error) {
         console.error('Error fetching lead:', error);
         res.status(500).json({ message: 'Server Error' });
@@ -26,9 +38,7 @@ router.get('/:id', async (req, res) => {
 // Route to create a new lead
 router.post('/', async (req, res) => {
     try {
-        const newLead = req.body; // Expecting the lead data in the body of the POST request
-        
-        // Set created and modified times (current timestamp)
+        const newLead = req.body; 
         const currentTime = new Date().toISOString(); // Get current time as ISO string
         newLead.dateTime = currentTime;  // Created time
         newLead.modified = currentTime;  // Modified time (initially the same)

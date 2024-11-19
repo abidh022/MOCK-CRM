@@ -35,7 +35,7 @@ function filterRecords() {
 // Function to fetch leads
 async function fetchLeads() {
     try {
-        const response = await fetch('/api/leads'); 
+        const response = await fetch('/data/leads'); 
         if (!response.ok) throw new Error('Failed to fetch leads');
         return await response.json();
     } catch (error) {
@@ -230,7 +230,7 @@ async function deleteSelectedLeads() {
     try {
         // Send DELETE requests for each selected lead
         const deletePromises = leadIds.map(leadId => 
-            fetch(`/api/leads/${leadId}`, { method: 'DELETE' })
+            fetch(`/data/leads/${leadId}`, { method: 'DELETE' })
         );
         
         const responses = await Promise.all(deletePromises);

@@ -52,7 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 // Endpoint to retrieve leads
-app.post('/api/leads', async (req, res) => {
+app.post('/data/leads', async (req, res) => {
     try {
         // await client.connect();
         const db = client.db("crm"); //database name
@@ -69,7 +69,7 @@ app.post('/api/leads', async (req, res) => {
     }
 });
 //GET
-app.get('/api/leads', async (req, res) => {
+app.get('/data/leads', async (req, res) => {
     try {
         const leads = await leadsCollection.find().toArray(); // Fetch all leads
         res.status(200).json(leads);
@@ -85,7 +85,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/leads', leadRoutes); // Use lead routes 
+app.use('/data/leads', leadRoutes); // Use lead routes 
 
 
 module.exports = app;

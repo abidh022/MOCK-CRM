@@ -57,7 +57,7 @@
 // Fetch a specific lead based on the ID in the URL
 async function fetchLeadData(leadId) {
     try {
-        const response = await fetch(`/api/leads/${leadId}`);
+        const response = await fetch(`/data/leads/${leadId}`);
         if (!response.ok) throw new Error('Lead not found');
         return await response.json(); // Return the lead data
     } catch (error) {
@@ -167,7 +167,7 @@ async function deleteLead() {
 
     try {
         // Send the DELETE request to the server
-        const response = await fetch(`/api/leads/${leadId}`, {
+        const response = await fetch(`/data/leads/${leadId}`, {
             method: 'DELETE',
         });
 

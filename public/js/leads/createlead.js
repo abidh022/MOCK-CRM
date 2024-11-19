@@ -131,7 +131,7 @@ function formatCustomDate(dateString) {
     async function loadLeadData(leadId) {
         try {
             // Fetch the lead data from the server
-            const response = await fetch(`/api/leads/${leadId}`);
+            const response = await fetch(`/data/leads/${leadId}`);
             const lead = await response.json();
 
             if (lead) {
@@ -231,13 +231,13 @@ function formatCustomDate(dateString) {
             if (leadId) {
                 // If we have an ID, it's an update (PUT request)
                 // Do not change dateTime when updating an existing lead
-                const existingLead = await fetch(`/api/leads/${leadId}`);
+                const existingLead = await fetch(`/data/leads/${leadId}`);
                 const leadData = await existingLead.json();
 
                 leadObj.dateTime = leadData.dateTime;  // Keep the original dateTime from the existing lead
 
                 // Perform the update (PUT request)
-                response = await fetch(`/api/leads/${leadId}`, {
+                response = await fetch(`/data/leads/${leadId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -249,7 +249,7 @@ function formatCustomDate(dateString) {
                 leadObj.dateTime = new Date().toISOString();  // Set dateTime to the current time for new leads
 
                 // Perform the create (POST request)
-                response = await fetch('/api/leads', {
+                response = await fetch('/data/leads', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -351,7 +351,7 @@ function formatCustomDate(dateString) {
         insertLead(leadObj);
 
         try {
-            const response = await fetch('/api/leads', {
+            const response = await fetch('/data/leads', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

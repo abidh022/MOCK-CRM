@@ -10,6 +10,9 @@ require('dotenv').config();
 const app = express();
 const port = 5000;
 
+
+app.use('/data/leads', leadRoutes); // Use lead routes 
+
 // MongoDB connection setup
 const uri = process.env.MONGODB_URI;
 if (!uri) {
@@ -85,7 +88,6 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/data/leads', leadRoutes); // Use lead routes 
 
 
 module.exports = app;

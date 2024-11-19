@@ -37,7 +37,6 @@
                 <button id="createButton">Create Lead</button>
             </div>
     
-            <!-- Existing Action Buttons (Original ones) -->
             <select name="action" id="actionbtn">
                 <option value="" class="hidden">Actions</option>
                 <option value="mass_delete">Mass Delete</option>
@@ -56,16 +55,16 @@
             </select>
     
             <select name="Sort" id="sorting">
-                <option value=""  class="hidden">List / Sort</option>
-                <option value="date created"> Date Created</option>
-                <option value="A-Z" >↑ A-Z</option>
-                <option value="Z-A" >↓ Z-A</option>
-
+                <option value="" class="hidden">List / Sort</option>
+                <!-- <option value="date created desc">↓ Date Created</option> -->
+                <option value="A-Z">↑ A - Z</option>
+                <option value="Z-A">↓ Z - A</option>
+                <option value="date created asc">↑ Date Created</option>
             </select>
-            <!-- Action Buttons to be shown when records are selected -->
+            
             <div id="action-buttons" style="display: none;">
                 <button id="runMacroBtn">Run Macro</button>
-                <button id="actionsBtn">Actions</button>
+                <!-- <button id="actionsBtn">Actions</button> -->
                 <button id="createTaskBtn">Create Task</button>
                 <button id="tagsBtn">Tags</button>
                 <button id="sendEmail">Send Email</button>

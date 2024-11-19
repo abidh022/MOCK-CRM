@@ -44,22 +44,55 @@ async function fetchLeads() {
     }
 }
 
+// Sorting functionality
+document.querySelector('#sorting').addEventListener('change', async (event) => {
+    const sortValue = event.target.value;
+    await sortLeads(sortValue);
+    renderLeads(); 
+});
+
+// For sort options 
+async function sortLeads(sortValue) {
+    leads = await fetchLeads();
+
+    switch (sortValue) {
+        case 'date created asc':
+            leads.sort((a, b) => new Date(a.createdTime) - new Date(b.createdTime));
+            break;
+        case 'date created desc':
+            leads.sort((a, b) => new Date(b.createdTime) - new Date(a.createdTime));
+            break;
+        case 'Z-A':
+            leads.sort((a, b) => a.firstName.localeCompare(b.firstName));
+            break;
+        case 'A-Z':
+            leads.sort((a, b) => b.firstName.localeCompare(a.firstName));
+            break;
+        default:
+            break;
+    }
+}
+
+
 // Function to render the leads in the right container
 async function renderLeads() {
     const dataContainer = document.getElementById('dataContainer');
     const totalRecordsElement = document.getElementById('totalRecords');
-    leads = await fetchLeads();
+    // leads = await fetchLeads();
+    
+    if (leads.length === 0) {
+        leads = await fetchLeads();
+    }
+    
     console.log('Fetched Leads:', leads);
-
-    // Update total records count
     totalRecordsElement.textContent = `Total Records: ${leads.length}`;
 
-    leads.reverse();
-
-
-    dataContainer.innerHTML = ''; // Clear the existing data container
-
+    
+    
+    dataContainer.innerHTML = ''; 
+    
     if (leads.length > 0) {
+        leads.reverse();
         leads.forEach(lead => {
             const row = document.createElement('div');
             row.classList.add('data-row');
@@ -86,15 +119,13 @@ function updateTotalRecordsSelected() {
     const actionButtons = document.getElementById('action-buttons');
     const actionSelectBox = document.getElementById('actionbtn');
     const recBox = document.getElementById('recBox');
-    const allActionButtons = recBox.querySelectorAll('button, select'); // All buttons and selects inside recBox
-    const actionBtns = recBox.querySelectorAll('#action-buttons button'); // The specific action buttons
+    const allActionButtons = recBox.querySelectorAll('button, select'); 
+    const actionBtns = recBox.querySelectorAll('#action-buttons button');
 
     // If any records are selected, show the action buttons and hide the rest
     if (totalSelected > 0) {
-        // Update the total selected count
         totalRecordsElement.textContent = `Total Records Selected: ${totalSelected}`;
 
-        // Hide all buttons and selects in recBox
         allActionButtons.forEach(btn => btn.style.display = 'none');
 
         // Show the action buttons (6 specific buttons)
@@ -140,7 +171,7 @@ function toggleSelectAll() {
     checkboxes.forEach(checkbox => {
         checkbox.checked = selectAllCheckbox.checked;
     });
-    updateTotalRecordsSelected();  // Update the selected records count
+    updateTotalRecordsSelected(); 
 }
 
 // Function to update the 'select all' checkbox state based on individual checkboxes
@@ -153,14 +184,14 @@ function updateSelectAllState() {
     selectAllCheckbox.checked = selectedCheckboxes === totalCheckboxes;
     selectAllCheckbox.indeterminate = selectedCheckboxes > 0 && selectedCheckboxes < totalCheckboxes;
     
-    updateTotalRecordsSelected();  // Update the selected records count
+    updateTotalRecordsSelected(); 
 }
 
 // Initial render of total records count
 document.addEventListener('DOMContentLoaded', () => {
-    updateTotalRecordsSelected(); // Call on page load to display the correct total
-    renderLeads(); // Render the leads after the page is loaded
-    renderRecords(); // Render the record filters on page load
+    updateTotalRecordsSelected(); 
+    renderLeads(); 
+    renderRecords(); 
 });
 
 // Add event listener for clicking on a lead row

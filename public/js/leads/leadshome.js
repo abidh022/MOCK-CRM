@@ -35,9 +35,12 @@ function filterRecords() {
 // Function to fetch leads
 async function fetchLeads() {
     try {
-        const response = await fetch(`/get`)        
-        if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);        
-        return await response.json();
+        const response = await fetch("/leads/getAllLead", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });    
+        if (!response.ok) throw new Error(`${response?.status} ${response?.statusText}`)
+        return await response?.json();
     } catch (error) {
         console.error(error);
         return [];
@@ -77,11 +80,11 @@ async function sortLeads(sortValue) {
 async function renderLeads() {
     const dataContainer = document.getElementById('dataContainer');
     const totalRecordsElement = document.getElementById('totalRecords');
-    // leads = await fetchLeads();
+    leads = await fetchLeads();
     
-    if (leads.length === 0) {
-        leads = await fetchLeads();        
-    }
+    // if (leads.length === 0) {
+    //     leads = await fetchLeads();        
+    // }
     
     console.log('Fetched Leads:', leads);
     totalRecordsElement.textContent = `Total Records: ${leads.length}`;

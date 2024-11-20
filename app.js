@@ -1,10 +1,11 @@
-const express = require('express');
+let express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const port = process.env.PORT || 5000;
 const app = express();
 require('dotenv').config();
+
 
 const leadRoutes = require('./routes/leadRoutes');
 const contactRoutes = require('./routes/contactRoutes')
@@ -17,11 +18,7 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Use lead routes
-app.get('/get',(req,res)=>{
-    res.send('Welcome');
-});
-
+app.use('/leads', leadRoutes);
 
 app.listen(port,()=>{
     console.log(`Server Listining at http://localhost:${port}`);

@@ -37,7 +37,9 @@ async function fetchLeads() {
     try {
         const response = await fetch("/leads/getAllLead", {
             method: "GET",
-            headers: { "Content-Type": "application/json" }
+            headers: { 
+                "Content-Type": "application/json" 
+            }
         });    
         if (!response.ok) throw new Error(`${response?.status} ${response?.statusText}`)
         return await response?.json();

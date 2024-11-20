@@ -1,12 +1,34 @@
 //routes/leadRoutes.js
-
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-const { ObjectId } = require('mongodb');
+const { MongoClient } = require('mongodb');
+
+const uri = process.env.MONGODB_URI;
+const client = new MongoClient(uri);
 
 
-router.get('/data/leads', async (req, res) => {
+let leadsCollection;
+let contactsCollection;
+
+async function connectToDatabase() {
     try {
+        await client.connect();
+        const db = client.db("crm"); // database name
+        leadsCollection = db.collection("leads"); //collection name
+        contactsCollection = db.collection("contacts");
+        console.log("Connected to MongoDB!");
+    } catch (error) {
+        console.error("Error connecting to MongoDB:", error);
+    }
+}
+
+connectToDatabase();
+
+
+router.get('/getLeads', async (req, res) => {
+    try {
+        console.log('hello its working!');
         const leads = await leadsCollection.find().toArray();  // Ensure the query is working
         console.log('Fetched Leads:', leads);  // Log the result to debug
         res.status(200).json(leads);

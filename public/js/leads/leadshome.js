@@ -35,12 +35,15 @@ function filterRecords() {
 // Function to fetch leads
 async function fetchLeads() {
     try {
-        const response = await fetch('/data/leads'); 
+        const response = await Promise.race([
+            fetch('/data/leads'),
+            new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))  // Timeout after 5 seconds
+        ]);
         if (!response.ok) throw new Error('Failed to fetch leads');
         return await response.json();
     } catch (error) {
         console.error('Error fetching leads:', error);
-        return [];
+        return [];  // Return an empty array in case of an error
     }
 }
 

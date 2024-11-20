@@ -5,6 +5,17 @@ const router = express.Router();
 const { ObjectId } = require('mongodb');
 
 
+router.get('/', async (req, res) => {
+    try {
+        const leads = await leadsCollection.find().toArray();  // Ensure the query is working
+        console.log('Fetched Leads:', leads);  // Log the result to debug
+        res.status(200).json(leads);
+    } catch (error) {
+        console.error('Error fetching leads:', error);
+        res.status(500).send('Error fetching leads');
+    }
+});
+
 // Get all leads
 router.get('/:id', async (req, res) => {
     try {

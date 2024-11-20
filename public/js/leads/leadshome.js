@@ -36,10 +36,10 @@ function filterRecords() {
 async function fetchLeads() {
     try {
         const response = await fetch('/leads/getLeads')        
-        if (!response.ok) throw new Error('Failed to fetch leads');        
+        if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);        
         return await response.json();
     } catch (error) {
-        console.error('Error fetching leads:', error);
+        console.error(error);
         return [];
     }
 }

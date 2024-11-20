@@ -1,7 +1,7 @@
 document.querySelector('#createButton')?.addEventListener('click', () => {
     window.location.href = '/html/leads/createLead.html';
 });
-
+const baseUrl = window.location.origin;
 let leads = []; 
 
 const records = [
@@ -35,7 +35,7 @@ function filterRecords() {
 // Function to fetch leads
 async function fetchLeads() {
     try {
-        const response = await fetch('/leads/getLeads')        
+        const response = await fetch(`${baseUrl}/leads/getLeads`)        
         if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);        
         return await response.json();
     } catch (error) {

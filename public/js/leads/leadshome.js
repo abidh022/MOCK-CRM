@@ -1,4 +1,4 @@
-document.querySelector('#createButton')?.addEventListener('click', () => {
+document.querySelector('#createButton').addEventListener('click', () => {
     window.location.href = '/html/leads/createLead.html';
 });
 const baseUrl = window.location.origin;

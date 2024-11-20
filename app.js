@@ -50,6 +50,8 @@ app.post('/data/leads', async (req, res) => {
         const db = client.db("crm"); //database name
         leadsCollection = db.collection("leads");
         const result = await leadsCollection.insertOne(req.body);
+        console.log(result);
+        
         
         // Send only the insertedId in the response
         res.status(200).json({

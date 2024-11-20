@@ -33,26 +33,14 @@ function filterRecords() {
 }
 
 // Function to fetch leads
-// Function to fetch leads with more detailed error handling
 async function fetchLeads() {
     try {
-        const response = await Promise.race([
-            fetch('/data/leads'),
-            new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))  // Timeout after 5 seconds
-        ]);
-
-        if (!response.ok) {
-            // Log the response status if not ok
-            throw new Error(`Failed to fetch leads: ${response.statusText} (Status Code: ${response.status})`);
-        }
-
-        const data = await response.json();
-        console.log('Fetched Leads Data:', data); // Log the fetched data
-        return data;
+        const response = await fetch('/data/leads')        
+        if (!response.ok) throw new Error('Failed to fetch leads');
+        return await response.json();
     } catch (error) {
         console.error('Error fetching leads:', error);
-        alert("Error fetching leads: " + error.message); // Display a message to the user
-        return [];  // Return an empty array in case of an error
+        return [];
     }
 }
 
@@ -89,37 +77,35 @@ async function sortLeads(sortValue) {
 async function renderLeads() {
     const dataContainer = document.getElementById('dataContainer');
     const totalRecordsElement = document.getElementById('totalRecords');
-
-    // Fetch the leads if the array is empty
+    // leads = await fetchLeads();
+    
     if (leads.length === 0) {
         leads = await fetchLeads();
     }
     
     console.log('Fetched Leads:', leads);
     totalRecordsElement.textContent = `Total Records: ${leads.length}`;
-
-    // Clear previous content
-    dataContainer.innerHTML = '';
-
+    
+    dataContainer.innerHTML = ''; 
+    
     if (leads.length > 0) {
-        leads.reverse(); // Optionally reverse the order if you want to show the latest leads first
+        leads.reverse();
         leads.forEach(lead => {
             const row = document.createElement('div');
             row.classList.add('data-row');
             row.setAttribute('data-id', lead._id);
-            row.innerHTML = `
-                <input type="checkbox" class="lead-checkbox">
+            row.innerHTML = 
+                `<input type="checkbox" class="lead-checkbox">
                 <span class="lead-name">${lead.firstName} ${lead.lastName}</span>
                 <span class="lead-company">${lead.company}</span>
                 <span class="lead-email">${lead.email}</span>
                 <span class="lead-mobile">${lead.mobile || 'N/A'}</span>
-                <span class="lead-source">${lead.leadSource || 'N/A'}</span>
-            `;
+                <span class="lead-source">${lead.leadSource || 'N/A'}</span>`;
             dataContainer.appendChild(row);
         });
     } else {
-        dataContainer.innerHTML = '<img src="/assets/No-data-cuate.png" alt="No Leads Available">';
-    }
+        dataContainer.innerHTML = '<img src="/assets/No-data-cuate.png" alt="No Leads Available">'; 
+   }
 }
 
 // Function to update the "Total Records Selected" and show action buttons

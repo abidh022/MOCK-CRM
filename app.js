@@ -18,8 +18,9 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Use lead routes
-app.use('/leads', leadRoutes);
-app.use('/get',contactRoutes);
+app.get('/get',(req,res)=>{
+    res.send('Welcome');
+});
 
 
 app.listen(port,()=>{

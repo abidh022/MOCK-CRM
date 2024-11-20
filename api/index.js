@@ -1,2 +1,3 @@
-import app from '../app'
-module.exports =app;
+import app from '../app';
+
+module.exports = app;

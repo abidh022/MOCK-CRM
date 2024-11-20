@@ -2,14 +2,12 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const { MongoClient } = require('mongodb');
 const leadRoutes = require('./routes/leadRoutes');
 const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-// const port = 5000;
-
 // MongoDB connection setup
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
@@ -40,9 +38,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-
 // Endpoint to retrieve leads
 app.post('/data/leads', async (req, res) => {
     try {
@@ -50,8 +45,6 @@ app.post('/data/leads', async (req, res) => {
         const db = client.db("crm"); //database name
         leadsCollection = db.collection("leads");
         const result = await leadsCollection.insertOne(req.body);
-        console.log(result);
-        
         
         // Send only the insertedId in the response
         res.status(200).json({

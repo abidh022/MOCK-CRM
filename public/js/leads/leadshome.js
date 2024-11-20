@@ -35,8 +35,8 @@ function filterRecords() {
 // Function to fetch leads
 async function fetchLeads() {
     try {
-        const response = await fetch('/data/leads')        
-        if (!response.ok) throw new Error('Failed to fetch leads');
+        const response = await fetch('http://localhost:5000/data/leads')        
+        if (!response.ok) throw new Error('Failed to fetch leads');        
         return await response.json();
     } catch (error) {
         console.error('Error fetching leads:', error);
@@ -80,7 +80,7 @@ async function renderLeads() {
     // leads = await fetchLeads();
     
     if (leads.length === 0) {
-        leads = await fetchLeads();
+        leads = await fetchLeads();        
     }
     
     console.log('Fetched Leads:', leads);

@@ -17,6 +17,7 @@ const mainFunction = async () => {
 router.use(async (req, res, next) => {
   await mainFunction();
   if (leadsCollection) {
+    alert('leads data retived')
     next(); //calling the mainfunction
   } else {
     return res.json("Db connected,Collection Not Found");

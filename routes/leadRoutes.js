@@ -9,7 +9,7 @@ const { ObjectId } = require('mongodb');
 router.get('/:id', async (req, res) => {
     try {
         const leadId = req.params.id; // Get the leadId from the URL parameter
-        const lead = await client.db("crm").collection("leads").findOne({ _id: new ObjectId(leadId) }); 
+        const lead = await req.leadsCollection.findOne({ _id: new ObjectId(leadId) }); 
         
         if (!lead) {
             return res.status(404).json({ message: 'Lead not found' });

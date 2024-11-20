@@ -2,11 +2,15 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const leadRoutes = require('./routes/leadRoutes');
 const cors = require('cors');
-const app = express();
 require('dotenv').config();
 
+const app = express();
+// const port = 5000;
+
+// MongoDB connection setup
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
 
@@ -69,7 +73,6 @@ app.use((req, res, next) => {
     req.leadsCollection = leadsCollection; // Add the leadsCollection to the request object
     next();
 });
-const leadRoutes = require('./routes/leadRoutes');
 
 app.use('/data/leads', leadRoutes); // Use lead routes 
 

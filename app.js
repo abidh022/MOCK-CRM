@@ -44,22 +44,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Endpoint to retrieve leads
-// app.post('/data/leads', async (req, res) => {
-//     try {
-//         // await client.connect();
-//         const db = client.db("crm"); //database name
-//         leadsCollection = db.collection("leads");
-//         const result = await leadsCollection.insertOne(req.body);
+app.post('/data/leads', async (req, res) => {
+    try {
+        // await client.connect();
+        const db = client.db("crm"); //database name
+        leadsCollection = db.collection("leads");
+        const result = await leadsCollection.insertOne(req.body);
         
-//         // Send only the insertedId in the response
-//         res.status(200).json({
-//             id: result.insertedId.toString()
-//         });
-//     } catch (error) {
-//         console.error('Error retrieving leads:', error);
-//         res.status(500).send('Error retrieving leads');
-//     }
-// });
+        // Send only the insertedId in the response
+        res.status(200).json({
+            id: result.insertedId.toString()
+        });
+    } catch (error) {
+        console.error('Error retrieving leads:', error);
+        res.status(500).send('Error retrieving leads');
+    }
+});
 //GET
 app.get('/data/leads', async (req, res) => {
     try {

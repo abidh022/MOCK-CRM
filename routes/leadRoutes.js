@@ -5,7 +5,7 @@ const router = express.Router();
 const { ObjectId } = require('mongodb');
 
 
-router.get('/', async (req, res) => {
+router.get('/data/leads', async (req, res) => {
     try {
         const leads = await leadsCollection.find().toArray();  // Ensure the query is working
         console.log('Fetched Leads:', leads);  // Log the result to debug
@@ -32,6 +32,7 @@ router.get('/:id', async (req, res) => {
         res.status(500).json({ message: 'Server Error' });
     }
 });
+
 
 // Route to create a new lead
 router.post('/', async (req, res) => {

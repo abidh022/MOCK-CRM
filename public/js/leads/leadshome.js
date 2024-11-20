@@ -33,27 +33,26 @@ function filterRecords() {
 }
 
 // Function to fetch leads
-// Function to fetch leads with better error handling
+// Function to fetch leads with more detailed error handling
 async function fetchLeads() {
     try {
         const response = await Promise.race([
             fetch('/data/leads'),
             new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))  // Timeout after 5 seconds
         ]);
-        
-        console.log('Response status:', response.status); // Log the response status
-        
+
         if (!response.ok) {
-            throw new Error('Failed to fetch leads');
+            // Log the response status if not ok
+            throw new Error(`Failed to fetch leads: ${response.statusText} (Status Code: ${response.status})`);
         }
-        
+
         const data = await response.json();
         console.log('Fetched Leads Data:', data); // Log the fetched data
         return data;
     } catch (error) {
         console.error('Error fetching leads:', error);
         alert("Error fetching leads: " + error.message); // Display a message to the user
-        return [];  // Return an empty array if an error occurs
+        return [];  // Return an empty array in case of an error
     }
 }
 

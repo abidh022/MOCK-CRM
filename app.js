@@ -3,9 +3,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const { MongoClient } = require('mongodb');
 const leadRoutes = require('./routes/leadRoutes');
+const contactRoutes = require('./routes/contactRoutes')
 const cors = require('cors');
 require('dotenv').config();
-
+const port = process.env.PORT || 5000;
 const app = express();
 
 // MongoDB connection setup
@@ -38,5 +39,11 @@ app.use(cors());
 
 // Use lead routes
 app.use('/leads', leadRoutes);
+app.use('/get',contactRoutes);
+
+
+app.listen(port,()=>{
+    console.log(`Server Listining at http://localhost:${port}`);
+})
 
 module.exports = app;

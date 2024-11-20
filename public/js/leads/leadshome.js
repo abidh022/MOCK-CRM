@@ -35,7 +35,7 @@ function filterRecords() {
 // Function to fetch leads
 async function fetchLeads() {
     try {
-        const response = await fetch(`${baseUrl}/leads/getLeads`)        
+        const response = await fetch(`/get`)        
         if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);        
         return await response.json();
     } catch (error) {

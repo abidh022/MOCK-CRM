@@ -37,7 +37,7 @@ function filterRecords() {
 async function fetchLeads() {
     try {
         const response = await Promise.race([
-            fetch('/data/leads'),
+            fetch('http://localhost:5000/data/leads'),
             new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))  // Timeout after 5 seconds
         ]);
 

@@ -248,8 +248,8 @@ function formatCustomDate(dateString) {
                 // If no ID, create a new lead (POST request)
                 leadObj.dateTime = new Date().toISOString();  // Set dateTime to the current time for new leads
 
-                // Perform the create (POST request)
-                response = await fetch('/data/leads', {
+                // Perform the create (POST request) 
+                response = await fetch('/leads/dataPost', {  // this is save
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

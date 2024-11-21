@@ -16,7 +16,8 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('./leads', leadRoutes);
+app.use('/leads', leadRoutes);
+
 app.listen(port,()=>{
     console.log(`Server Listining at http://localhost:${port}`);
 })

@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const router = express.Router();
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 
 const URI = process.env.MONGODB_URI;
 const client = new MongoClient(URI);
@@ -43,19 +43,20 @@ router.get("/getAllLead", (req, res) => {
   res.json(leadsCollection);
 });
 
-// Get all leads
-router.get("/:id", async (req, res) => {
+// Get specific leads using ID
+router.get("/data/:id", async (req, res) => {
   try {
     const leadId = req.params.id; // Get the leadId from the URL parameter
-    const lead = await req?.leadsCollection?.findOne({
+    const fetchLeadIndividual = client.db("crm").collection("leads");
+    const leadIndividualInformation = fetchLeadIndividual.findOne({
       _id: new ObjectId(leadId),
     });
 
-    if (!lead) {
+    if (!leadIndividualInformation) {
       return res.status(404).json({ message: "Lead not found" });
     }
-
-    res.status(200).json(lead); // Return the lead data as JSON
+    
+    res.status(200).json(await leadIndividualInformation); // Return the lead data as JSON
   } catch (error) {
     console.error("Error fetching lead:", error);
     res.status(500).json({ message: "Server Error" });
@@ -63,20 +64,22 @@ router.get("/:id", async (req, res) => {
 });
 
 // Route to create a new lead
-router.post("/", async (req, res) => {
+router.post("/dataPost", async (req, res) => {
   try {
     const newLead = req.body; // Expecting the lead data in the body of the POST request
-
+    
     // Set created and modified times (current timestamp)
     const currentTime = new Date().toISOString(); // Get current time as ISO string
     newLead.dateTime = currentTime; // Created time
     newLead.modified = currentTime; // Modified time (initially the same)
 
     // Insert the new lead into the collection
-    const result = await req.leadsCollection.insertOne(newLead);
+    // const result = await req.leadsCollection.insertOne(newLead);
+    const settingDbAndCollection = client.db('crm').collection('leads')
+    const addingLead = await settingDbAndCollection?.insertOne(newLead)
 
     res.status(200).json({
-      insertedId: result.insertedId, // Send the insertedId back to the client
+      insertedId: addingLead.insertedId, // Send the insertedId back to the client
       ...newLead, // Return the lead data with created and modified times
     });
   } catch (error) {

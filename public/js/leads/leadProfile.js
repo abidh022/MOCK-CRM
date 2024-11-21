@@ -57,9 +57,10 @@
 // Fetch a specific lead based on the ID in the URL
 async function fetchLeadData(leadId) {
     try {
-        const response = await fetch(`/data/leads/${leadId}`);
+        const response = await fetch(`/leads/data/${leadId}`,{ method : 'GET' }); // fetch data
         if (!response.ok) throw new Error('Lead not found');
-        return await response.json(); // Return the lead data
+     
+                return await response.json() // Return the lead data
     } catch (error) {
         console.error('Error fetching lead data:', error);
         document.getElementById('leadName').textContent = 'Lead not found';
@@ -93,6 +94,7 @@ async function renderLeadProfile() {
         const lead = await fetchLeadData(leadId);
 
         if (lead) {
+            console.log(lead);
             // Update the profile data on the page
             document.getElementById('leadName').textContent = `${lead.firstName} ${lead.lastName}`;
             document.getElementById('leadN').textContent = `${lead.firstName} ${lead.lastName}`;

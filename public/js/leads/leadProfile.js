@@ -153,23 +153,18 @@ async function renderLeadProfile() {
 // leadProfile.js
 async function deleteLead() {
     const leadId = new URLSearchParams(window.location.search).get('id');
-    
-    // Check if the leadId exists
     if (!leadId) {
         alert("Lead ID is missing.");
         return;
     }
-
     const isConfirmed = window.confirm("Are you sure you want to delete this lead? This action cannot be undone.");
-
     if (!isConfirmed) {
         alert("Deletion cancelled.");
         return;
     }
 
     try {
-        // Send the DELETE request to the server
-        const response = await fetch(`/data/leads/${leadId}`, {
+        const response = await fetch(`/leads/deletedata/${leadId}`, {
             method: 'DELETE',
         });
 
@@ -185,6 +180,8 @@ async function deleteLead() {
         alert('An error occurred while deleting the lead.');
     }
 }
+document.getElementById('delete').addEventListener('click',deleteLead);
+
 // Event listener to detect the 'Delete' key press
 document.addEventListener('keydown' , function(event) {
     if (event.key === 'Delete') {

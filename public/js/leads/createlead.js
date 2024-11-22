@@ -131,7 +131,7 @@ function formatCustomDate(dateString) {
     async function loadLeadData(leadId) {
         try {
             // Fetch the lead data from the server
-            const response = await fetch(`/data/leads/${leadId}`);
+            const response = await fetch(`/leads/getIdForEdit/${leadId}`);
             const lead = await response.json();
 
             if (lead) {
@@ -223,21 +223,16 @@ function formatCustomDate(dateString) {
 
             };
 
-            const leadId = new URLSearchParams(window.location.search).get('id'); // Get the ID from URL
-
+            const leadId = new URLSearchParams(window.location.search).get('id'); 
            
         try {
             let response;
             if (leadId) {
-                // If we have an ID, it's an update (PUT request)
-                // Do not change dateTime when updating an existing lead
-                const existingLead = await fetch(`/data/leads/${leadId}`);
+                const existingLead = await fetch(`/leads/getIdForEdit/${leadId}`);
                 const leadData = await existingLead.json();
 
-                leadObj.dateTime = leadData.dateTime;  // Keep the original dateTime from the existing lead
-
-                // Perform the update (PUT request)
-                response = await fetch(`/data/leads/${leadId}`, {
+                leadObj.dateTime = leadData.dateTime;  // Keep the original dateTime from the existing lead)
+                response = await fetch(`/leads/updateLead/${leadId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -351,7 +346,7 @@ function formatCustomDate(dateString) {
         insertLead(leadObj);
 
         try {
-            const response = await fetch('/data/leads', {
+            const response = await fetch('/leads/datapost', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

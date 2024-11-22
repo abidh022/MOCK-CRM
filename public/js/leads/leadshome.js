@@ -52,43 +52,35 @@ async function fetchLeads() {
 // Sorting functionality
 document.querySelector('#sorting').addEventListener('change', async (event) => {
     const sortValue = event.target.value;
-    await sortLeads(sortValue);
+    leads = await sortLeads(sortValue); 
     renderLeads(); 
 });
 
-// For sort options 
+
+// For sort options
 async function sortLeads(sortValue) {
-    leads = await fetchLeads();
+    let sortedLeads = await fetchLeads();  
 
     switch (sortValue) {
         case 'date created asc':
-            leads.sort((a, b) => new Date(a.createdTime) - new Date(b.createdTime));
-            break;
-        case 'date created desc':
-            leads.sort((a, b) => new Date(b.createdTime) - new Date(a.createdTime));
+            sortedLeads.sort((a, b) => new Date(a.createdTime) - new Date(b.createdTime));
             break;
         case 'Z-A':
-            leads.sort((a, b) => a.firstName.localeCompare(b.firstName));
+            sortedLeads.sort((a, b) => a.firstName.localeCompare(b.firstName));
             break;
         case 'A-Z':
-            leads.sort((a, b) => b.firstName.localeCompare(a.firstName));
+            sortedLeads.sort((a, b) => b.firstName.localeCompare(a.firstName));
             break;
         default:
             break;
     }
+    return sortedLeads; 
 }
 
-// Function to render the leads in the right container
 async function renderLeads() {
     const dataContainer = document.getElementById('dataContainer');
     const totalRecordsElement = document.getElementById('totalRecords');
-    leads = await fetchLeads();
     
-    // if (leads.length === 0) {
-    //     leads = await fetchLeads();        
-    // }
-    
-    console.log('Fetched Leads:', leads);
     totalRecordsElement.textContent = `Total Records: ${leads.length}`;
     
     dataContainer.innerHTML = ''; 
@@ -127,24 +119,16 @@ function updateTotalRecordsSelected() {
     // If any records are selected, show the action buttons and hide the rest
     if (totalSelected > 0) {
         totalRecordsElement.textContent = `Total Records Selected: ${totalSelected}`;
-
         allActionButtons.forEach(btn => btn.style.display = 'none');
-
-        // Show the action buttons (6 specific buttons)
-        actionBtns.forEach(btn => btn.style.display = 'inline-block');  // or 'flex', depending on layout
-        actionButtons.style.display = 'flex'; // Ensure action buttons are visible
+        // Show 6 buttons
+        actionBtns.forEach(btn => btn.style.display = 'inline-block');  
+        actionButtons.style.display = 'flex';
         
-        // Hide the original action select box (dropdown)
         actionSelectBox.style.display = 'none';
     } else {
-        // If no records are selected, show the total records available
         totalRecordsElement.textContent = `Total Records: ${leads.length}`;
-
-        // Show the original action select box and hide the action buttons
         actionSelectBox.style.display = 'block';
         actionButtons.style.display = 'none';
-
-        // Show all other buttons (filters, select box, etc.)
         allActionButtons.forEach(btn => btn.style.display = 'inline-block');
     }
 }
@@ -190,8 +174,9 @@ function updateSelectAllState() {
 }
 
 // Initial render of total records count
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async() => {
     updateTotalRecordsSelected(); 
+    leads = await fetchLeads();
     renderLeads(); 
     renderRecords(); 
 });
@@ -230,9 +215,8 @@ async function deleteSelectedLeads() {
     }
 
     try {
-        // Send DELETE requests for each selected lead
         const deletePromises = leadIds.map(leadId => 
-            fetch(`/data/leads/${leadId}`, { method: 'DELETE' })
+            fetch(`/leads/deletedata/${leadId}`, { method: 'DELETE' })
         );
         
         const responses = await Promise.all(deletePromises);
@@ -244,7 +228,7 @@ async function deleteSelectedLeads() {
             alert("Some leads could not be deleted. Please check the console for details.");
             responses.forEach(async (response, index) => {
                 if (!response.ok) {
-                    const errorData = await response.json();
+                    const errorData = await response.json().catch(err => response.text());
                     console.error(`Delete failed for lead ID ${leadIds[index]}:`, errorData);
                 }
             });
@@ -254,7 +238,6 @@ async function deleteSelectedLeads() {
         alert('An error occurred while deleting leads.');
     }
 }
-// Attach the delete function to the button
 document.getElementById('deleteSelected').addEventListener('click', deleteSelectedLeads);
 
 // Function to clear all selections

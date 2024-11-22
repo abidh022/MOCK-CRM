@@ -7,7 +7,6 @@ const URI = process.env.MONGODB_URI;
 const client = new MongoClient(URI);
 
 let leadsCollection;
-let contactsCollection;
 
 const mainFunction = async () => {
   leadsCollection = await getlead(); // storing the lead datas in leadsCollection variable
@@ -79,7 +78,7 @@ router.post("/dataPost", async (req, res) => {
     const addingLead = await settingDbAndCollection?.insertOne(newLead)
 
     res.status(200).json({
-      insertedId: addingLead.insertedId, // Send the insertedId back to the client
+      id: addingLead.insertedId.toString(), // Convert ObjectId to string before sending it
       ...newLead, // Return the lead data with created and modified times
     });
   } catch (error) {
@@ -88,19 +87,33 @@ router.post("/dataPost", async (req, res) => {
   }
 });
 
+
+//retrive data already exist
+router.get("/getIdForEdit/:id", async (req, res) => {
+  const leadId = req.params.id;
+  const lead = await client.db("crm").collection("leads").findOne({
+     _id: new ObjectId(leadId) 
+    });
+
+  if (lead) {
+    res.status(200).json(lead);
+  } else {
+    res.status(404).json({ message: "Lead not found" });
+  }
+});
+
+
 // Update lead by ID
-router.put("/:id", async (req, res) => {
+router.put("/updateLead/:id", async (req, res) => {
   try {
     const leadId = req.params.id;
     const updatedLead = req.body;
 
     const currentTime = new Date().toISOString();
-
-    // Ensure that the "modified" time is updated
     updatedLead.modified = currentTime;
 
     // Retrieve the current modifications array from the lead
-    const lead = await req.leadsCollection.findOne({
+    const lead = await client.db("crm").collection("leads").findOne({
       _id: new ObjectId(leadId),
     });
 
@@ -108,18 +121,16 @@ router.put("/:id", async (req, res) => {
       return res.status(404).json({ message: "Lead not found" });
     }
 
-    // If modifications already exist, push the new timestamp to the array
     const modifications = lead.modifications || []; // Ensure array exists
-    modifications.push(currentTime); // Add the new modification timestamp
+    modifications.push(currentTime); 
 
-    // Now, update the lead with the new modification timestamps and the updated data
-    const result = await req.leadsCollection.updateOne(
+    const result = await client.db("crm").collection("leads").updateOne(
       { _id: new ObjectId(leadId) },
       {
         $set: {
           ...updatedLead, // Update the lead fields
-          modifications: modifications, // Save the updated modifications array
-          modified: currentTime, // Update the 'modified' field as well
+          modifications: modifications, 
+          modified: currentTime, 
         },
       }
     );
@@ -141,18 +152,22 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete a lead by ID
-router.delete("/:id", async (req, res) => {
+router.delete("/deletedata/:id", async (req, res) => {
   const { id } = req.params;
   //check ObjectId format is correct
   if (!ObjectId.isValid(id)) {
     return res.status(400).json({ error: "Invalid lead ID format" });
   }
 
+
   try {
-    // Attempt to delete
-    const result = await req.leadsCollection.deleteOne({
-      _id: new ObjectId(id),
+    const leadId = req.params.id;
+    const fetchanddelete = client.db("crm").collection("leads");
+    const result = await fetchanddelete.deleteOne({
+      _id: new ObjectId(leadId),
     });
+    // return console.log(result);
+    
 
     if (result.deletedCount === 1) {
       return res.status(200).json({ message: "Lead deleted successfully" });

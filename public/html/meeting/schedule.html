@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule - Zoho CRM</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/meetinglogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/meetings/schedule.css">
+    <script src="../../js/meeting/schedule.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">   
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+</head>
+<body>
+    <div id="recBox">
+        <img id="meetinglogo" src="/assets/meeting.png" alt="Zoom Meeting Logo">
+    </div>
+    <custom-sidebar></custom-sidebar>
+    <script src="./../../js/customs/sidebar.js"></script>
+    
+    <div class="data-container">
+        <h3>Schedule a Meeting</h3>
+        <form id="scheduleMeetingForm">
+            <div class="form-group">
+                <label for="title">Title <span class="required">*</span></label>
+                <input type="text" id="title" name="topic" placeholder="Enter meeting title" required>
+            </div>
+        
+            <!-- Meeting Type -->
+            <div class="form-group">
+                <label class="radio-label">Meeting Type</label><br>
+                <div class="meeting-type">
+                    <!-- Video Conferencing Option -->
+                    <input type="radio" id="video" name="meetingType" value="video" required>
+                    <label for="video" class="meeting-option">
+                        <div class="option-content">
+                            <span class="icon">✔</span>
+                            <span class="label-text">Video Conferencing</span>
+                        </div>
+                        <small>Conduct face-to-face meeting via webcam video.</small>
+                    </label>
+                    <!-- Audio Conferencing Option -->
+                    <input type="radio" id="audio" name="meetingType" value="audio">
+                    <label for="audio" class="meeting-option">
+                        <div class="option-content">
+                            <span class="icon">✔</span>
+                            <span class="label-text">Audio Conferencing</span>
+                        </div>
+                        <small>Connect via phone or computer for voice conferencing.</small>
+                    </label>
+                </div>
+            </div>
+        <div class="datetimeandduration">
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="time">Time</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+
+            <div class="form-group-inline">
+                <div class="form-group">
+                    <label for="duration-hours">Duration (hr)</label>
+                    <input type="number" id="duration-hours" name="duration_hours" min="0" placeholder="Hours" required >
+                </div>
+                <div class="form-group">
+                    <label for="duration-minutes">Duration (min)</label>
+                    <input type="number" id="duration-minutes" name="duration_minutes" min="0" placeholder="Minutes" required>
+                </div>
+            </div>
+        </div>        
+            <div class="form-group">
+                <label for="zone">Time Zone</label>
+                <select id="zone" name="timezone" required>
+                    <option value="" disabled selected>Select Time Zone</option>
+                    <option value="IST">Indian Standard Time (IST)</option>
+                    <option value="GMT">Greenwich Mean Time (GMT)</option>
+                    <option value="EST">Eastern Standard Time (EST)</option>
+                    <option value="PST">Pacific Standard Time (PST)</option>
+                </select>
+            </div>
+        
+            <!-- <div class="form-group">
+                <label for="host">Host</label>
+                <input type="text" id="host" name="host"  readonly>
+            </div> -->
+        
+            <div class="form-group">
+                <label for="agenda">Agenda</label>
+                <input type="text" id="agenda" name="agenda" placeholder="Enter meeting agenda" required>
+            </div>
+            <div class="form-group">
+                <label for="participants">Participants</label>
+                <input type="text" id="participants" name="participants" placeholder="Enter participant email" required>
+            </div>
+        
+            <div class="button-container">
+                <button type="submit" id="scheduleMeetingForm">Schedule Meeting</button>
+                <button type="button" id="cancel" onclick="window.location.replace('/html/meeting/myMeeting.html')">Cancel</button>
+            </div>
+        </form>
+</body>
+</html>

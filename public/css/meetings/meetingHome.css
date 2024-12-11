@@ -1,0 +1,156 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #EDF0F4;
+    box-sizing: border-box; /* Ensures padding and border are included in the element's width */
+}
+
+/* Header Box */
+#recBox {
+    display: flex;
+    justify-content: space-between;  /* Align items to the left */
+    align-items: center;  /* Vertically center the image */
+    background-color: #FFFFFF;
+    width: 98.76%;
+    height: 40px;  /* Set a fixed height for the container */
+    padding: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    flex-wrap: nowrap;
+}
+
+/* Meeting Logo */
+#meetinglogo {
+    width: 120px;          /* Set the desired width */
+    height: auto;         /* Set the height to maintain the aspect ratio */
+    margin-right: 10px;   /* Adjust margin to fit */
+}
+
+#backtocrm{
+    border-radius: 5px; 
+    color: #018BFA; 
+    padding: 4px 14px;
+    background-color: #E2F0FF;
+    font-size: 15px; 
+    border: 1px solid #018BFA; 
+    cursor: pointer; 
+}
+
+#currentTime {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    margin-right: 180px;
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon {
+    font-size: 40px;
+}
+
+.time {
+    font-size: 30px;
+}
+
+.date {
+    font-size: 18px;
+    color: gray;
+}
+
+
+/* Animation for fading in and scaling */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.9);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Apply these animations when the class "fade-in" is added */
+.fade-in {
+    animation: fadeIn 1s ease-out, scaleUp 1s ease-out;
+}
+
+.main-content{
+    margin-left: 11% ;
+}
+.container{
+    display: flex;
+    gap: 10px;
+}
+
+.box{
+    width: 500px;
+    height: auto;
+    background-color: #FFFFFF;
+    border-radius: 1px;
+    box-shadow:  0 4px 8px rgba(0, 0, 0, 0.1);
+    /* text-align: start; */
+    padding: 15px;
+    /* margin-left: 140px; */
+    margin-top: 30px;
+
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border: none;
+    align-items: end;
+    font-size: 15px;
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: 240px;
+
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.schedule{
+    border-radius: 5px; 
+    color: #018BFA; 
+    padding: 10px 20px;
+    background-color: #E2F0FF;
+    font-size: 15px; 
+    border: 1px solid #018BFA; 
+    cursor: pointer; 
+}
+.schedule:hover{
+    background-color: #b1cae4;
+}
+
+#getaccesstoken{
+    margin-top: 40px;
+    margin-left: 610px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #E2F0FF;
+    cursor: pointer;
+    border: none;
+    border: 1px solid #018BFA; 
+    color: #018BFA;
+}
+
+#getaccesstoken:hover{
+    background-color: #b1cae4;
+}

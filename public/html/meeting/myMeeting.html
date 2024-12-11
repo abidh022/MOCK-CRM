@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Meeting - Zoho CRM</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/tabCRM.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/meetings/myMeeting.css">
+    <script src="../../js/meeting/myMeeting.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>    
+</head>
+<body>
+    <!-- Header Box (Logo) -->
+    <div id="recBox">
+        <img id="meetinglogo" src="/assets/meeting.png" alt="Zoom Meeting Logo">
+    </div>
+    <custom-sidebar></custom-sidebar>
+    <script src="./../../js/customs/sidebar.js"></script>
+  <div id="upheader">
+    <div class="header" id="upcoming" onclick="window.location.replace('/html/meeting/myMeeting.html')">Upcoming</div>
+    <!-- <div class="header" id="past" onclick="window.location.replace('/html/meeting/past.html')">Past</div> -->
+    <div class="header" id="personalroom" onclick="window.location.replace('/html/meeting/personalroom.html')">Personal Room</div> 
+    <div id="header-btn">
+    <button class="button" id="meetnow">Meet Now</button>
+    <button class="schedule" id="schedule" onclick="window.location.replace('/html/meeting/schedule.html')">Schedule</button>
+  </div>
+  </div>
+  <div class="data-container">
+      <!-- <div class="no-meetings-message">
+          <img src="/assets/no-upcoming-meeting.png" alt="No Upcoming Meetings" class="no-meetings-image">
+          <h2>No Upcoming Meetings</h2>
+          <p>You can either start an instant meeting or schedule a meeting.</p>
+          <button class="button" id="meetnow">Meet Now</button>
+          <button class="schedule" id="schedule" onclick="window.location.replace('/html/meeting/schedule.html')">Schedule</button>
+      </div> -->
+    <div id="meetlistbox-container">
+      <!-- Meetings will be dynamically inserted here -->
+   </div>
+</div> 
+</body>

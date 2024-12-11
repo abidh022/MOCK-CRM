@@ -1,0 +1,226 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: #F5F8FC;
+    box-sizing: border-box; /* Ensures padding and border are included in the element's width */
+}
+
+/* Header Box */
+#recBox {
+    display: flex;
+    justify-content: flex-start;  /* Align items to the left */
+    align-items: center;  /* Vertically center the image */
+    background-color: #FFFFFF;
+    width: 98.76%;
+    height: 40px;  /* Set a fixed height for the container */
+    padding: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    flex-wrap: nowrap;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+
+/* Meeting Logo */
+#meetinglogo {
+    width: 120px;          /* Set the desired width */
+    height: auto;         /* Set the height to maintain the aspect ratio */
+    margin-right: 10px;   /* Adjust margin to fit */
+}
+
+#upheader {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    margin-top: 56px;
+    padding-left: 110px;
+    border-bottom: 1px solid lightgray; /* Light 1px line */
+
+  }
+
+  /* Default header styles */
+  .header {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    font-weight: normal;
+    margin-top: 30px;
+    color: black;
+    padding-bottom: 5px; /* Add some space for underline */
+  }
+
+  /* Hover effect */
+  .header:hover {
+    /* font-weight: bold; */
+    color: #007bff; /* Change color on hover */
+  }
+
+  /* Active header style (blue underline when active) */
+  .active {
+    font-weight: bold;
+    color: #007bff; /* Active text color */
+    border-bottom: 2px solid #007bff; /* Blue underline for active section */
+  }
+
+  #header-btn{
+    margin-left:45%;
+  }
+
+#no-meetings-message {
+    text-align: center;
+}
+
+.no-meetings-image {
+    max-width: 100%;
+    max-height: 300px; 
+    margin-bottom: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  font-size: 15px;
+  color: white;
+  background-color: #007bff;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.schedule{
+  border-radius: 25px; 
+  color: #018BFA; 
+  padding: 10px 20px;
+  background-color: #E2F0FF;
+  font-size: 15px; 
+  border: 1px solid #018BFA; 
+  cursor: pointer; 
+}
+.schedule:hover{
+  background-color: #b1cae4;
+}
+
+.data-container {
+  width: 90%;
+  height: 75vh;
+  background-color: #F5F8FC;
+  margin-top: 10px;
+  margin-left: 110px;
+  /* display: flex; */
+  justify-content: center;
+}
+
+#daywise{
+  color: grey;
+  margin-bottom: 10px;
+}
+
+#meetlistbox-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 15px;
+}
+
+  .meetlistbox {
+  display: flex;
+  justify-content:space-evenly;  
+  align-items: center;  
+  background-color: #FFFFFF;
+  width: 98.76%;
+  height: 50px; 
+  padding: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* margin: 0 auto; */
+  /* margin-bottom: 2px; */
+  border: 1px solid transparent;
+}
+
+.meetlistbox:hover{
+  border:1px solid #018BFA;
+  cursor: pointer;
+}
+
+#timelogo{
+  margin-left: 10px;
+}
+#datetime {
+  font-size: 15px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  flex-shrink: 0; 
+}
+
+#time {
+  font-size: 14px;
+  color: #555;
+}
+
+#meetTopic {
+  margin-left: 20%;
+  flex-grow: 1;  
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+#zohoaccount {
+  display: flex;
+  align-items: center;
+  margin-right: 20%;
+  flex-shrink: 0; 
+}
+
+#presenterImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+#nameanddept{
+  margin-left: 20px;
+  flex-shrink: 0; 
+}
+#name {
+  margin-bottom: 5px;
+
+}
+
+#department {
+  color: #777;
+  font-size: 12px;
+}
+
+#starttime p {
+  font-size: 12px;
+  margin: 0;
+  margin-top: 3px;
+  padding: 0;
+}
+
+button#start {
+  margin-right: 25%;
+  /* margin-left: 10%; */
+  border-radius: 20px;
+  width: 70px;
+  padding: 6px;
+  border: 1px solid #007bff;
+  color: #007bff;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+button#start:hover {
+  background-color: #007bff;
+  color: #FFFFFF;
+}
+

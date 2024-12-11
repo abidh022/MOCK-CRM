@@ -258,16 +258,13 @@ function formatCustomDate(dateString) {
                     console.log(`Lead ${leadId ? 'updated' : 'created'} with ID: ${data.id}`);
                     showToast(`Lead ${leadId ? 'updated' : 'created'} successfully!`, true);
                     
-                    // Disable button to prevent multiple submissions
                     save.disabled = true;
                     document.body.classList.add('no-click');
 
                     setTimeout(() => {
-                        // Enable the save button and remove the "no-click" class after a short delay
                         save.disabled = false;
                         document.body.classList.remove('no-click');
 
-                        // Redirect to lead profile page with the new/updated lead ID
                         window.location.href = `/html/leads/leadProfile.html?id=${data.id}`;
                     }, 2000); // Adjust delay as needed
                 } else {
@@ -290,7 +287,7 @@ function formatCustomDate(dateString) {
             input.value = '';
         }
     }
-
+    
     document.getElementById('btn2').addEventListener('click',async  () => {
         leadForm.requestSubmit();
 
@@ -311,6 +308,13 @@ function formatCustomDate(dateString) {
             setSuccess(lastName);
         }
 
+        if (!email.value){
+            setError(email);
+            isValid = false;
+        }else {
+            setSuccess(email);
+        }
+        
         async function insertLead(leads) {
             const result = await leadsCollection.insertOne(leads);
             console.log('Lead inserted with ID:', result);

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Details- Zoho CRM</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/meetinglogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/meetings/meetingDetails.css">
+    <script src="../../js/meeting/meetingDetails.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    
+</head> 
+<body>
+    <div id="recBox">
+        <img id="meetinglogo" src="/assets/meeting.png" alt="Zoom Meeting Logo">
+    </div>
+    <custom-sidebar></custom-sidebar>
+    <script src="./../../js/customs/sidebar.js"></script>
+  <div class="namebox">
+    <i id="back" class="fas fa-arrow-left" title="Back"></i>
+    <p id="meetingname">Meeting name</p>
+    <div id="buttons">
+      <button id="startmeeting" title="Start the meeting">Start Meeting</button>
+      <button id="edit">Edit </button>
+      <button id="cancel">Cancel </button>
+
+
+      <button id="repeatmeeting" hidden>Repeat Meeting </button>
+      <button id="cancel" hidden>Delete </button>
+
+    </div>
+  </div>
+  <div class="data">
+    <div id="date" class="section">
+        <img id="logos" src="/assets/calendar.png">
+        <div id="line"></div>
+        <div class="text-section">
+            <div class="text" id="dateText">Date and Time</div>
+            <div class="text" id="timezone">Timezone</div>
+        </div>
+    </div>
+    <div id="host" class="section">
+        <img id="logos" src="/assets/cohost.png">
+        <div id="line"></div>
+        <div class="text-section">
+            <div class="text" id="bold">Host</div>
+            <div class="text" id="hostName">Host Name</div>
+        </div>
+    </div>
+    <div id="participants" class="section">
+        <img id="logos" src="/assets/participants.png">
+        <div id="line-p"></div>
+        <div class="text-section">
+            <div class="text" id="bold">No. of Participants invited</div>
+            <div class="text">
+                <span id="bold">Link:</span> <span class="value" id="link">Link</span>
+            </div>
+            <div class="text"><span id="bold">Meeting ID:</span> <span class="value" id="meetingId">Meeting ID</span></div>
+            <div class="text"><span id="bold">Password:</span> <span class="value" id="password">Password</span></div>
+            <div class="text" id="copylink">Copy link</div>
+        </div>
+    </div>
+    <div id="agenda" class="section">
+        <img id="logos" src="/assets/agenda.png">
+        <div id="line"></div>
+        <div class="text-section">
+            <div class="text" id="bold">Agenda</div>
+            <div class="text" id="agendaText">Agenda Text</div>
+        </div>
+    </div>
+    <div id="analytics" class="section">
+        <img id="logos" src="/assets/analytics.png">
+        <div id="line"></div>
+        <div class="text-section">
+            <div class="text" id="bold">Analytics</div>
+            <div class="text" id="copylink">View meeting analytics</div>
+        </div>
+    </div>
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+</html>

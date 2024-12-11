@@ -8,6 +8,20 @@ const records = [
     "Touched Records","Untouched Records","Record Action","Related Records Action","Locked","Email Sentiment","Latest Email Status","Activities","Notes","Campaigns","Annual Revenue","City","Company","Converted Account","Converted Contact","Converted Deal","Country","Created By","Created Time","Email","Email Opt Out","Fax","First Name","Industry","Last Activity Time","Last Name","Lead Conversion Time","Lead Name","Lead Owner","Lead Source","Lead Status","Mobile","Modified By","Modified Time","No. of Employees","Phone","Rating","Salutation","Secondary Email","Skype ID","State","Street","Tag","Title","Twitter","Unsubscribed Mode","Unsubscribed Time","Website","Zip Code"
 ];
 
+const filterButton = document.querySelector('.filterBtn');
+const leftContainer = document.getElementById('leftContainer');
+const rightContainer = document.getElementById('rightContainer');
+
+// Toggle function for the filter button
+filterButton.addEventListener('click', () => {
+    leftContainer.classList.toggle('hidden');
+    if (leftContainer.classList.contains('hidden')) {
+        rightContainer.style.width = '100%';  // Make right container take full width when left is hidden
+    } else {
+        rightContainer.style.width = '80%';  // Set right container width when left is visible
+    }
+});
+
 // Function to render records in the left container
 function renderRecords() {
     const recordList = document.getElementById('recordList');

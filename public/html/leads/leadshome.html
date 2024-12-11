@@ -78,7 +78,7 @@
         <p id="totalRecords" >Total records </p><span><button id="clearSelectionBtn" style="display: none;" onclick="clearSelection()">Clear Selection</button></span>
 
     <div class="main-container">
-        <div class="left-container">
+        <div class="left-container" id="leftContainer">
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Search..." oninput="filterRecords()">
                 <i class="fas fa-search"></i>
@@ -87,7 +87,7 @@
                 <!-- Records will be populated here -->
             </div>
         </div>
-        <div class="right-container">
+        <div class="right-container" id="rightContainer">
             <div class="header">
                 <input type="checkbox" id="selectAll" onclick="toggleSelectAll()">
                 <label for="selectAll"></label>

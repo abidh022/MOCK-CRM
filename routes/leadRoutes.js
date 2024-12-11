@@ -80,7 +80,7 @@ router.post("/dataPost", async (req, res) => {
     res.status(200).json({
       id: addingLead.insertedId.toString(), // Convert ObjectId to string before sending it
       ...newLead, // Return the lead data with created and modified times
-    });
+    }); 
   } catch (error) {
     console.error("Error creating lead:", error);
     res.status(500).send("Error creating lead");

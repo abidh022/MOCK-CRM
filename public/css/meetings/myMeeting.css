@@ -67,7 +67,8 @@ body {
   }
 
   #header-btn{
-    margin-left:45%;
+    margin-left:auto;
+    margin-right: 15px;
   }
 
 #no-meetings-message {
@@ -87,7 +88,6 @@ body {
   color: white;
   background-color: #007bff;
   border-radius: 25px;
-  cursor: pointer;
   margin-bottom: 5px;
 }
 
@@ -95,6 +95,9 @@ body {
   background-color: #0056b3;
 }
 
+#meetnow{
+  cursor: not-allowed;
+}
 .schedule{
   border-radius: 25px; 
   color: #018BFA; 
@@ -175,7 +178,7 @@ body {
 #zohoaccount {
   display: flex;
   align-items: center;
-  margin-right: 20%;
+  margin-right: 10%;
   flex-shrink: 0; 
 }
 

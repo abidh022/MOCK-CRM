@@ -317,4 +317,53 @@ router.put("/updatemeeting", async (req, res) => {
   }
 });
 
+
+
+//personal meeting creation 
+router.post("/personalmeeting", async (req, res) => {
+  const zsoid = req.session.user ? req.session.user.userDetails.zsoid : null;
+  const zuid = req.session.user ? req.session.user.userDetails.zuid : null;
+  const userId = req.session.userId;
+  const accessToken =req.session.tokens && req.session.tokens[userId] ? req.session.tokens[userId].accessToken : null;
+
+  console.log("userId from session:", userId);
+  console.log("Access Token from session:", accessToken);
+  console.log('ZSOID from session:', zsoid);
+  console.log("ZUID from session:", zuid);
+
+  if (!zsoid || !zuid || !accessToken) {
+    console.error("Session or ZSOID, zuid not found");
+    return res.status(400).send("Session or ZSOID not found");
+  }
+
+  const meetingDetails = req.body.session;
+  console.log('Meeting details:', meetingDetails);
+
+  try {
+    const response = await axios.post(`https://meeting.zoho.in/api/v2/${zsoid}/sessions.json`, meetingDetails,
+      {
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8",
+          Authorization: `Zoho-oauthtoken ${accessToken}`,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      console.log("Meeting scheduled successfully:", response.data);
+      res.status(200).send(response.data);
+    } else {
+      console.error("Failed to schedule meeting:", response.data);
+      res.status(400).send("Failed to schedule meeting with Zoho.");
+    }
+  } catch (error) {
+    console.error(
+      "Error scheduling meeting:",
+      error.response ? error.response.data : error.message
+    );
+    res.status(500).send("Internal server error while scheduling the meeting.");
+  }
+});
+
+
 module.exports = router;

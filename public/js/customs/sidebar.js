@@ -83,7 +83,7 @@ class CustomSidebar extends HTMLElement {
           <i class="fas fa-file-alt"></i>
           Files
         </div>
-        <div class="sidebar-item"  id="more">
+        <div class="sidebar-item"  id="more" style="cursor: not-allowed;">
           <i class="fas fa-ellipsis-h"></i>
           More
         </div>

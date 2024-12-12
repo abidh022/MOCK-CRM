@@ -22,12 +22,8 @@ async function getMeetingDetails() {
                 if (!link) return alert('No meeting link available.');
                 window.open(link,'_blank');
             });            
-
-
             document.getElementById('agendaText').innerText = meetingDetails.session.agenda || 'No Agenda Available';
-
-            // console.log(meetingDetails.session.timeFormat);
-            
+            // console.log(meetingDetails.session.timeFormat);    
             const startDate = new Date(meetingDetails.session.startTime);
             const formattedStartDate = startDate.toLocaleString();
             const durationMinutes = meetingDetails.session.duration ? meetingDetails.session.duration / 60000 : 0;
@@ -54,6 +50,15 @@ async function getMeetingDetails() {
                 window.open(link,'_blank');
             });
 
+             // Check if the meeting has already started or not
+             const currentTime = new Date();
+             const meetingStartTime = new Date(meetingDetails.session.startTime);
+             if (currentTime >= meetingStartTime) {
+                 document.getElementById('edit').style.display = 'none';
+             } else {
+                 document.getElementById('edit').style.display = 'block';
+             }
+            
         } else {
             console.error('Meeting details are missing in the response.');
         }
@@ -61,8 +66,6 @@ async function getMeetingDetails() {
         console.error('Error fetching meeting details:', error);
     }
 }
-
-
 document.addEventListener("DOMContentLoaded", getMeetingDetails);
 
 
@@ -100,104 +103,6 @@ async function deleteMeeting() {
 }
 
 document.getElementById("cancel").addEventListener("click", deleteMeeting);
-
-
-// async function updatemeeting() {
-//     try {
-//         const urlParams = new URLSearchParams(window.location.search);
-//         const meetingKey = urlParams.get('meetingKey');
-
-//         // Collect updated details from the form (assuming you have input fields for topic, agenda, etc.)
-//         const form = document.getElementById("updateMeetingForm");
-//         if (!form) {
-//             throw new Error('Form element not found');
-//         }
-
-//         const formData = new FormData(form);
-//         const meetingDetails = {
-//             topic: formData.get('topic'),
-//             agenda: formData.get('agenda'),
-//             presenter: formData.get('presenter'),
-//             startTime: formData.get('startTime'),
-//             duration: formData.get('duration'),
-//             timezone: formData.get('timezone'),
-//             participants: formData.get('participants')
-//         };
-        
-//     } catch (error) {
-//         console.error('Error updating meeting:', error.message);
-//         alert('Failed to update the meeting. Please try again later.');
-//     }
-// }
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     document.getElementById("edit").addEventListener("click", updatemeeting);
-// });
-
-
-// async function updatemeeting() {
-//     try{
-//         const urlParams = new URLSearchParams(window.location.search);
-//         const meetingKey = urlParams.get('meetingKey');
-
-//         const response = await axios.put('/auth/updatemeeting',{
-//             headers: {
-//                 'Content-type': 'application/json',
-//             },
-//             data:{
-//                 meetingKey : meetingKey },
-//             });
-//             if (response.status === 200){
-//                 console.log('Meeting Updated successfully');
-//                 alert('Meeting updated successfully');
-//                 // window.location.replace('html/')
-//             }
-//     }catch (error){
-//         console.error('Error updating meeting:', error.message);
-//         alert('Failed to updating the meeting. Please try again later.');
-//     }
-// }
-
-// document.getElementById("edit").addEventListener("click", updatemeeting);
-
-// document.getElementById("edit").addEventListener("click", async function() {
-//     // Get the meetingKey from the URL query params
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const meetingKey = urlParams.get('meetingKey');
-
-//     // Check if meetingKey is present
-//     if (!meetingKey) {
-//         alert('Meeting key is missing from the URL.');
-//         return;
-//     }
-
-//     try {
-//         // Fetch meeting details using the meetingKey
-//         const meetingData = await fetchMeetingDetails(meetingKey);
-
-//         if (meetingData) {
-//             // Store the meeting data in localStorage for use on the schedule page
-//             localStorage.setItem('meetingData', JSON.stringify(meetingData));
-//             window.location.href = '/html/meeting/schedule.html';  // Adjust the path as necessary
-//         } else {
-//             alert('Failed to fetch meeting details.');
-//         }
-//     } catch (error) {
-//         console.error('Error fetching meeting details:', error);
-//         alert('An error occurred while fetching meeting details.');
-//     }
-// });
-
-    // // Function to fetch meeting details from the server
-    // async function fetchMeetingDetails(meetingKey) {
-    //     try {
-    //         const response = await axios.get(`/auth/getMeetingDetails/${meetingKey}`);  // Adjust the URL as necessary
-    //         return response.data;  // Assuming the data is returned in response.data
-    //     } catch (error) {
-    //         console.error('Error fetching meeting details:', error);
-    //         return null;
-    //     }
-    // }
 
 
 document.getElementById("edit").addEventListener("click", async function() {

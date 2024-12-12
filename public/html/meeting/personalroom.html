@@ -8,7 +8,9 @@
     <link rel="shortcut icon" href="/assets/meetinglogo.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/meetings/personalroom.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    
-    <script src="../../js/meeting/myMeeting.js" defer></script>
+    <script src="../../js/meeting/personalroom.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
+
     
 </head>
 <body>
@@ -18,15 +20,15 @@
     <custom-sidebar></custom-sidebar>
     <script src="./../../js/customs/sidebar.js"></script>
     <div id="upheader">
-        <div class="header" id="upcoming" onclick="window.location.replace('/html/meeting/myMeeting.html')">Upcoming</div>
+        <div class="header" id="upcoming" onclick="window.location.replace('/html/meeting/myMeeting.html')">Meetings</div>
         <!-- <div class="header" id="past" onclick="window.location.replace('/html/meeting/past.html')">Past</div> -->
         <div class="header" id="personalroom" onclick="window.location.replace('/html/meeting/personalroom.html')">Personal Room</div>
       </div>
 
   <div class="data-container">
     <div class="personal-room-container">
-        <p>A personal meeting room provides a perfect setting for exclusive meetings with colleagues, friends, and family members. It's permanently reserved for you and accessible with your Personal Meeting ID or personal invite link. The room is fully equipped with all the necessary features of an online meeting, enabling real-time collaboration with guests. <a href="#">Learn More</a></p>
-    
+        <p>A personal meeting room provides a perfect setting for exclusive meetings with colleagues, friends, and family members. It's permanently reserved for you and accessible with your Personal Meeting ID or personal invite link. The room is fully equipped with all the necessary features of an online meeting, enabling real-time collaboration with guests. <a href="https://help.zoho.com/portal/en/kb/meeting/user-guide/meetings/rooms/articles/personal-rooms-1" target="_blank"  >Learn More</a></p>
+        <button id="createMeetingButton">Create Instant Meeting</button>
         <div class="room-and-notes">
             <!-- Left side: Room Details -->
             <div class="room-details">
@@ -34,30 +36,49 @@
                 <table>
                     <tr>
                         <td><strong>Title</strong></td>
-                        <td>CRM China's Personal Meeting Room</td>
+                        <td id="HostName">Instant Personal Meeting Room</td>
                     </tr>
                     <tr>
-                        <td><strong>Meeting ID</strong></td>
-                        <td>107265131717</td>
+                        <td><strong>Meeting Key</strong></td>
+                        <td id="meetingKey">Loading...</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Invite Link</strong></td>
+                        <td id="meetinglink">Loading...</td>
                     </tr>
                     <tr>
                         <td><strong>Security</strong></td>
                         <td>
-                            <ul>
-                                <input type="checkbox" >Always locked
-                                <input type="checkbox" >Password protected
-                            </ul>
+                            <input type="radio" name="security" checked id="alwaysLocked" onclick="togglePasswordRow()">Always locked
+                            <input type="radio" name="security" id="passwordCheckbox" onclick="togglePasswordRow()">Password protected
                         </td>
                     </tr>
-                    <tr>
-                        <td><strong>Invite Link</strong></td>
-                        <td><a href="https://meet.zoho.com/aAVxjSgwGZ" target="_blank">https://meet.zoho.com/aAVxjSgwGZ</a></td>
+                    <tr id="passwordRow" style="display:none;">
+                        <td><strong>Password</strong></td>
+                        <td id="pwd"></td>
                     </tr>
                 </table>
                 <div class="copy-link">
-                    <button onclick="copyLink()">Copy link</button>
+                    <a href="#" id="copyLink" onclick="copyLink()">Copy link</a>
                     <span>|</span>
-                    <a href="#">View invitation</a>
+                    <a href="#" id="openInvitation">View invitation</a>
+                    <!-- The Modal -->
+                    <div id="invitationModal" class="modal">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h2>Participant Invitation</h2>
+                            <p id="title1"><strong>You can invite to join an online meeting.</strong></p>
+                            <p><strong>Title:</strong><span id="topic"></span></p>
+                            <p><strong>Meeting Key:</strong><span id="meetingKeypop"></span></p>
+                            <p><strong>Meeting link:</strong> <span id="meetinglinkpop" target="_blank"></span></p>
+                            <p><strong>Password:</strong><span id="pwdpop"></span></p>                        
+                            <button id="cancelBtn">Cancel</button>
+                            <button id="copyBtn">Copy</button>
+                            <button id="sharebtn">Share</button>
+
+                        </div>
+                    </div>
                 </div>
                     <button id="startmeetingbtn"> Start Meeting</button>
             </div>
@@ -78,5 +99,12 @@
         </div>
     </div>  
   </div>
+<div id="personalmeetinginputs" hidden >
+  <input type="text" id="title" name="topic" placeholder="Enter meeting title" value="Instant Meeting">
+  <input type="presenter" id="presenter" name="presenter" >
+  <input type="date" id="date" name="date" >
+  <input type="time" id="time" name="time" >
+</div>
+
 </body>
 </html> 

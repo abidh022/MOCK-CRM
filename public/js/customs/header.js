@@ -17,6 +17,8 @@ class Header extends HTMLElement {
                 <li><a href="/html/accounts/accountsHome.html" id="accounts">Accounts</a></li>
                 <li><a href="/html/deals/dealsHome.html">Deals</a></li>
                 <li><a href="/html/meeting/meetingHome.html" id="meeting">Meetings</a></li>
+                <li><a href="/html/mail/mailHome.html" id="mail">Mail</a></li>
+
             </ul>
             <ul class="nav-icons">
                 <li><a href="#" id="search" title="Search"><i class="fas fa-search"></i></a></li>

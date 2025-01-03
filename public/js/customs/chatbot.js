@@ -3,14 +3,11 @@
     constructor() {
       super();
       
-      // Create a shadow DOM to encapsulate the widget's styles and behavior
       const shadow = this.attachShadow({mode: 'open'});
 
-      // Create a div element to wrap the chat widget
       const container = document.createElement('div');
       container.id = 'chat-container';
 
-      // Append the div to the shadow DOM
       shadow.appendChild(container);
 
       // Create and insert the Tawk.to script dynamically into the shadow DOM
@@ -28,7 +25,6 @@
         })();
       `;
       
-      // Append the script to the shadow DOM
       shadow.appendChild(script);
     }
   }

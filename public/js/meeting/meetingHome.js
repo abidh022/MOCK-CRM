@@ -39,8 +39,12 @@ document.getElementById("getaccesstoken").onclick = function() {
     const scope = "ZohoCRM.users.READ,ZohoCRM.modules.ALL,ZohoMeeting.manageOrg.READ,ZohoCRM.org.READ,ZohoMeeting.meeting.ALL,ZohoMeeting.meeting.CREATE,ZohoMeeting.meeting.READ,ZohoMeeting.meeting.DELETE";
     const responseType = "code";  
     const accessType = "offline"; 
+    let loc = ".in"; 
+    if (someCondition) {
+    loc = ".com";
+    }
   
-    const authUrl = `https://accounts.zoho.in/oauth/v2/auth?scope=${scope}&client_id=${clientId}&response_type=${responseType}&access_type=${accessType}&redirect_uri=${redirectUri}`;    
+    const authUrl = `https://accounts.zoho${loc}/oauth/v2/auth?scope=${scope}&client_id=${clientId}&response_type=${responseType}&access_type=${accessType}&redirect_uri=${redirectUri}`;    
     window.location.href = authUrl;
   };
 

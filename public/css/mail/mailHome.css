@@ -155,7 +155,7 @@ body {
 }
 
 #year {
-    width: 100%;
+    width: 98.5%;
     padding: 5px;
     background-color: #F1F2F3;
     color: #666970;
@@ -217,5 +217,65 @@ input[type="checkbox"]:checked + .icon-container #closed-icon {
 
 input[type="checkbox"]:checked + .icon-container #open-icon {
     display: inline-block;
+}
+
+
+.tab-bar {
+    display: block;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 98%;
+    position: relative;
+}
+
+.tab-bar .tabs {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.tab-bar .tab {
+    padding: 10px 20px;
+    background-color: #403e3e;
+    border: 1px solid #ccc;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    margin-right: 5px;
+    position: relative;
+    display: inline-block;
+}
+
+.tab-bar .tab-content {
+    display: none; 
+}
+
+.tab-bar .tab-content.active {
+    display: block;  
+}
+
+.tab-bar .close-tab {
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 2px 6px;
+    margin-top: 9px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.tab-bar .close-tab:hover {
+    background-color: darkred;
+}
+
+.tab-bar .tab.active {
+    background-color: #4CAF50;  
+    color: white;
 }
 

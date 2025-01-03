@@ -40,7 +40,10 @@ document.getElementById("getaccesstoken").onclick = function() {
     const responseType = "code";  
     const accessType = "offline"; 
   
-    const authUrl = `https://accounts.zoho.in/oauth/v2/auth?scope=${scope}&client_id=${clientId}&response_type=${responseType}&access_type=${accessType}&redirect_uri=${redirectUri}`;    
+    const currentUrl = window.location.href;
+    const loc = currentUrl.includes('.in') ? '.in' : '.com';
+
+    const authUrl = `https://accounts.zoho${loc}/oauth/v2/auth?scope=${scope}&client_id=${clientId}&response_type=${responseType}&access_type=${accessType}&redirect_uri=${redirectUri}`;    
     window.location.href = authUrl;
   };
 

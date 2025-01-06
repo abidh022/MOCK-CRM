@@ -1,164 +1,13 @@
-// // Get elements
-// const folderBtns = document.querySelectorAll('.namebtn');
-// const tabBar = document.getElementById('tabBar');
-// const tabsContainer = document.getElementById('tabs');
-// const tabContentContainer = document.getElementById('tabContentContainer');
+document.getElementById("compose").onclick = function() {
+    window.location.href = "../../html/mail/compose.html";
+};
 
-// let tabCounter = 1; // Track number of tabs
-// let lastActiveTab = null; // Track the last active tab
-
-// // Show tab bar when any folder button is clicked
-// folderBtns.forEach(btn => {
-//     btn.addEventListener('click', function() {
-//         const tabName = btn.textContent.trim();
-//         createNewTab(tabName);
-//     });
-// });
-
-// // Function to create a new tab based on folder name
-// function createNewTab(tabName) {
-//     const tabId = 'tab' + tabCounter;
-
-//     // Create the new tab button
-//     const tab = document.createElement('div');
-//     tab.classList.add('tab');
-//     tab.setAttribute('data-tab', tabId);
-//     tab.textContent = tabName;
-
-//     // Create the close button for the tab
-//     const closeTabBtn = document.createElement('button');
-//     closeTabBtn.classList.add('close-tab');
-//     closeTabBtn.textContent = 'X';
-//     closeTabBtn.addEventListener('click', function(e) {
-//         e.stopPropagation();
-//         closeTab(tabId);
-//     });
-
-//     tab.appendChild(closeTabBtn);
-
-//     // Create the new tab content
-//     const tabContent = document.createElement('div');
-//     tabContent.classList.add('tab-content');
-//     tabContent.setAttribute('id', tabId);
-
-//     // Add content based on the tab name
-//     if (tabName === "Inbox") {
-//         tabContent.innerHTML = `
-//             <h2>Inbox</h2>
-//             <p>Emails in Inbox:</p>
-//             <div class="box">
-//                 <div class="email-row">
-//                     <input type="checkbox" id="email-checkbox">
-//                     <span class="icon-container">
-//                         <i class="fa-regular fa-envelope-open" id="open-icon"></i>
-//                         <i class="fa-regular fa-envelope" id="closed-icon"></i>
-//                     </span>
-//                     <p id="mailid">welcome@zoho.in</p>
-//                     <p id="subject">We are happy to have you onboard!</p>
-//                     <p id="dateTime">DEC 16, 2024 4:20 PM</p>
-//                 </div>
-//             </div>
-//         `;
-//     } else if (tabName === "Draft") {
-//         tabContent.innerHTML = `
-//             <h2>Draft</h2>
-//             <p>Emails in Draft:</p>
-//             <div class="box">
-//                 <div class="email-row">
-//                     <input type="checkbox" id="email-checkbox">
-//                     <span class="icon-container">
-//                         <i class="fa-regular fa-envelope-open" id="open-icon"></i>
-//                         <i class="fa-regular fa-envelope" id="closed-icon"></i>
-//                     </span>
-//                     <p id="mailid">welcome@zoho.in</p>
-//                     <p id="subject">We are happy to have you onboard!</p>
-//                     <p id="dateTime">DEC 16, 2024 4:20 PM</p>
-//                 </div>
-//             </div>
-//         `;
-//     }
-
-//     // Append the new tab and content to the respective containers
-//     tabsContainer.appendChild(tab);
-//     tabContentContainer.appendChild(tabContent);
-
-//     // Show the tab bar
-//     tabBar.style.display = 'block';
-
-//     // Remove old content and activate the new tab
-//     removeOldContent();
-//     setActiveTab(tab, tabContent);
-
-//     tabCounter++; // Increment tab counter for next tab
-// }
-
-// // Remove old content before displaying new content
-// function removeOldContent() {
-//     const currentActiveContent = tabContentContainer.querySelector('.tab-content.active');
-//     if (currentActiveContent) {
-//         currentActiveContent.classList.remove('active');
-//     }
-// }
-
-// // Set the clicked tab as active
-// function setActiveTab(tab, tabContent) {
-//     // Remove active class from all tabs
-//     const tabs = document.querySelectorAll('.tab');
-//     tabs.forEach(t => t.classList.remove('active'));
-
-//     // Add active class to the clicked tab
-//     tab.classList.add('active');
-    
-
-//     // Remove active class from all contents
-//     const contents = document.querySelectorAll('.tab-content');
-//     contents.forEach(content => content.classList.remove('active'));
-
-//     // Display the tab content
-//     tabContent.classList.add('active');
-
-//     // Update the last active tab
-//     lastActiveTab = tab;
-// }
-
-// // Add event listener to handle clicking on the tab (to show content)
-// tabsContainer.addEventListener('click', function(e) {
-//     if (e.target.classList.contains('tab')) {
-//         const tabId = e.target.getAttribute('data-tab');
-//         const tabContent = document.getElementById(tabId);
-//         setActiveTab(e.target, tabContent);
-//     }
-// });
-
-// // Close individual tab and its content
-// function closeTab(tabId) {
-//     const tab = document.querySelector(`.tab[data-tab="${tabId}"]`);
-//     const tabContent = document.getElementById(tabId);
-
-//     // Remove the tab and its content
-//     tab.remove();
-//     tabContent.remove();
-
-//     // After closing the tab, set the last active tab (if any)
-//     if (tabsContainer.children.length > 0) {
-//         let nextTabToActivate;
-
-//         // If lastActiveTab exists, we activate it
-//         if (lastActiveTab && lastActiveTab !== tab) {
-//             nextTabToActivate = lastActiveTab;
-//         } else {
-//             // If there was no lastActiveTab or the closed tab was the only one, pick the first tab
-//             nextTabToActivate = tabsContainer.children[0];
-//         }
-
-//         const nextTabContent = document.getElementById(nextTabToActivate.getAttribute('data-tab'));
-//         setActiveTab(nextTabToActivate, nextTabContent);
-
-//         // Update lastActiveTab to be the new active tab
-//         lastActiveTab = nextTabToActivate;
-//     }
-// }
-
+document.addEventListener('DOMContentLoaded', function() {
+    const inboxBtn = document.getElementById('inbox');
+    if (inboxBtn) {
+        inboxBtn.click();
+    }
+}); 
 
 // Get elements
 const folderBtns = document.querySelectorAll('.namebtn');
@@ -220,13 +69,49 @@ function createNewTab(tabName) {
                         <p id="subject">We are happy to have you onboard!</p>
                         <p id="dateTime">DEC 16, 2024 4:20 PM</p>
                     </div>
+                    <div class="email-row">
+                        <input type="checkbox" id="email-checkbox">
+                        <span class="icon-container">
+                            <i class="fa-regular fa-envelope-open" id="open-icon"></i>
+                            <i class="fa-regular fa-envelope" id="closed-icon"></i>
+                        </span>
+                        <p id="mailid">welcome@zoho.in</p>
+                        <p id="subject">We are happy to have you onboard!</p>
+                        <p id="dateTime">DEC 16, 2024 4:20 PM</p>
+                    </div><div class="email-row">
+                        <input type="checkbox" id="email-checkbox">
+                        <span class="icon-container">
+                            <i class="fa-regular fa-envelope-open" id="open-icon"></i>
+                            <i class="fa-regular fa-envelope" id="closed-icon"></i>
+                        </span>
+                        <p id="mailid">welcome@zoho.in</p>
+                        <p id="subject">We are happy to have you onboard!</p>
+                        <p id="dateTime">DEC 16, 2024 4:20 PM</p>
+                    </div><div class="email-row">
+                        <input type="checkbox" id="email-checkbox">
+                        <span class="icon-container">
+                            <i class="fa-regular fa-envelope-open" id="open-icon"></i>
+                            <i class="fa-regular fa-envelope" id="closed-icon"></i>
+                        </span>
+                        <p id="mailid">welcome@zoho.in</p>
+                        <p id="subject">We are happy to have you onboard!</p>
+                        <p id="dateTime">DEC 16, 2024 4:20 PM</p>
+                    </div><div class="email-row">
+                        <input type="checkbox" id="email-checkbox">
+                        <span class="icon-container">
+                            <i class="fa-regular fa-envelope-open" id="open-icon"></i>
+                            <i class="fa-regular fa-envelope" id="closed-icon"></i>
+                        </span>
+                        <p id="mailid">welcome@zoho.in</p>
+                        <p id="subject">We are happy to have you onboard!</p>
+                        <p id="dateTime">DEC 16, 2024 4:20 PM</p>
+                    </div>
                 </div>
             `;
             break;
         case "Draft":
             tabContent.innerHTML = `
                 <h2>Draft</h2>
-                <p>Emails in Draft:</p>
                 <div class="box">
                     <div class="email-row">
                         <input type="checkbox" id="email-checkbox">
@@ -244,31 +129,21 @@ function createNewTab(tabName) {
         case "Templates":
             tabContent.innerHTML = `
                 <h2>Templates</h2>
-                <p>Available Templates:</p>
-                <div class="box">
-                    <div class="email-row">
-                        <p>Welcome Email Template</p>
-                        <p>Subject: "Welcome to our service!"</p>
-                    </div>
-                    <div class="email-row">
-                        <p>Password Reset Template</p>
-                        <p>Subject: "Reset your password"</p>
-                    </div>
-                </div>
+                <p style="text-align: center;">You do not have any templates yet.</p>
             `;
             break;
         case "Snoozed":
             tabContent.innerHTML = `
                 <h2>Snoozed</h2>
-                <p>Snoozed Emails:</p>
                 <div class="box">
                     <div class="email-row">
-                        <p>Meeting Reminder: Zoom Call</p>
-                        <p>Snoozed till: DEC 17, 2024 9:00 AM</p>
-                    </div>
-                    <div class="email-row">
-                        <p>Follow-up on your inquiry</p>
-                        <p>Snoozed till: DEC 18, 2024 3:00 PM</p>
+                     <input type="checkbox" id="email-checkbox">
+                        <span class="icon-container">
+                            <i class="fa-regular fa-envelope-open" id="open-icon"></i>
+                            <i class="fa-regular fa-envelope" id="closed-icon"></i>
+                        </span>
+                        <p id="mailid">Meeting Reminder: Zoom Call</p>
+                        <p id="dateTime">Snoozed till: DEC 17, 2024 9:00 AM</p>
                     </div>
                 </div>
             `;
@@ -276,17 +151,27 @@ function createNewTab(tabName) {
         case "Sent":
             tabContent.innerHTML = `
                 <h2>Sent</h2>
-                <p>Sent Emails:</p>
+                <p id="year">2025</p>
                 <div class="box">
                     <div class="email-row">
-                        <p>To: john.doe@example.com</p>
-                        <p>Subject: "Project Updates"</p>
-                        <p>Date: DEC 15, 2024 12:00 PM</p>
+                        <input type="checkbox" id="email-checkbox">
+                        <span class="icon-container">
+                            <i class="fa-regular fa-envelope-open" id="open-icon"></i>
+                            <i class="fa-regular fa-envelope" id="closed-icon"></i>
+                        </span>
+                        <p id="mailid">To: john.doe@example.com</p>
+                        <p id="subject">Subject: "Project Updates"</p>
+                        <p id="dateTime">Date: DEC 15, 2024 12:00 PM</p>
                     </div>
                     <div class="email-row">
-                        <p>To: sarah.lee@example.com</p>
-                        <p>Subject: "Meeting Agenda"</p>
-                        <p>Date: DEC 16, 2024 2:30 PM</p>
+                     <input type="checkbox" id="email-checkbox">
+                        <span class="icon-container">
+                            <i class="fa-regular fa-envelope-open" id="open-icon"></i>
+                            <i class="fa-regular fa-envelope" id="closed-icon"></i>
+                        </span>
+                        <p id="mailid">To: sarah.lee@example.com</p>
+                        <p id="subject">Subject: "Meeting Agenda"</p>
+                        <p id="dateTime">Date: DEC 16, 2024 2:30 PM</p>
                     </div>
                 </div>
             `;
@@ -294,11 +179,16 @@ function createNewTab(tabName) {
         case "Spam":
             tabContent.innerHTML = `
                 <h2>Spam</h2>
-                <p>Emails in Spam:</p>
                 <div class="box">
                     <div class="email-row">
-                        <p>You've won a prize!</p>
-                        <p>From: unknown@scam.com</p>
+                     <input type="checkbox" id="email-checkbox">
+                        <span class="icon-container">
+                            <i class="fa-regular fa-envelope-open" id="open-icon"></i>
+                            <i class="fa-regular fa-envelope" id="closed-icon"></i>
+                        </span>
+                        <p id="subject">You've won a prize!</p>
+                        <p id="mailid">From: unknown@scam.com</p>
+                        <p id="dateTime">Date: DEC 16, 2024 2:30 PM</p>
                     </div>
                 </div>
             `;
@@ -306,11 +196,16 @@ function createNewTab(tabName) {
         case "Trash":
             tabContent.innerHTML = `
                 <h2>Trash</h2>
-                <p>Deleted Emails:</p>
                 <div class="box">
                     <div class="email-row">
-                        <p>Subject: "Last Year's Report"</p>
-                        <p>Date: DEC 10, 2024</p>
+                     <input type="checkbox" id="email-checkbox">
+                        <span class="icon-container">
+                            <i class="fa-regular fa-envelope-open" id="open-icon"></i>
+                            <i class="fa-regular fa-envelope" id="closed-icon"></i>
+                        </span>
+                        <p id="mailid">From: unknown@scam.com</p>
+                        <p id="subject">Subject: "Last Year's Report"</p>
+                        <p id="dateTime">Date: DEC 16, 2024 2:30 PM</p>
                     </div>
                 </div>
             `;
@@ -318,23 +213,10 @@ function createNewTab(tabName) {
         case "Outbox":
             tabContent.innerHTML = `
                 <h2>Outbox</h2>
-                <p>Emails in Outbox:</p>
                 <div class="box">
                     <div class="email-row">
                         <p>Sending: "Welcome aboard!"</p>
-                        <p>Date: DEC 17, 2024 5:00 PM</p>
-                    </div>
-                </div>
-            `;
-            break;
-        case "Newsletter":
-            tabContent.innerHTML = `
-                <h2>Newsletter</h2>
-                <p>Newsletters Subscribed:</p>
-                <div class="box">
-                    <div class="email-row">
-                        <p>Tech News Digest</p>
-                        <p>Weekly updates on tech trends.</p>
+                        <p id="dateTime">Date: DEC 17, 2024 5:00 PM</p>
                     </div>
                 </div>
             `;
@@ -342,11 +224,10 @@ function createNewTab(tabName) {
         case "Notification":
             tabContent.innerHTML = `
                 <h2>Notification</h2>
-                <p>Recent Notifications:</p>
                 <div class="box">
                     <div class="email-row">
-                        <p>Your password has been changed.</p>
-                        <p>Date: DEC 16, 2024 10:00 AM</p>
+                        <p id="subject">Your password has been changed.</p>
+                        <p id="dateTime">Date: DEC 16, 2024 10:00 AM</p>
                     </div>
                 </div>
             `;

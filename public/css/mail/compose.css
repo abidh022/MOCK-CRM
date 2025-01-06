@@ -279,3 +279,83 @@ input[type="checkbox"]:checked + .icon-container #open-icon {
     color: white;
 }
 
+#topactions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    width: 100%;
+}
+#leftsidebtns {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    height: 30px;
+    cursor: pointer;
+}
+
+#rightsidebtns {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    cursor: pointer;
+    height: 30px;
+    text-align: center;
+    justify-items: center;
+    justify-content: center;
+    
+}
+
+#rightsidebtns p, #rightsidebtns button {
+    font-size: 14px;
+    padding: 0 5px;
+}
+
+button {
+    padding: 8px ;
+    border: none;
+    color: rgb(68, 129, 252);
+    border-radius: 5px;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid #1f99f7;
+}
+button i {
+    margin-right: 5px;
+} 
+
+
+.input-container {
+    display: flex;
+    margin-left: 5px;
+    border-bottom: 1px solid #ddd;
+
+}
+
+.input-container span {
+    font-size: 14px;
+    color: #555;
+    margin-right: 10px;
+    margin-top: 6px;
+    width: 80px;
+}
+
+.input-container input, .input-container textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    /* border-bottom: 2px solid #ddd; */
+    outline: none;
+    color: #414040;
+    background-color: #FFFFFF;
+    font-size: 14px;
+}
+
+.input-container input:focus, .input-container textarea:focus {
+    border-bottom-color: #0056b3;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+

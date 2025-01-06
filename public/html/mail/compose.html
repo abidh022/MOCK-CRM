@@ -6,8 +6,8 @@
     <title>Mail Zoho</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/assets/maillogo.png" type="image/x-icon">
-    <link rel="stylesheet" href="../../css/mail/mailHome.css">
-    <script src="../../js/mail/mailHomejs" defer></script>
+    <link rel="stylesheet" href="../../css/mail/compose.css">
+    <script src="../../js/mail/compose.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    
 </head> 
 <body>
@@ -15,6 +15,100 @@
     <script src="../../js/customs/mailLoader.js"></script> -->
     <chat-widget></chat-widget>
     <script src="../../js/customs/chatbot.js"></script>
+    <div id="recBox">
+        <img id="meetinglogo" src="/assets/monochrome_large.png" alt="Zoom Meeting Logo">
+        <p id="mailtext">Mail</p>
+    </div>
+    <div class="main-box">
+    <!-- <sidebar-nav></sidebar-nav> -->
+    <!-- <script src="../../js/customs/mailsidebar.js"></script> -->
+    <div class="nav">
+        <div id="sidebarapps">
+            <a href="/html/mail/mailHome.html">
+                <img src="/assets/mailapp.png" alt="Mail">
+                <p class="apptext">Mail</p>       
+            </a>     
+            <a href="/calendarpage.html">
+                <img src="/assets/calendarapp.png" alt="Calendar">
+                <p class="apptext">Mail</p>       
     
+            </a>
+            <a href="/todopage.html">
+                <img src="/assets/todoapp.png" alt="To do">
+                <p class="apptext">ToDo</p>       
+            </a>
+            <a href="/notespage.html">
+                <img src="/assets/notesapp.png" alt="Notes">
+                <p class="apptext">Notes</p>       
+            </a>
+            <a href="/contactspage.html">
+                <img src="/assets/contactsapp.jpg" alt="Contacts">
+                <p class="apptext">Contacts</p>       
+            </a>
+            <a href="/bookmarkspage.html">
+                <img src="/assets/bookmarkapp.png" alt="Bookmarks">
+                <p class="apptext">Bookmarks</p>       
+            </a>
+        </div>
+        <div class="navigaionNames">
+            <p id="navheader">Folders</p>
+            <button class="newmail" id="newmail">New Mail</button>
+            <button class="namebtn" id="inbox">Inbox</button>
+            <button class="namebtn" id="draft">Draft</button>
+            <button class="namebtn" id="templates">Templates</button>
+            <button class="namebtn" id="snoozed">Snoozed</button>
+            <button class="namebtn" id="sent">Sent</button>
+            <button class="namebtn" id="spam">Spam</button>
+            <button class="namebtn" id="trash">Trash</button>
+            <button class="namebtn" id="outbox">Outbox</button>
+            <button class="namebtn" id="notification">Notification</button>
+        </div>
+        
+        </div>
+        <div class="right-box">
+        <div id="topactions">
+            <div id="leftsidebtns">
+                <button><i class="fas fa-paper-plane"></i> Send</button>
+                <button><i class="fa-regular fa-clock"></i> Send Later</button>
+                <button><i class="fas fa-paperclip"></i> Attach File</button>
+                <button><i class="fas fa-exclamation"></i> High Priority</button>
+            </div>
+            <div id="rightsidebtns">
+                <button><i class="fa-regular fa-floppy-disk"></i>Save Draft</button>
+                <button><i class="fa-regular fa-pen-to-square"></i>Share Draft</button>
+                <button><i class="fa-solid fa-rotate-right"></i>Reset</button>
+                <button><i class="fa-solid fa-xmark"></i>Close</button>
+            </div>
+        </div>
+        <div class="input-container">
+            <span>From:</span>
+            <input type="text" id="from" name="from" placeholder="Your email address" required>
+        </div>
+        <div class="input-container">
+            <span>To:</span>
+            <input type="email" id="to" name="to" placeholder="Recipient's email address" required>
+        </div>
+        <div class="input-container">
+            <span>Cc:</span>
+            <input type="text" id="cc" name="cc" placeholder="Cc" required>
+        </div>
+        <div class="input-container">
+            <span>Subject:</span>
+            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+        </div>
+        <div class="input-container">
+            <span>Message:</span>
+            <textarea id="message" name="message" placeholder="Write your message here..." required>
+            
+            
+
+
+
+Sent using Zoho mail</textarea>
+        </div>
+        <div id="bottom-box">
+
+        </div>
+        </div>
 </body>
 </html>

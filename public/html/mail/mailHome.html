@@ -7,7 +7,8 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/assets/maillogo.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/mail/mailHome.css">
-    <script src="../../js/mail/mailHomejs" defer></script>
+    <script src="../../js/mail/mailHome.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    
 </head> 
 <body>
@@ -53,15 +54,17 @@
         <div class="navigaionNames">
             <p id="navheader">Folders</p>
             <button class="newmail" id="compose">New Mail</button>
-            <button class="namebtn" id="inbox">Inbox</button>
-            <button class="namebtn" id="draft">Draft</button>
-            <button class="namebtn" id="templates">Templates</button>
-            <button class="namebtn" id="snoozed">Snoozed</button>
-            <button class="namebtn" id="sent">Sent</button>
-            <button class="namebtn" id="spam">Spam</button>
-            <button class="namebtn" id="trash">Trash</button>
-            <button class="namebtn" id="outbox">Outbox</button>
-            <button class="namebtn" id="notification">Notification</button>
+            <button class="namebtn" data-folder-id="1683715000000008014">Inbox</button>
+            <button class="namebtn" data-folder-id="1683715000000008016">Draft</button>
+            <button class="namebtn" data-folder-id="1683715000000008018">Templates</button>
+            <button class="namebtn" data-folder-id="1683715000000008020">Snoozed</button>
+            <button class="namebtn" data-folder-id="1683715000000008022">Sent</button>
+            <button class="namebtn" data-folder-id="1683715000000008024">Spam</button>
+            <button class="namebtn" data-folder-id="1683715000000008026">Trash</button>
+            <button class="namebtn" data-folder-id="1683715000000008028">Outbox</button>
+            <button class="namebtn" data-folder-id="1683715000000009001">Notification</button>
+            <button class="namebtn" data-folder-id="1683715000000009011">Newsletter</button>
+            <button id="token">Get access token</button>
         </div>
         
         </div>

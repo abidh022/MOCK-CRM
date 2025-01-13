@@ -68,29 +68,32 @@
         <div class="right-box">
         <div id="topactions">
             <div id="leftsidebtns">
-                <button><i class="fas fa-paper-plane"></i> Send</button>
-                <button><i class="fa-regular fa-clock"></i> Send Later</button>
-                <button><i class="fas fa-paperclip"></i> Attach File</button>
-                <button><i class="fas fa-exclamation"></i> High Priority</button>
+                <button id="send"><i class="fas fa-paper-plane"></i> Send</button>
+                <button id="attachment">
+                    <input type="file" id="fileInput" style="display: none;">
+                    <i class="fas fa-paperclip"></i> Attach File
+                </button>
+                <button id="sendLater"><i class="fa-regular fa-clock"></i> Send Later</button>
+                <button id="highPriority"><i class="fas fa-exclamation"></i> High Priority</button>
             </div>
             <div id="rightsidebtns">
-                <button><i class="fa-regular fa-floppy-disk"></i>Save Draft</button>
-                <button><i class="fa-regular fa-pen-to-square"></i>Share Draft</button>
-                <button><i class="fa-solid fa-rotate-right"></i>Reset</button>
-                <button><i class="fa-solid fa-xmark"></i>Close</button>
+                <button id="saveDraft"><i class="fa-regular fa-floppy-disk"></i>Save Draft</button>
+                <button id="shareDraft"><i class="fa-regular fa-pen-to-square"></i>Share Draft</button>
+                <button id="reset"><i class="fa-solid fa-rotate-right"></i>Reset</button>
+                <button id="close"><i class="fa-solid fa-xmark"></i>Close</button>
             </div>
         </div>
         <div class="input-container">
             <span>From:</span>
-            <input type="text" id="from" name="from" placeholder="Your email address" required>
+            <input type="text" id="fromAddress" name="from" placeholder="Your email address" required>
         </div>
         <div class="input-container">
             <span>To:</span>
-            <input type="email" id="to" name="to" placeholder="Recipient's email address" required>
+            <input type="email" id="toAddress" name="to" placeholder="Recipient's email address" required>
         </div>
         <div class="input-container">
             <span>Cc:</span>
-            <input type="text" id="cc" name="cc" placeholder="Cc" required>
+            <input type="text" id="ccAddress" name="cc" placeholder="Cc" required>
         </div>
         <div class="input-container">
             <span>Subject:</span>
@@ -98,7 +101,7 @@
         </div>
         <div class="input-container">
             <span>Message:</span>
-            <textarea id="message" name="message" placeholder="Write your message here..." required>
+            <textarea id="content" name="message" placeholder="Write your message here..." required>
             
             
 
@@ -106,9 +109,7 @@
 
 Sent using Zoho mail</textarea>
         </div>
-        <div id="bottom-box">
-
-        </div>
+        <div id="attachmentdisplay"></div>
         </div>
 </body>
 </html>

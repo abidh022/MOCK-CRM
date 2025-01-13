@@ -176,6 +176,17 @@ class Header extends HTMLElement {
         } else if (currentPath.includes('/html/meeting/')) {
             this.shadowRoot.querySelector('#meeting').parentElement.classList.add('active');
         }
+
+        // this.shadowRoot.querySelector("#mail").onclick = function() {
+        //     const clientId = "1000.Z4UWL3MAKX12X6WX4VGIQF51TPWV1Z";  // Your Zoho client ID
+        //     const redirectUri = "http://localhost:5000/auth";  // Your redirect URI
+        //     const scope = "ZohoCRM.users.READ,ZohoCRM.modules.ALL,ZohoMeeting.manageOrg.READ,ZohoCRM.org.READ,ZohoMeeting.meeting.ALL,ZohoMeeting.meeting.CREATE,ZohoMeeting.meeting.READ,ZohoMeeting.meeting.DELETE";
+        //     const responseType = "code";  
+        //     const accessType = "offline"; 
+
+        //     const authUrl = `https://accounts.zoho.in/oauth/v2/auth?scope=${scope}&client_id=${clientId}&response_type=${responseType}&access_type=${accessType}&redirect_uri=${redirectUri}`;    
+        //     window.location.href = authUrl;
+        // };
     }
 }
 

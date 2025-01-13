@@ -2,12 +2,24 @@ document.getElementById("compose").onclick = function() {
     window.location.href = "../../html/mail/compose.html";
 };
 
+document.getElementById("token").onclick = function() {
+    const clientId = "1000.Z4UWL3MAKX12X6WX4VGIQF51TPWV1Z";  // Your Zoho client ID
+    const redirectUri = "http://localhost:5000/auth";  // Your redirect URI
+    const scope = "ZohoMail.partner.organization.ALL,";
+    const accessType = "offline"; 
+  
+    const authUrl = `https://accounts.zoho.in/oauth/v2/auth?scope=${scope}&client_id=${clientId}&response_type=${responseType}&access_type=${accessType}&redirect_uri=${redirectUri}`;    
+    window.location.href = authUrl;
+  };
+
 document.addEventListener('DOMContentLoaded', function() {
     const inboxBtn = document.getElementById('inbox');
     if (inboxBtn) {
         inboxBtn.click();
     }
 }); 
+
+
 
 // Get elements
 const folderBtns = document.querySelectorAll('.namebtn');

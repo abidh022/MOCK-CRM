@@ -279,3 +279,17 @@ input[type="checkbox"]:checked + .icon-container #open-icon {
     color: white;
 }
 
+.no-emails{
+    display: flex;
+    justify-content: center;  /* Horizontally center */
+    align-items: center;      /* Vertically center */
+    height: 100%;             /* Make sure the container takes up the full height */
+    text-align: center; 
+    
+}
+
+.no-emails p {
+    margin: 0;                /* Remove default margin */
+    padding: 0;      
+    display: inline-block;    /* Ensure p behaves like a block, but allows centering */                                                                                                                              /* Remove any padding */
+}

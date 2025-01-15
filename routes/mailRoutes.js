@@ -161,51 +161,7 @@ router.get('/getMailAddress', (req, res) => {
   }
 });
 
-
-// list emails
-router.get("/mailList", async (req, res) => {
-  console.log("Getting mails");
-
-  const { accessToken } = req.session.tokens || {};  
-  const { accountId } = req.session;  
-  const { folderId } = req.query; 
-  
-  if (!accountId || !accessToken || !folderId) {
-    return res.status(400).send("Account ID, Access Token, or Folder ID not found.");
-  }
-
-  console.log("Account ID:", accountId);
-  console.log("Folder ID:", folderId);
-
-  try {
-    // Make the API request to fetch the emails in the specified folder
-    const response = await axios.get(`https://mail.zoho.com/api/accounts/${accountId}/messages/view`, {
-      params: {
-        folderId: folderId,          
-        threadedMails: true,         
-        includeto: true              
-      },
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,  
-        'Accept': 'application/json',              
-        'Content-Type': 'application/json'         
-      }
-    });
-
-    if (response.status !== 200) {
-      throw new Error('Failed to fetch emails');
-    }
-
-    const emails = response.data;
-    console.log("Emails:", emails);
-    res.json(emails); 
-
-  } catch (error) {
-    console.error('Error fetching emails:', error);
-    res.status(500).send('Internal server error');
-  }
-});
-
+//attachment 
 router.post('/uploadAttachment', async (req, res) => {
   const { accessToken } = req.session.tokens || {};
   const { accountId } = req.session;
@@ -301,8 +257,7 @@ router.post('/sendMail', async (req, res) => {
 
   try{
   const response = await axios.post(`https://mail.zoho.com/api/accounts/${accountId}/messages`, 
-      emailData, 
-      {
+      emailData,{
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json",
@@ -323,5 +278,92 @@ router.post('/sendMail', async (req, res) => {
     res.status(500).json({ error: "Failed to send email", details: error.message });
   }
 });
+
+
+
+// list emails
+router.get("/mailList", async (req, res) => {
+  console.log("Getting mails");
+
+  const { accessToken } = req.session.tokens || {};  
+  const { accountId } = req.session;  
+  const { folderId } = req.query; 
+  
+  if (!accountId || !accessToken || !folderId) {
+    return res.status(400).send("Account ID, Access Token, or Folder ID not found.");
+  }
+
+  console.log("Account ID:", accountId);
+  console.log("Folder ID:", folderId);
+
+  try {
+    // Make the API request to fetch the emails in the specified folder
+    const response = await axios.get(`https://mail.zoho.com/api/accounts/${accountId}/messages/view`, {
+      params: {
+        folderId: folderId,          
+        threadedMails: true,         
+        includeto: true              
+      },
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,  
+        'Accept': 'application/json',              
+        'Content-Type': 'application/json'         
+      }
+    });
+
+    if (response.status !== 200) {
+      throw new Error('Failed to fetch emails');
+    }
+
+    const emails = response.data;
+    console.log("Emails:", emails);
+    res.json(emails); 
+
+  } catch (error) {
+    console.error('Error fetching emails:', error);
+    res.status(500).send('Internal server error');
+  }
+});
+
+//email content view
+router.get('/getDetailedMail', async (req , res ) => {
+  console.log("getDetailedMail called"); // Log when the route is triggered  
+
+  const { accessToken } = req.session.tokens || {};  
+  const { accountId } = req.session;  
+  const { folderId, messageId } = req.query;  
+
+  console.log("Received Message ID:", messageId); // Log messageId
+  console.log("Received Folder ID:", folderId); 
+
+  
+  if (!accountId || !accessToken || !messageId || !folderId) {
+    return res.status(400).send("Account ID, Access Token, Folder ID, or Message ID not found.");
+  }
+  try{
+    const response = await axios.get(`https://mail.zoho.com/api/accounts/${accountId}/folders/${folderId}/messages/${messageId}/content`,{ 
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Zoho-oauthtoken ${accessToken}`
+          }
+        });
+      
+      if (response.status !== 200) {
+        throw new Error('Failed to fetch email content');
+      }
+  
+      const emailContent = response.data;
+      console.log(response.data);
+      console.log("Email Content:", emailContent);
+
+      res.json(emailContent); 
+      // res.send("Test Route is Working");
+  
+    } catch (error) {
+      console.error('Error fetching email content:', error);
+      res.status(500).send('Internal server error');
+    }
+  });
 
 module.exports = router;

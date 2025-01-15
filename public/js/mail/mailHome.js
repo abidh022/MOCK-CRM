@@ -1,14 +1,11 @@
-// const { default: axios } = require("axios");
-// const e = require("express");
-
 document.getElementById("compose").onclick = function() {
     window.location.href = "../../html/mail/compose.html";
 };
 
 document.getElementById("token").onclick = function() {
-    const clientId = "1000.Z4UWL3MAKX12X6WX4VGIQF51TPWV1Z";  // Your Zoho client ID
-    const redirectUri = "http://localhost:5000/mail";  // Your redirect URI
-    const scope = "ZohoMail.messages.CREATE,ZohoMail.folders.ALL,ZohoMail.accounts.READ,ZohoMail.messages.ALL,ZohoMail.partner.organization.ALL,ZohoMail.accounts.READ,ZohoMail.folders.CREATE,ZohoCRM.users.READ,ZohoCRM.modules.ALL,ZohoMeeting.manageOrg.READ,ZohoCRM.org.READ";
+    const clientId = "1000.Z4UWL3MAKX12X6WX4VGIQF51TPWV1Z";  
+    const redirectUri = "http://localhost:5000/mail"; 
+    const scope = "ZohoMail.messages.READ,ZohoMail.messages.CREATE,ZohoMail.folders.ALL,ZohoMail.accounts.READ,ZohoMail.messages.ALL,ZohoMail.partner.organization.ALL,ZohoMail.accounts.READ,ZohoMail.folders.CREATE,ZohoCRM.users.READ,ZohoCRM.modules.ALL,ZohoMeeting.manageOrg.READ,ZohoCRM.org.READ";
     const accessType = "offline";
     const responseType = "code";
   
@@ -96,9 +93,11 @@ function createNewTab(tabName, folderId) {
             } else {
 
             emails.forEach(email => {
-                const sender = email.sender;
+                const fromAddress = email.fromAddress;
                 const subject = email.subject;
                 const status = email.status;
+                const messageId = email.messageId;
+                // const accountId = email.accountId;
                 const isOpen = Number(status) === 1;
 
                 // Time
@@ -117,15 +116,15 @@ function createNewTab(tabName, folderId) {
 
               // Create HTML for each email
               emailRowsHTML += `
-              <div class="email-row">
-                  <input type="checkbox" id="email-checkbox">
+              <div class="email-row" data-message-id="${messageId}" data-folder-id="${folderId}">
+                  <input type="checkbox">
                   <span class="icon-container">
                       <!-- Show open icon if email is read (status = 1) -->
                       <i class="fa-regular fa-envelope-open" id="open-icon" style="display: ${isOpen ? 'inline' : 'none'};"></i>
                       <!-- Show closed icon if email is unread (status = 0) -->
                       <i class="fa-regular fa-envelope" id="closed-icon" style="display: ${isOpen ? 'none' : 'inline'};"></i>
                   </span>
-                  <p id="mailid">${sender}</p>
+                  <p id="mailid">${fromAddress}</p>
                   <p id="subject">${subject}</p>
                   <p id="dateTime">${formattedSentDate}</p>
               </div>
@@ -142,27 +141,110 @@ function createNewTab(tabName, folderId) {
           </div>
       `;
 
-        } catch (error) {
-            console.error('Error', error);  
-        }
-    }
+        document.getElementById('tabContentContainer').addEventListener('click', function(e) {
+            if (e.target.closest('.email-row')) { 
+                const row = e.target.closest('.email-row');
+                console.log('Email row clicked:', row);
+        
+                const subject = row.querySelector('#subject').textContent;
+                const sender = row.querySelector('#mailid').textContent;
+                const dateTime = row.querySelector('#dateTime').textContent;
+                const messageId = row.dataset.messageId;
+                const folderId = row.dataset.folderId;
+                
+                const emailContentOpen = document.getElementById('emailcontentopen');
+                emailContentOpen.classList.add('open');
+                emailContentOpen.style.display = 'block';
+        
+                document.getElementById('subject-details').textContent = "Subject: " + subject;
+                document.querySelector('.sender-email').textContent = sender;
+                document.querySelector('.date').textContent = dateTime;
+                console.log('Fetching email with messageId:', messageId, 'and folderId:', folderId);
 
-        // Fetch mails for the folder
-        fetchMailList(folderId);
+                // Use axios to fetch the email content
+                        axios.get(`/mail/getDetailedMail?messageId=${messageId}&folderId=${folderId}`)
+                        .then(response => {
+                            console.log("Fetched email :", response.data);
+                            console.log("Fetched email content:", response.data.data.content);
+                            // Display the email content (assuming 'content' contains the email body)
+                            // document.getElementById('messagecontent').textContent = response.data.data.content || "No content available";
+                            let emailContent = response.data.data.content || "No content available";
+                            // Convert the email content from HTML to plain text
+                            emailContent = htmlToPlainText(emailContent);
+                            // Display the plain text email content
+                            document.getElementById('messagecontent').textContent = emailContent;
+                        })
+                        
+                        .catch(error => {
+                            console.error('Error fetching email content:', error);
+                            alert('Failed to fetch email content');
+                        });
+                }
+                // Function to convert HTML to plain text
+                function htmlToPlainText(html) {
+                    // Create a temporary DOM element to convert HTML to plain text
+                    let doc = new DOMParser().parseFromString(html, 'text/html');
+                    
+                    // Handle bold text
+                    let boldElements = doc.querySelectorAll('b, strong');
+                    boldElements.forEach(element => {
+                        element.replaceWith('*' + element.textContent + '*'); // Use markdown-style bold (asterisks)
+                    });
+                    
+                    // Convert unordered lists to bullet points
+                    let ulElements = doc.querySelectorAll('ul');
+                    ulElements.forEach(ul => {
+                        let listItems = ul.querySelectorAll('li');
+                        let listText = Array.from(listItems).map(item => `• ${item.textContent}`).join('\n');
+                        ul.replaceWith(listText); // Replace <ul> with bullet-pointed text
+                    });
+                    
+                    // Convert ordered lists to numbered points
+                    let olElements = doc.querySelectorAll('ol');
+                    olElements.forEach(ol => {
+                        let listItems = ol.querySelectorAll('li');
+                        let listText = Array.from(listItems).map((item, index) => `${index + 1}. ${item.textContent}`).join('\n');
+                        ol.replaceWith(listText); // Replace <ol> with numbered list
+                    });
+                    
+                    // Convert <br /> to a new line
+                    let brElements = doc.querySelectorAll('br');
+                    brElements.forEach(br => {
+                        br.replaceWith('\n'); // Replace <br /> with new line
+                    });
+                    
+                    // Convert paragraphs to plain text
+                    let paragraphs = doc.querySelectorAll('p');
+                    paragraphs.forEach(p => {
+                        p.replaceWith(p.textContent + '\n');
+                    });
+                    
+                    // Convert the final HTML to plain text (ignoring any other tags)
+                    return doc.body.textContent.trim();
+                }
+            });
 
-        // Add tab to tab container
-        tabsContainer.appendChild(tab);
-        tabContentContainer.appendChild(tabContent);
+                        } catch (error) {
+                            console.error('Error', error);  
+                        }
+                    }
 
-        // Show the tab bar
-    tabBar.style.display = 'block';
+// Fetch mails for the folder
+fetchMailList(folderId);
 
-    // Remove old content and activate the new tab
-    removeOldContent();
-    setActiveTab(tab, tabContent);
+// Add tab to tab container
+tabsContainer.appendChild(tab);
+tabContentContainer.appendChild(tabContent);
+
+// Show the tab bar
+tabBar.style.display = 'block';
+
+// Remove old content and activate the new tab
+removeOldContent();
+setActiveTab(tab, tabContent);
     
-        tabCounter++;
-    }
+tabCounter++;
+}
 
 // Remove old content before displaying new content
 function removeOldContent() {
@@ -230,4 +312,9 @@ function closeTab(tabId) {
     }
 }
 
-// document.addEventListener("DOMContentLoaded",ferchFolderId);
+// Optionally, you can close the email content view when the close button is clicked
+document.querySelector('.close-btn').addEventListener('click', function() {
+    const emailContentOpen = document.getElementById('emailcontentopen');
+    emailContentOpen.classList.remove('open');  // Remove the 'open' class to hide the div
+    emailContentOpen.style.display = 'none';  // Hide the email content div
+});

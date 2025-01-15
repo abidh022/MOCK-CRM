@@ -7,9 +7,74 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="/assets/maillogo.png" type="image/x-icon">
     <link rel="stylesheet" href="../../css/mail/mailHome.css">
-    <script src="../../js/mail/mailHome.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    
+    <!-- <link
+    rel="stylesheet"
+    data-purpose="Layout StyleSheet"
+    title="Web Awesome"
+    href="/css/app-wa-4605c815f1874757bc9ac33aa114fb0f.css?vsn=d"
+  >
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css"
+    >
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-duotone-thin.css"
+    >
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-duotone-solid.css"
+    >
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-duotone-regular.css"
+    >
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-duotone-light.css"
+    >
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-thin.css"
+    >
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-solid.css"
+    >
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-regular.css"
+    >
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-light.css"
+    >
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.7.2/css/duotone-thin.css"
+    >
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.7.2/css/duotone-regular.css"
+    >
+
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.7.2/css/duotone-light.css"
+    > -->
 </head> 
 <body>
     <!-- <custom-mailloader></custom-mailloader>
@@ -72,66 +137,46 @@
             <div class="tab-bar" id="tabBar" style="display:none;">
             <div class="tabs" id="tabs"></div>
             <div class="tab-content-container" id="tabContentContainer"></div>
-        <!-- </div> -->
-            <!-- <div class="tab"> -->
-                <!-- Mail -->
-            <!-- </div> -->
-            <!-- <div class="box">
-                <div class="email-row">
-                    <input type="checkbox" id="email-checkbox">
-                    <span class="icon-container">
-                        <i class="fa-regular fa-envelope-open" id="open-icon"></i>
-                        <i class="fa-regular fa-envelope" id="closed-icon"></i>
-                    </span>
-                    <p id="mailid">welcome@zoho.in</p>
-                    <p id="subject">We are happy to have you onboard!</p>
-                    <p id="dateTime">DEC 16, 2024 4:20 PM</p>
-                </div>
-            </div> 
-            <p id="draft">Draft</p>
-            <p id="year">2025</p>
-            <div class="box">
-                <div class="email-row">
-                    <input type="checkbox" id="email-checkbox">
-                    <span class="icon-container">
-                        <i class="fa-regular fa-envelope-open" id="open-icon"></i>
-                        <i class="fa-regular fa-envelope" id="closed-icon"></i>
-                    </span>
-                    <p id="mailid">welcome@zoho.in</p>
-                    <p id="subject">We are happy to have you onboard!</p>
-                    <p id="dateTime">DEC 16, 2024 4:20 PM</p>
-                </div>
-                </div>
-                <div class="email-row">
-                    <input type="checkbox" id="email-checkbox">
-                    <span class="icon-container">
-                        <i class="fa-regular fa-envelope-open" id="open-icon"></i>
-                        <i class="fa-regular fa-envelope" id="closed-icon"></i>
-                    </span>
-                    <p id="mailid">welcome@zoho.in</p>
-                    <p id="subject">We are happy to have you onboard!</p>
-                    <p id="dateTime">DEC 16, 2024 4:20 PM</p>
-                </div><div class="email-row">
-                    <input type="checkbox" id="email-checkbox">
-                    <span class="icon-container">
-                        <i class="fa-regular fa-envelope-open" id="open-icon"></i>
-                        <i class="fa-regular fa-envelope" id="closed-icon"></i>
-                    </span>
-                    <p id="mailid">welcome@zoho.in</p>
-                    <p id="subject">We are happy to have you onboard!</p>
-                    <p id="dateTime">DEC 16, 2024 4:20 PM</p>
-                </div><div class="email-row">
-                    <input type="checkbox" id="email-checkbox">
-                    <span class="icon-container">
-                        <i class="fa-regular fa-envelope-open" id="open-icon"></i>
-                        <i class="fa-regular fa-envelope" id="closed-icon"></i>
-                    </span>
-                    <p id="mailid">welcome@zoho.in</p>
-                    <p id="subject">We are happy to have you onboard!</p>
-                    <p id="dateTime">DEC 16, 2024 4:20 PM</p>
-                </div>
-            </div> -->
+            <!-- <div id="emailList"></div> -->
         </div>
+        <div id="emailcontentopen">
+          <div>
+            <button class="top-btns"><i class="fa-regular fa-bell"></i> Reminder</button>
+            <button class="top-btns"><i class="fa-solid fa-check"></i> Add task</button>
+            <button class="top-btns"><i class="fa-solid fa-link"></i> Permalink</button>
+            <button class="top-btns"><i class="fa-regular fa-clock"></i> Snooze</button>
+            <button class="close-btn"><i class="fas fa-times"></i></button>
+          </div>
+          <div id="subjectcontent">Sender</div>
+          <div class="recipient">
+          <div class="profile-circle">ME</div>
+          <div class="senderAndDate"> 
+            <span class="sender-email"></span>
+          <div class="date"></div>
+        </div>
+        <div>
+          <button class="small-actions"><i class="fa-solid fa-reply"></i></button>
+          <button class="small-actions"><i class="fa-solid fa-reply-all"></i></button>
+          <button class="small-actions"><i class="fa-solid fa-arrow-right"></i></button>
+          <button class="small-actions"><i class="fa-regular fa-share-from-square"></i></button>
+        </div>
+      </div>
+      <div id="bottomline"></div>
+        <div class="tags">
+          Tags: <i class="fa-solid fa-tag"></i>
+        </div>
+        <div class="subject" id="subject-details">Subject:</div>
+        <div class="content">
+            <p id="messagecontent"></p>
+        </div>
+        <div class="actions">
+          <button class="action-button"><i class="fas fa-reply"></i> Reply</button>
+          <button class="action-button"><i class="fas fa-reply-all"></i> Reply All</button>
+          <button class="action-button"><i class="fas fa-share"></i> Forward</button>
+        </div>
+    </div>
 </div>
+<script src="../../js/mail/mailHome.js" defer></script>
+
 </body>
 </html>

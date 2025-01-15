@@ -176,7 +176,14 @@ body {
     border-bottom: 1px solid #ccc; 
     padding: 10px 0;
     width: 100%;
+    cursor: pointer;
+    font-size: 13px;
 }
+
+.email-row:hover {
+    background-color: #f0f0f0;
+    color:#5298ee
+  }
 
 .icon-container {
     display: flex;
@@ -275,7 +282,7 @@ input[type="checkbox"]:checked + .icon-container #open-icon {
 }
 
 .tab-bar .tab.active {
-    background-color: #4CAF50;  
+    background-color: #6b9af7;  
     color: white;
 }
 
@@ -292,4 +299,166 @@ input[type="checkbox"]:checked + .icon-container #open-icon {
     margin: 0;                /* Remove default margin */
     padding: 0;      
     display: inline-block;    /* Ensure p behaves like a block, but allows centering */                                                                                                                              /* Remove any padding */
+}
+
+#emailcontentopen {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100; /* Increased z-index to ensure it's above the tabs */
+    background-color: #fffbfb;
+    height: 100%;
+    width: 70%;
+    margin: 0;
+    display: none;  /* Hidden by default */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease; /* Smooth transition */
+    transform: translateX(100%);  /* Initially off-screen */
+}
+
+#emailcontentopen.open {
+    transform: translateX(0);  /* Slide the box into view */
+    display: block;  /* Show it */
+}
+
+.top-btns{
+    background-color: transparent;
+    border: none;
+    margin: 5px;
+    margin-left: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+
+}  
+
+#subjectcontent{
+    color: var(--app-text-color-title);
+    font-weight: 700;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px
+}
+
+.profile-circle {
+    width: 30px;
+    height: 30px;
+    background-color:#559eed;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    margin-right: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.senderAndDate{
+    margin-right: 52%;
+}
+
+.date{
+    color: #878787;
+    font-size: 11px;
+}
+
+.recipient{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 3px;
+}
+
+.small-actions{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    
+}
+
+#bottomline{
+    border-bottom: 1px solid #ccc;
+}
+
+.subject{
+    margin-left: 30px ;
+    font-size: 18px;
+    color: #333;
+}
+    .close-btn {
+        position: absolute;
+        top: 25px;
+        right: 20px;
+        font-size: 20px;
+        color: #ccc;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+  
+      .close-btn:hover {
+        color: #000;
+      }
+  
+      .tags {
+        margin-bottom: 5px;
+        margin-top: 10px;
+        margin-left: 10px;
+        font-size: 12px;
+      }
+  
+      .tag {
+        display: inline-block;
+        padding: 3px 8px;
+        background-color: #eee;
+        border-radius: 3px;
+        margin-right: 6px;
+        font-size: 14px;
+      }
+
+.content{
+    width: 98%;
+    height: 42%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    overflow-x: auto;
+    overflow-y: auto;
+    font-size: 13px;
+
+}   
+#messagecontent{
+    margin-left: 20px ;
+    font-size: 13px;
+}
+.actions {
+    display: flex;
+    gap: 12px;
+    margin-left: 20px;
+}
+
+.action-button {
+    color: #5298EE; 
+    border: 1px solid#5298EE ;
+    padding: 10px;
+    border-radius: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+}
+
+.action-button i {
+    margin-right: 6px;
+}
+
+.action-button:hover {
+    background-color: #acccef;
 }

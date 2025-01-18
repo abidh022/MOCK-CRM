@@ -119,7 +119,7 @@
         <div class="navigaionNames">
             <p id="navheader">Folders</p>
             <button class="newmail" id="compose">New Mail</button>
-            <button class="namebtn" data-folder-id="1683715000000008014">Inbox</button>
+            <button class="namebtn" data-folder-id="1683715000000008014" id="inbox">Inbox</button>
             <button class="namebtn" data-folder-id="1683715000000008016">Draft</button>
             <button class="namebtn" data-folder-id="1683715000000008018">Templates</button>
             <button class="namebtn" data-folder-id="1683715000000008020">Snoozed</button>
@@ -145,7 +145,7 @@
             <button class="top-btns"><i class="fa-solid fa-check"></i> Add task</button>
             <button class="top-btns"><i class="fa-solid fa-link"></i> Permalink</button>
             <button class="top-btns"><i class="fa-regular fa-clock"></i> Snooze</button>
-            <button class="close-btn"><i class="fas fa-times"></i></button>
+            <button class="close-btn" data-tooltip="Close"><i class="fas fa-times"></i></button>
           </div>
           <div id="subjectcontent">Sender</div>
           <div class="recipient">
@@ -155,10 +155,12 @@
           <div class="date"></div>
         </div>
         <div>
-          <button class="small-actions"><i class="fa-solid fa-reply"></i></button>
-          <button class="small-actions"><i class="fa-solid fa-reply-all"></i></button>
-          <button class="small-actions"><i class="fa-solid fa-arrow-right"></i></button>
-          <button class="small-actions"><i class="fa-regular fa-share-from-square"></i></button>
+          <button class="small-actions" data-tooltip="Reply"><i class="fa-solid fa-reply"></i></button>
+          <button class="small-actions" data-tooltip="Reply All"><i class="fa-solid fa-reply-all"></i></button>
+          <button class="small-actions" data-tooltip="Forward"><i class="fa-solid fa-arrow-right"></i></button>
+          <button class="small-actions" data-tooltip="Share"><i class="fa-regular fa-share-from-square"></i></button>
+          <button class="small-actions" id="deleteMailBtn" data-tooltip="Delete"><i class="fa-solid fa-trash"></i></button>
+
         </div>
       </div>
       <div id="bottomline"></div>

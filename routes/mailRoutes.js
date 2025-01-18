@@ -327,13 +327,13 @@ router.get("/mailList", async (req, res) => {
 
 //email content view
 router.get('/getDetailedMail', async (req , res ) => {
-  console.log("getDetailedMail called"); // Log when the route is triggered  
+  console.log("getDetailedMail called");   
 
   const { accessToken } = req.session.tokens || {};  
   const { accountId } = req.session;  
   const { folderId, messageId } = req.query;  
 
-  console.log("Received Message ID:", messageId); // Log messageId
+  console.log("Received Message ID:", messageId); 
   console.log("Received Folder ID:", folderId); 
 
   
@@ -358,12 +358,49 @@ router.get('/getDetailedMail', async (req , res ) => {
       console.log("Email Content:", emailContent);
 
       res.json(emailContent); 
-      // res.send("Test Route is Working");
   
     } catch (error) {
       console.error('Error fetching email content:', error);
       res.status(500).send('Internal server error');
     }
   });
+
+// Delete mail
+router.delete('/deleteMail', async (req, res) => {
+  console.log("Delete mail called");
+
+  const { accessToken } = req.session.tokens || {};  
+  const { accountId } = req.session;  
+  const { folderId, messageId } = req.query;
+
+  console.log("Received Message ID:", messageId);
+  console.log("Received Folder ID:", folderId);
+
+  if (!accountId || !accessToken || !messageId || !folderId) {
+      return res.status(400).send("Account ID, Access Token, Folder ID, or Message ID not found.");
+  }
+
+  try {
+      const response = await axios.delete(`https://mail.zoho.com/api/accounts/${accountId}/folders/${folderId}/messages/${messageId}`, {
+          headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "Authorization": `Zoho-oauthtoken ${accessToken}`
+          }
+      });
+
+      if (response.status !== 200) {
+          throw new Error('Delete failed');
+      }
+
+      // Return a success message after email deletion
+      res.json({ message: "Email deleted successfully" });
+  } catch (error) {
+      console.error('Error deleting email:', error);
+      res.status(500).send('Internal server error');
+  }
+});
+
+
 
 module.exports = router;

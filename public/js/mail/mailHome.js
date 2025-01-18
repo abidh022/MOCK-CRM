@@ -97,6 +97,7 @@ function createNewTab(tabName, folderId) {
                 const subject = email.subject;
                 const status = email.status;
                 const messageId = email.messageId;
+                const folderId = email.folderId; 
                 // const accountId = email.accountId;
                 const isOpen = Number(status) === 1;
 
@@ -173,6 +174,12 @@ function createNewTab(tabName, folderId) {
                             emailContent = htmlToPlainText(emailContent);
                             // Display the plain text email content
                             document.getElementById('messagecontent').textContent = emailContent;
+
+                             // Add delete button functionality
+                             document.getElementById('deleteMailBtn').addEventListener('click', function() {
+                                deleteMail(messageId, folderId, row);
+                            });
+
                         })
                         
                         .catch(error => {
@@ -318,3 +325,18 @@ document.querySelector('.close-btn').addEventListener('click', function() {
     emailContentOpen.classList.remove('open');  // Remove the 'open' class to hide the div
     emailContentOpen.style.display = 'none';  // Hide the email content div
 });
+
+
+// Function to delete email
+function deleteMail(messageId, folderId, row) {
+    axios.delete(`/mail/deleteMail?messageId=${messageId}&folderId=${folderId}`)
+        .then(response => {
+            console.log("Email deleted:", response.data);
+            row.remove();  // Remove the email row from the UI
+            alert('Email deleted successfully');
+        })
+        .catch(error => {
+            console.error('Error deleting email:', error);
+            alert('Failed to delete email');
+        });
+}

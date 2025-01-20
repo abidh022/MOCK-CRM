@@ -1,3 +1,4 @@
+
 document.getElementById("compose").onclick = function() {
     window.location.href = "../../html/mail/compose.html";
 };
@@ -31,6 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
 }); 
 
 // Get elements
+let currentMessageId = null; 
+let currentFolderId = null;
 const folderBtns = document.querySelectorAll('.namebtn');
 const tabBar = document.getElementById('tabBar');
 const tabsContainer = document.getElementById('tabs');
@@ -142,6 +145,15 @@ function createNewTab(tabName, folderId) {
           </div>
       `;
 
+    //   document.getElementById('tabContentContainer').addEventListener('click', function(e) {
+        // // Check if the clicked element is a reply button
+        // if (e.target && e.target.classList.contains('reply-btn')) {
+        //     const messageId = e.target.closest('.email-row').dataset.messageId;
+        //     console.log("Reply clicked for messageId:", messageId);
+        //     window.location.href = `/html/mail/compose.html?replyTo=${messageId}`;
+        // }
+    
+
         document.getElementById('tabContentContainer').addEventListener('click', function(e) {
             if (e.target.closest('.email-row')) { 
                 const row = e.target.closest('.email-row');
@@ -150,8 +162,8 @@ function createNewTab(tabName, folderId) {
                 const subject = row.querySelector('#subject').textContent;
                 const sender = row.querySelector('#mailid').textContent;
                 const dateTime = row.querySelector('#dateTime').textContent;
-                const messageId = row.dataset.messageId;
-                const folderId = row.dataset.folderId;
+                currentMessageId = row.dataset.messageId;
+                currentFolderId = row.dataset.folderId;
                 
                 const emailContentOpen = document.getElementById('emailcontentopen');
                 emailContentOpen.classList.add('open');
@@ -160,10 +172,10 @@ function createNewTab(tabName, folderId) {
                 document.getElementById('subject-details').textContent = "Subject: " + subject;
                 document.querySelector('.sender-email').textContent = sender;
                 document.querySelector('.date').textContent = dateTime;
-                console.log('Fetching email with messageId:', messageId, 'and folderId:', folderId);
+                console.log('Fetching email with messageId:', currentMessageId, 'and folderId:', currentFolderId);
 
                 // Use axios to fetch the email content
-                        axios.get(`/mail/getDetailedMail?messageId=${messageId}&folderId=${folderId}`)
+                        axios.get(`/mail/getDetailedMail?messageId=${currentMessageId}&folderId=${currentFolderId}`)
                         .then(response => {
                             console.log("Fetched email :", response.data);
                             console.log("Fetched email content:", response.data.data.content);
@@ -230,6 +242,7 @@ function createNewTab(tabName, folderId) {
                     return doc.body.textContent.trim();
                 }
             });
+
 
                         } catch (error) {
                             console.error('Error', error);  
@@ -319,7 +332,6 @@ function closeTab(tabId) {
     }
 }
 
-// Optionally, you can close the email content view when the close button is clicked
 document.querySelector('.close-btn').addEventListener('click', function() {
     const emailContentOpen = document.getElementById('emailcontentopen');
     emailContentOpen.classList.remove('open');  // Remove the 'open' class to hide the div
@@ -327,16 +339,64 @@ document.querySelector('.close-btn').addEventListener('click', function() {
 });
 
 
-// Function to delete email
-function deleteMail(messageId, folderId, row) {
-    axios.delete(`/mail/deleteMail?messageId=${messageId}&folderId=${folderId}`)
-        .then(response => {
-            console.log("Email deleted:", response.data);
-            row.remove();  // Remove the email row from the UI
-            alert('Email deleted successfully');
+// Select all buttons with data-action="reply"
+const replyButtons = document.querySelectorAll('[data-action="reply"]');
+
+// Loop through each button and add the click event listener
+replyButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        console.log("Clicked");
+
+        // Check if currentMessageId and currentFolderId are available
+        if (currentMessageId && currentFolderId) {
+            console.log("Reply clicked for messageId:", currentMessageId, currentFolderId);
+            
+            // Redirect to the compose page with the correct query parameters
+            window.location.href = `/html/mail/compose.html?replyTo=${currentMessageId}&folderId=${currentFolderId}&actionType=reply`;
+        } else {
+            console.log("No messageId or folderId available for reply.");
+        }
+    });
+});
+
+const forward = document.querySelectorAll('[data-action="forward"]');
+
+forward.forEach(button => {
+    button.addEventListener('click', function() {
+        console.log("Clicked");
+
+        // Check if currentMessageId and currentFolderId are available
+        if (currentMessageId && currentFolderId) {
+            console.log("Reply clicked for messageId:", currentMessageId, currentFolderId);
+            
+            // Redirect to the compose page with the correct query parameters
+            window.location.href = `/html/mail/compose.html?replyTo=${currentMessageId}&folderId=${currentFolderId}&actionType=forward`;
+        } else {
+            console.log("No messageId or folderId available for reply.");
+        }
+    });
+});
+
+document.getElementById('share').addEventListener('click', function() {
+    // Assuming you have the email content in variables
+    const subject = "Subject of the email";  // Replace with dynamic email subject
+    const body = "This is the body of the email. You can add more content here.";  // Replace with dynamic email body
+
+    // Check if the Web Share API is supported
+    if (navigator.share) {
+        navigator.share({
+            title: subject,
+            text: body,
+            url: window.location.href  // You can optionally share the current URL
         })
-        .catch(error => {
-            console.error('Error deleting email:', error);
-            alert('Failed to delete email');
+        .then(() => {
+            console.log("Share was successful.");
+        })
+        .catch((error) => {
+            console.error("Error sharing:", error);
         });
-}
+    } else {
+        // If Web Share API is not supported, fallback to an alternative method
+        alert("Web Share API is not supported on this browser.");
+    }
+});

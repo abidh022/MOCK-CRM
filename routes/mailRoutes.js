@@ -278,7 +278,164 @@ router.post('/sendMail', async (req, res) => {
     res.status(500).json({ error: "Failed to send email", details: error.message });
   }
 });
+router.post('/replyMail', async (req, res) => {
+  console.log("Reply mail / server side");
 
+  const { accessToken } = req.session.tokens || {};  
+  const { accountId } = req.session;
+  const { messageId } = req.query;  // messageId from URL query
+  const { from, to, cc, subject, message, attachments } = req.body;
+
+  if (!accountId || !accessToken || !messageId || !from || !to || !subject || !message) {
+      return res.status(400).json({ error: "Missing required fields (Account ID, Access Token, From, To, Subject, Message, or Message ID)" });
+  }
+
+  const emailAttachments = attachments && attachments.length > 0 ? attachments : [];
+
+  const emailData = {
+      fromAddress: from,
+      toAddress: to,
+      ccAddress: cc || '',
+      bccAddress: '',
+      subject: subject,
+      content: message,
+      attachments: emailAttachments,  // Attachments passed here
+      askReceipt: "yes",
+      action: "reply",  // Specify that this is a reply
+      mailFormat: "html"
+  };
+
+  try {
+      // Sending the reply to Zoho Mail API
+      const response = await axios.post(`https://mail.zoho.com/api/accounts/${accountId}/messages/${messageId}`, emailData, {
+          headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "Authorization": `Zoho-oauthtoken ${accessToken}`
+          }
+      });
+
+      if (response.status === 200) {
+          res.status(200).json(response.data);  // Return successful reply response
+      } else {
+          console.error('Error replying to email via Zoho:', response.status, response.data);
+          res.status(500).json({ error: "Failed to send reply email", details: response.data });
+      }
+  } catch (error) {
+      console.error('Error replying to email:', error);
+      res.status(500).json({ error: "Failed to send reply email", details: error.message });
+  }
+});
+
+
+// router.get('/getEmailReply', async (req, res) => {
+//   console.log("Fetching email data for reply");
+
+//   // Extract messageId from query params
+//   const { messageId } = req.query;
+//   const { accountId } = req.session;
+//   const { accessToken } = req.session.tokens || {};  // Ensure access token is available
+
+//   // Check if all necessary data is available
+//   if (!messageId || !accountId || !accessToken) {
+//       return res.status(400).json({ error: "Missing messageId, accountId, or accessToken" });
+//   }
+
+//   try {
+//       // Log for debugging purposes
+//       console.log(`Fetching email with messageId: ${messageId} for accountId: ${accountId}`);
+
+//       // Call Zoho API to fetch the email details
+//       const response = await axios.get(`https://mail.zoho.com/api/accounts/${accountId}/messages/${messageId}originalmessage`, {
+//           headers: {
+//               "Accept": "application/json",
+//               "Content-Type": "application/json",
+//               "Authorization": `Zoho-oauthtoken ${accessToken}`
+//           }
+//       });
+
+//       // Log the full response object from Zoho API for debugging
+//       console.log("Zoho API Response:", JSON.stringify(response.data, null, 2)); // Pretty-print the response
+//       // Check for success status
+//       if (response.status === 200) {
+//           // Return the email data needed for reply
+//           const emailData = response.data.data; // Assuming Zoho API returns email data in `data`
+//           res.status(200).json({
+//               subject: emailData.subject,
+//               fromAddress: emailData.fromAddress,
+//               receivedTime: emailData.receivedTime,  // You might want to format this timestamp
+//               content: emailData.content  // This could be HTML content, so you might need to convert it
+//           });
+//       } else {
+//           console.error('Error fetching email data from Zoho:', response.status, response.data);
+//           res.status(500).json({ error: "Failed to fetch email data" });
+//       }
+//   } catch (error) {
+//       console.error('Error fetching email data:', error);
+//       res.status(500).json({ error: "Failed to fetch email data", details: error.message });
+//   }
+// });
+
+//reply mail;
+router.get('/getReplyMail', async (req, res) => {
+  console.log("reply page server-side");
+
+  const { accessToken } = req.session.tokens || {};
+  const { accountId } = req.session;
+  const { folderId, messageId } = req.query;
+
+  console.log("Received Message ID:", messageId);
+  console.log("Received Folder ID:", folderId);
+
+  if (!accountId || !accessToken || !messageId || !folderId) {
+    return res.status(400).send("Account ID, Access Token, Folder ID, or Message ID not found.");
+  }
+
+  try {
+    const contentResponse = await axios.get(`https://mail.zoho.com/api/accounts/${accountId}/folders/${folderId}/messages/${messageId}/content`, {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Zoho-oauthtoken ${accessToken}`
+      }
+    });
+
+    if (contentResponse.status !== 200) {
+      throw new Error('Failed to fetch email content');
+    }
+
+    const emailContent = contentResponse.data;
+    console.log("Email Content:", emailContent);
+
+    const detailsResponse = await axios.get(`https://mail.zoho.com/api/accounts/${accountId}/folders/${folderId}/messages/${messageId}/details`, {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Zoho-oauthtoken ${accessToken}`
+      }
+    });
+
+    if (detailsResponse.status !== 200) {
+      throw new Error('Failed to fetch email details');
+    }
+
+    const emailDetails = detailsResponse.data;
+    console.log("Email Details:", emailDetails);
+
+    // Combine both the content and details into one response
+    const responsePayload = {
+      content: emailContent,
+      details: emailDetails
+    };
+
+    // Send combined response
+    res.json(responsePayload);
+
+  } catch (error) {
+    console.error('Error fetching email data:', error);
+    res.status(500).send('Internal server error');
+  }
+});
 
 
 // list emails
@@ -400,7 +557,5 @@ router.delete('/deleteMail', async (req, res) => {
       res.status(500).send('Internal server error');
   }
 });
-
-
 
 module.exports = router;

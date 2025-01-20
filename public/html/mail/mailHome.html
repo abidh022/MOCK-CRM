@@ -155,10 +155,10 @@
           <div class="date"></div>
         </div>
         <div>
-          <button class="small-actions" data-tooltip="Reply"><i class="fa-solid fa-reply"></i></button>
-          <button class="small-actions" data-tooltip="Reply All"><i class="fa-solid fa-reply-all"></i></button>
-          <button class="small-actions" data-tooltip="Forward"><i class="fa-solid fa-arrow-right"></i></button>
-          <button class="small-actions" data-tooltip="Share"><i class="fa-regular fa-share-from-square"></i></button>
+          <button class="small-actions" data-tooltip="Reply"  data-action="reply"><i class="fa-solid fa-reply"></i></button>
+          <button class="small-actions" data-tooltip="Reply All" data-action="reply"><i class="fa-solid fa-reply-all"></i></button>
+          <button class="small-actions" data-tooltip="Forward" data-action="forward"><i class="fa-solid fa-arrow-right"></i></button>
+          <button class="small-actions" data-tooltip="Share" id="share"><i class="fa-regular fa-share-from-square"></i></button>
           <button class="small-actions" id="deleteMailBtn" data-tooltip="Delete"><i class="fa-solid fa-trash"></i></button>
 
         </div>
@@ -172,13 +172,12 @@
             <p id="messagecontent"></p>
         </div>
         <div class="actions">
-          <button class="action-button"><i class="fas fa-reply"></i> Reply</button>
-          <button class="action-button"><i class="fas fa-reply-all"></i> Reply All</button>
-          <button class="action-button"><i class="fas fa-share"></i> Forward</button>
+          <button   class="action-button" data-action="reply"><i class="fas fa-reply"></i> Reply</button>
+          <button class="action-button" data-action="reply"><i class="fas fa-reply-all"></i> Reply All</button>
+          <button class="action-button" data-action="forward"><i class="fas fa-share"></i> Forward</button>
         </div>
     </div>
 </div>
 <script src="../../js/mail/mailHome.js" defer></script>
 
 </body>
-</html>

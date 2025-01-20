@@ -219,7 +219,7 @@ input[type="checkbox"]:checked + .icon-container #open-icon {
     display: inline-block;
 }
 
-
+/* 
 .tab-bar {
     display: block;
     background-color: #ffffff;
@@ -277,7 +277,7 @@ input[type="checkbox"]:checked + .icon-container #open-icon {
 .tab-bar .tab.active {
     background-color: #4CAF50;  
     color: white;
-}
+} */
 
 #topactions {
     display: flex;
@@ -355,7 +355,10 @@ button i {
 }
 
 textarea {
-    height: 100px;
+    height: 250px;
     resize: vertical;
 }
 
+#sendLater,#highPriority,#saveDraft{
+    cursor: not-allowed;
+}

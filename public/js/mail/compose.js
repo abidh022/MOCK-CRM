@@ -117,213 +117,106 @@ document.querySelector('#send').addEventListener('click', async () => {
     }
 });
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     document.querySelector('#send').addEventListener('click', async () => {
-//         console.log('Send button clicked');
-
-//         const fromAddress = document.querySelector('#fromAddress').value;
-//         const toAddress = document.querySelector('#toAddress').value;
-//         const ccAddress = document.querySelector('#ccAddress').value;
-//         const subject = document.querySelector('#subject').value;
-//         const content = document.querySelector('#content').value;
-//         const attachmentFile = document.querySelector('#attachment').files[0]; 
-
-//         if (!fromAddress || !toAddress || !content) {
-//             alert("Please fill in all required fields.");
-//             return;
-//         }
-
-//         console.log("Sending email...");
-//         console.log(`From: ${fromAddress}`);
-//         console.log(`To: ${toAddress}`);
-//         console.log(`CC: ${ccAddress}`);
-//         console.log(`Subject: ${subject}`);
-//         console.log(`Body: ${content}`);
-
-//         const emailData = {
-//             from: fromAddress,
-//             to: toAddress,
-//             cc: ccAddress,
-//             subject: subject,
-//             message: content,
-//             attachments : []
-//         };        
-
-//         if (attachmentFile) {
-//             const formData = new FormData();
-//             formData.append('file',attachmentFile);
-
-//             try{
-
-//                 const fileUploadResponse = await fetch('/mail/uploadAttachment',{
-//                     method : 'POST',
-//                     body : formData
-//                 });
-
-//                 const fileUploadData = await fileUploadResponse.json();
-
-//                 if (fileUploadResponse.ok) {
-//                     // Add the uploaded file details to the email data
-//                     emailData.attachments.push({
-//                         storeName: fileUploadData.storeName,
-//                         attachmentPath: fileUploadData.attachmentPath,
-//                         attachmentName: fileUploadData.attachmentName
-//                     });
-//                 } else {
-//                     alert('Failed to upload file');
-//                     return;
-//                 }
-//             } catch (error) {
-//                 console.error('Error uploading attachment:', error);
-//                 alert('Error uploading attachment.');
-//                 return;
-//             }
-//         }
-//         try {
-//             const response = await fetch('/mail/sendMail', {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify(emailData)
-//             });
-
-//             const responseData = await response.json();
-
-//             if (response.ok) {
-//                 alert('Email sent successfully!');
-
-//                 document.querySelector('#fromAddress').value = '';
-//                 document.querySelector('#toAddress').value = '';
-//                 document.querySelector('#ccAddress').value = '';
-//                 document.querySelector('#subject').value = '';
-//                 document.querySelector('#content').value = '';
-//                 document.querySelector('#attachment').value = ''; 
-//             } else {
-//                 alert('Failed to send email: ' + responseData.error);
-//             }
-//         } catch (error) {
-//             console.error('Error:', error);
-//             alert('Error sending email.');
-//         }
-//     });
-// });
 
 function closemail(){
     window.location.href = "../../html/mail/mailHome.html";
 }
 document.querySelector("#close").addEventListener("click", closemail);
 
-// // Function to attach a file
-// function attachFile() {
-//     const fileInput = document.createElement('input');
-//     fileInput.type = 'file';
-//     fileInput.onchange = function () {
-//         alert(`File ${fileInput.files[0].name} attached.`);
-//     };
-//     fileInput.click();
-// }
-// document.querySelector("#attachment").addEventListener("click", attachFile); // Attach File
 
-    // Trigger the file input when the button is clicked
-    // document.getElementById('attachment').addEventListener('click', function() {
-    //     document.getElementById('fileInput').click();
-    // });
+const urlParams = new URLSearchParams(window.location.search);
+const replyToMessageId = urlParams.get('replyTo');
+const folderId = urlParams.get('folderId');  
+const actionType = urlParams.get('actionType'); 
+console.log(replyToMessageId,folderId,actionType);
 
-    // // Display the attached files in the given div
-    // document.getElementById('fileInput').addEventListener('change', function(event) {
-    //     const files = event.target.files;
-    //     const attachmentDisplay = document.getElementById('attachmentdisplay');
+if (replyToMessageId) {
+    axios.get(`/mail/getReplyMail?messageId=${replyToMessageId}&folderId=${folderId}`)    
+    .then(response => {
+        console.log("Email data fetched:", response.data);
+        const emailContent = response.data.content.data.content;
+        const emailDetails = response.data.details;
 
-    //     // Loop through each selected file and display its details or preview
-    //     Array.from(files).forEach(file => {
-    //         const fileContainer = document.createElement('div');
-    //         const fileName = document.createElement('p');
-    //         fileName.textContent = `File name: ${file.name}`;
-
-    //         // Optionally display an image preview if the file is an image
-    //         if (file.type.startsWith('image/')) {
-    //             const reader = new FileReader();
-    //             reader.onload = function(e) {
-    //                 const img = document.createElement('img');
-    //                 img.src = e.target.result;
-    //                 img.alt = file.name;
-    //                 img.style.maxWidth = '200px';
-    //                 fileContainer.appendChild(img);
-    //                 fileContainer.appendChild(fileName);
-    //                 attachmentDisplay.appendChild(fileContainer);
-    //             };
-    //             reader.readAsDataURL(file);
-    //         } else {
-    //             // If it's not an image, just display the file name
-    //             fileContainer.appendChild(fileName);
-    //             attachmentDisplay.appendChild(fileContainer);
-    //         }
-    //     });
-    // });
-
-// // Function to save the draft
-// function saveDraft() {
-//     const fromEmail = document.querySelector("input[placeholder='Your email']").value;
-//     const toEmail = document.querySelector("input[placeholder='Recipient email']").value;
-//     const ccEmail = document.querySelector("input[placeholder='CC email']").value;
-//     const bccEmail = document.querySelector("input[placeholder='BCC email']").value;
-//     const subject = document.querySelector("input[placeholder='Email subject']").value;
-//     const body = document.querySelector("textarea[placeholder='Compose your email']").value;
-
-//     localStorage.setItem('draft', JSON.stringify({ fromEmail, toEmail, ccEmail, bccEmail, subject, body }));
-//     alert('Draft saved successfully!');
-// }
-
-// // Function to share the draft
-// function shareDraft() {
-//     const draft = JSON.parse(localStorage.getItem('draft'));
-    
-//     if (!draft) {
-//         alert('No draft found to share.');
-//         return;
-//     }
-
-//     alert('Sharing draft...\n' + JSON.stringify(draft));
-//     // Perform actual sharing logic here (e.g., sharing via an API or sending to another user).
-// }
-
-// // Function to delete the email
-// function deleteEmail() {
-//     const confirmation = confirm("Are you sure you want to Reser this email?");
-//     if (confirmation) {
-//         document.querySelector("input[placeholder='Your email']").value = '';
-//         document.querySelector("input[placeholder='Recipient email']").value = '';
-//         document.querySelector("input[placeholder='CC email']").value = '';
-//         document.querySelector("input[placeholder='BCC email']").value = '';
-//         document.querySelector("input[placeholder='Email subject']").value = '';
-//         document.querySelector("textarea[placeholder='Compose your email']").value = '';
-//     }
-// }
-
-// // Function to send email later
-// function sendLater() {
-//     alert("Your email will be sent later.");
-//     // Logic to handle the scheduling of the email (e.g., via server-side scheduling).
-// }
+        console.log(emailContent);
+        console.log("details",emailDetails);
+        console.log("details", emailDetails.data.fromAddress);
+        console.log("details", emailDetails.data.toAddress);
 
 
+        const fromAddress = emailDetails.data.fromAddress;
+        const toAddress = emailDetails.data.toAddress;
+        const ccAddress = emailDetails.data.ccAddress;
+        const subject = emailDetails.data.subject || 'No Subject';
+        const receivedTime = emailDetails.data.receivedTime;
 
+        const dateObj = new Date(parseInt(receivedTime));  
+        
+        const formattedDate = dateObj.toLocaleString("en-US", {
+            weekday: 'short',   // Mon
+            day: '2-digit',     // 13
+            month: 'short',     // Jan
+            year: 'numeric',    // 2025
+            hour: '2-digit',    // 17
+            minute: '2-digit',  // 41
+            second: '2-digit',  // 14
+            hour12: false,      // 24-hour format
+        }).replace(",", "");  // Remove the comma after the weekday
+        
+        const htmlContent = emailContent;
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = htmlContent; 
+        const plainTextContent = tempDiv.textContent || tempDiv.innerText || "";
 
-// // Function to mark the email as high priority
-// function setHighPriority() {
-//     alert("This email is marked as High Priority!");
-//     // Additional logic to visually indicate high priority or flag it for sending with priority.
-// }
+        // let fullMessage = '';
 
+        if (actionType === 'reply') {
+            // Format for Reply
+            const oldMessageHeader = `\n\n\n\n\n\n\n\n\n---- On ${formattedDate} <${fromAddress}> wrote ---\n`;
+            fullMessage = oldMessageHeader + plainTextContent;
+        } else if (actionType === 'forward') {
+            // Format for Forward
+            const forwardedHeader = `\n\n\n\n\n\n============ Forwarded message ============\nFrom: ${fromAddress}\nTo: ${toAddress}\nDate: ${formattedDate}\nSubject: ${subject}\n============ Forwarded message ============\n\n`;
+            fullMessage = forwardedHeader + plainTextContent;
+        }
 
+        console.log("msg:",fullMessage);
+        
+        const cleanFromAddress = fromAddress.replace(/[<>]/g, '').replace(/&lt;/g, '').replace(/&gt;/g, '').trim();
+        const cleanToAddress = fromAddress.replace(/[<>]/g, '').replace(/&lt;/g, '').replace(/&gt;/g, '').trim();
+        const cleanCcAddress = ccAddress === "Not Provided" ? "" : ccAddress.replace(/[<>]/g, '').replace(/&lt;/g, '').replace(/&gt;/g, '').trim();
+        // const displayToAddress = (cleanFromAddress === cleanToAddress) ? cleanFromAddress : cleanToAddress;
 
+        // document.getElementById('fromAddress').value = cleanFromAddress;
+        document.getElementById('toAddress').value = cleanToAddress;
+        document.getElementById('ccAddress').value = cleanCcAddress;
+        document.getElementById('subject').value = subject;
+        document.getElementById('content').value = fullMessage;
+        })
+    .catch(error => {
+        console.error("Error fetching email data:", error);
+        alert("Failed to load email data for reply.");
+    });
+}   
 
-// // Add event listeners for buttons
-// document.querySelector("#send").addEventListener("click", ); // Send
-// document.querySelector("#leftsidebtns button:nth-child(2)").addEventListener("click", sendLater); // Send Later
-// document.querySelector("#leftsidebtns button:nth-child(4)").addEventListener("click", setHighPriority); // High Priority
+document.getElementById('reset').addEventListener('click', function(){
+    window.location.href = "/html/mail/compose.html";
+})
 
-// document.querySelector("#rightsidebtns button:nth-child(1)").addEventListener("click", saveDraft); // Save Draft
-// document.querySelector("#rightsidebtns button:nth-child(2)").addEventListener("click", shareDraft); // Share Draft
-// document.querySelector("#rightsidebtns button:nth-child(3)").addEventListener("click", deleteEmail); // Delete
+document.getElementById('shareDraft').addEventListener('click', function() {
+
+    // Check if the Web Share API is supported
+    if (navigator.share) {
+        navigator.share({
+            url: window.location.href  // You can optionally share the current URL
+        })
+        .then(() => {
+            console.log("Share was successful.");
+        })
+        .catch((error) => {
+            console.error("Error sharing:", error);
+        });
+    } else {
+        // If Web Share API is not supported, fallback to an alternative method
+        alert("Web Share API is not supported on this browser.");
+    }
+});

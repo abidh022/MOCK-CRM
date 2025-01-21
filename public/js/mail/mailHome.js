@@ -5,7 +5,7 @@ document.getElementById("compose").onclick = function() {
 
 document.getElementById("token").onclick = function() {
     const clientId = "1000.Z4UWL3MAKX12X6WX4VGIQF51TPWV1Z";  
-    const redirectUri = "http://localhost:5000/mail"; 
+    const redirectUri = "https://mock-crm.vercel.app/mail"; 
     const scope = "ZohoMail.messages.READ,ZohoMail.messages.CREATE,ZohoMail.folders.ALL,ZohoMail.accounts.READ,ZohoMail.messages.ALL,ZohoMail.partner.organization.ALL,ZohoMail.accounts.READ,ZohoMail.folders.CREATE,ZohoCRM.users.READ,ZohoCRM.modules.ALL,ZohoMeeting.manageOrg.READ,ZohoCRM.org.READ";
     const accessType = "offline";
     const responseType = "code";

@@ -130,6 +130,9 @@ body {
     color: #5E93FF;
 }
 
+#token{
+    cursor: pointer;
+}
 .right-box {
     background-color: #FFFFFF;
     width: 97%;

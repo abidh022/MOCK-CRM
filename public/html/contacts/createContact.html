@@ -15,7 +15,7 @@
   <div class="toast hide"></div>
     <div class="recBox">
         <div class="b1">
-            <p id="txt">Create Lead</p>
+            <p id="txt">Create Contact</p>
             <a id="link" href="EditPageLayout">Edit Page Layout</a>
         </div>
         <div class="b2">
@@ -39,14 +39,31 @@
         <p id="heading">Contact Information</p>
         <form id="leadForm" class="two-column-form">
             <div class="form-group">
-                <label for="contactOwner">Lead Owner</label>
+                <label for="contactOwner">Contact Owner</label>
                 <input type="text" id="contactOwner" name="contactOwner">
             </div>
             <div class="form-group">
-                <label for="company">Company</label>
-                <input type="text" id="company" name="company"  >
-                <p class="error-message" id="companyError"></p>
-            </div>
+                <label for="leadSource">Lead Source</label>
+                <select id="leadSource" name="leadSource">
+                  <option value="">-None-</option>
+                  <option value="Advertisement">Advertisement</option>
+                  <option value="Cold Call">Cold Call</option>
+                  <option value="Employee Referral">Employee Referral</option>
+                  <option value="External Referral">External Referral</option>
+                  <option value="Online Store">Online Store</option>
+                  <option value="Partner">Partner</option>
+                  <option value="Public Relations">Public Relations</option>
+                  <option value="Sales Email Alias">Sales Email Alias</option>
+                  <option value="Seminar Partner">Seminar Partner</option>
+                  <option value="Internal Seminar">Internal Seminar</option>
+                  <option value="Trade Show">Trade Show</option>
+                  <option value="Web Download">Web Download</option>
+                  <option value="Web Research">Web Research</option>
+                  <option value="Chat">Chat</option>
+                  <option value="X (Twitter)">X (Twitter)</option>
+                  <option value="Facebook">Facebook</option>
+                </select>
+              </div>
             <div class="form-group">
                 <label for="firstName">First Name</label>
                 <input type="text" id="firstName" name="firstName">
@@ -57,44 +74,46 @@
                 <span class="error-message" id="lastNameError"></span>
             </div>
             <div class="form-group">
+                <label for="accoutName">Account Name</label>
+                <input type="text" id="accountName" name="accountName">
+            </div>
+            <div class="form-group">
                 <label for1="title">Title</label>
                 <input type="text" id="title" name="title">
             </div>
             <div class="form-group">
-                <label for="leadSource">Lead Source</label>
-                <input type="text" id="leadSource" name="leadSource">
-            </div>
-            <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email">
+                <span class="error-message" id="lastNameError"></span>
+
             </div>
             <div class="form-group">
-                <label for="fax">Fax</label>
-                <input type="text" id="fax" name="fax">
+                <label for="department">Department</label>
+                <input type="text" id="department" name="department">
             </div>
             <div class="form-group">
                 <label for="mobile">Mobile</label>
                 <input type="tel" id="mobile" name="mobile">
             </div>
             <div class="form-group">
-                <label for="website">Website</label>
-                <input type="url" id="website" name="website">
+                <label for="mobile">Phone</label>
+                <input type="tel" id="mobile" name="mobile">
             </div>
             <div class="form-group">
-                <label for="leadStatus">Lead Status</label>
-                <input type="text" id="leadStatus" name="leadStatus">
+                <label for="fax">Fax</label>
+                <input type="text" id="fax" name="fax">
             </div>
             <div class="form-group">
-                <label for="industry">Industry</label>
-                <input type="text" id="industry" name="industry">
+                <label for="dob">Date of Birth</label>
+                <input type="text" id="dob" name="dob" placeholder="DD/MM/YYYY">
             </div>
             <div class="form-group">
-                <label for="employees">No. of Employees</label>
-                <input type="number" id="employees" name="employees">
+                <label for="assistant">Assistant</label>
+                <input type="text" id="assistant" name="assistant">
             </div>
             <div class="form-group">
-                <label for="annualRevenue">Annual Revenue</label>
-                <input type="text" id="annualRevenue" name="annualRevenue">
+                <label for="asstPhone">Asst Phone</label>
+                <input type="tel" id="asstPhone" name="asstPhone">
             </div>
             <div class="form-group">
                 <label for="skypeID">Skype ID</label>
@@ -112,24 +131,44 @@
 
             <p id="heading">Address Information</p><br>
             <div class="form-group">
-                <label for="street">Street</label>
-                <input type="text" id="street" name="street">
+                <label for="mailingStreet">Mailing Street </label>
+                <input type="text" id="mailingStreet" name="mailingStreet">
             </div>
             <div class="form-group">
-                <label for="city">City</label>
-                <input type="text" id="city" name="city">
+                <label for="otherStreet">Other Street </label>
+                <input type="text" id="otherStreet" name="otherStreet">
             </div>
             <div class="form-group">
-                <label for="state">State</label>
-                <input type="text" id="state" name="state">
+                <label for="mailingCity">Mailing City</label>
+                <input type="text" id="mailingCity" name="mailingCity">
             </div>
             <div class="form-group">
-                <label for="country">Country</label>
-                <input type="text" id="country" name="country">
+                <label for="otherCity">Other City</label>
+                <input type="text" id="otherCity" name="otherCity">
             </div>
             <div class="form-group">
-                <label for="zipCode">Zip Code</label>
-                <input type="text" id="zipCode" name="zipCode">
+                <label for="mailingState">Mailing State</label>
+                <input type="text" id="mailingState" name="mailingState">
+            </div>
+            <div class="form-group">
+                <label for="otherState">Other State</label>
+                <input type="text" id="otherState" name="otherState">
+            </div>
+            <div class="form-group">
+                <label for="otherZip">Mailing Zip</label>
+                <input type="text" id="otherZip" name="otherZip">
+            </div>
+            <div class="form-group">
+                <label for="otherZip">Other Zip</label>
+                <input type="text" id="otherZip" name="otherZip">
+            </div>
+            <div class="form-group">
+                <label for="otherZip">Mailing Country</label>
+                <input type="text" id="otherZip" name="otherZip">
+            </div>
+            <div class="form-group">
+                <label for="otherCountry">Other Country</label>
+                <input type="text" id="otherCountry" name="otherCountry">
             </div><br>
 
         </form>

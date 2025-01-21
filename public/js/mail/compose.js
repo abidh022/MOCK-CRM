@@ -119,7 +119,8 @@ document.querySelector('#send').addEventListener('click', async () => {
 
 
 function closemail(){
-    window.location.href = "../../html/mail/mailHome.html";
+    window.history.back();
+    // window.location.href = "../../html/mail/mailHome.html";
 }
 document.querySelector("#close").addEventListener("click", closemail);
 
@@ -167,6 +168,13 @@ if (replyToMessageId) {
         tempDiv.innerHTML = htmlContent; 
         const plainTextContent = tempDiv.textContent || tempDiv.innerText || "";
 
+        
+        
+        const cleanFromAddress = fromAddress.replace(/[<>]/g, '').replace(/&lt;/g, '').replace(/&gt;/g, '').trim();
+        const cleanToAddress = toAddress.replace(/[<>]/g, '').replace(/&lt;/g, '').replace(/&gt;/g, '').trim();
+        const cleanCcAddress = ccAddress === "Not Provided" ? "" : ccAddress.replace(/[<>]/g, '').replace(/&lt;/g, '').replace(/&gt;/g, '').trim();
+        // const displayToAddress = (cleanFromAddress === cleanToAddress) ? cleanFromAddress : cleanToAddress;
+
         // let fullMessage = '';
 
         if (actionType === 'reply') {
@@ -175,19 +183,14 @@ if (replyToMessageId) {
             fullMessage = oldMessageHeader + plainTextContent;
         } else if (actionType === 'forward') {
             // Format for Forward
-            const forwardedHeader = `\n\n\n\n\n\n============ Forwarded message ============\nFrom: ${fromAddress}\nTo: ${toAddress}\nDate: ${formattedDate}\nSubject: ${subject}\n============ Forwarded message ============\n\n`;
+            const forwardedHeader = `\n\n\n\n\n\n============ Forwarded message ============\nFrom: ${fromAddress}\nTo: ${cleanToAddress}\nDate: ${formattedDate}\nSubject: ${subject}\n============ Forwarded message ============\n\n`;
             fullMessage = forwardedHeader + plainTextContent;
         }
 
         console.log("msg:",fullMessage);
-        
-        const cleanFromAddress = fromAddress.replace(/[<>]/g, '').replace(/&lt;/g, '').replace(/&gt;/g, '').trim();
-        const cleanToAddress = fromAddress.replace(/[<>]/g, '').replace(/&lt;/g, '').replace(/&gt;/g, '').trim();
-        const cleanCcAddress = ccAddress === "Not Provided" ? "" : ccAddress.replace(/[<>]/g, '').replace(/&lt;/g, '').replace(/&gt;/g, '').trim();
-        // const displayToAddress = (cleanFromAddress === cleanToAddress) ? cleanFromAddress : cleanToAddress;
 
         // document.getElementById('fromAddress').value = cleanFromAddress;
-        document.getElementById('toAddress').value = cleanToAddress;
+        document.getElementById('toAddress').value = cleanFromAddress;
         document.getElementById('ccAddress').value = cleanCcAddress;
         document.getElementById('subject').value = subject;
         document.getElementById('content').value = fullMessage;

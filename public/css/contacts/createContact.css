@@ -131,7 +131,7 @@ label {
     
 }
 
-input, textarea {
+input, textarea ,select {
     flex: 1;    
     padding: 8px;
     border: 1px solid #ccc;
@@ -150,7 +150,7 @@ textarea{
     max-width: 50%;
 }
 
-#company,#lastName{
+#lastName,#email{
     border-left: 3px solid red;
 }
 

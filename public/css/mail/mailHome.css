@@ -266,9 +266,9 @@ input[type="checkbox"]:checked + .icon-container #open-icon {
 
 .tab-bar .close-tab {
     position: absolute;
-    top: 2px;
+    top: 4px;
     right: 5px;
-    background-color: #6b9af7;
+    background-color: transparent;
     color: white;
     border: none;
     border-radius: 50%;
@@ -279,7 +279,8 @@ input[type="checkbox"]:checked + .icon-container #open-icon {
 }
 
 .tab-bar .close-tab:hover {
-    background-color: #4775d3;
+    background-color: #fb5154;
+    
 }
 
 .tab-bar .tab.active {

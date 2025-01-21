@@ -277,14 +277,12 @@ body {
     text-align: left;
 }
 
-
-
 .record-item {
     display: flex;
     align-items: center;
     padding: 5px;
     color: #404040;
-    text-align: left; /* Left-align text in record item */
+    text-align: left;
 }
 
 .record-item input {

@@ -9,13 +9,13 @@ const client = new MongoClient(URI);
 let leadsCollection;
 
 const mainFunction = async () => {
-  leadsCollection = await getlead(); // storing the lead datas in leadsCollection variable
+  leadsCollection = await getlead(); 
 };
 
 router.use(async (req, res, next) => {
   await mainFunction();
   if (leadsCollection) {
-    next(); //calling the mainfunction
+    next();
   } else {
     return res.json("Db connected,Collection Not Found");
   }

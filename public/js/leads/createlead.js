@@ -384,7 +384,7 @@ function formatCustomDate(dateString) {
             !company.value  ? setError(company) : setSuccess(company);
             !lastName.value ? setError(lastName) : setSuccess(lastName);
         }
-    })
+    });
 
     function setError(tag){
             tag.nextElementSibling.innerHTML="Required";

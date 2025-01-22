@@ -20,6 +20,7 @@ app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/leads', require('./routes/leadRoutes'));
+app.use('/contact', require('./routes/contactRoutes'));
 app.use('/auth', require('./routes/authRoutes'));
 app.use('/mail', require('./routes/mailRoutes'));
 

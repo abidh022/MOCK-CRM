@@ -125,10 +125,64 @@ body {
     width: 130px;
 }
 
+#action-buttons {
+    gap: 10px;
+    
+}   
+
+#runMacroBtn, #sendEmail,#deleteSelected,#createTaskBtn,#clearSelection,#tagsBtn {
+    font-family: sans-serif;
+    padding: 5px;
+    background-color: #EEF2F8;
+    border: 1px solid lightgray;
+    width: 100px;
+    height: 35px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(84, 137, 250, 0.1);
+    transition: border-color 0.3s;
+}
+
+#runMacroBtn,#createTaskBtn,#tagsBtn{
+    cursor: not-allowed;
+}
+
 .hidden {
     display: none;
 }
 
+#sorting{
+    font-family: sans-serif;
+    font-weight:normal;
+    font-size: 13px;
+    cursor: pointer;
+    width: auto;
+    height: 35px;   
+    text-align: left;
+    border: 1px solid lightgray;
+    background-color: #EEF2F8;
+    box-shadow: 0 2px 10px rgba(84, 137, 250, 0.1);
+    transition: border-color 0.3s;
+    border-radius: 6px;
+}
+
+#search{
+    font-family: sans-serif;
+    font-weight:normal;
+    font-size: 12px;
+    cursor:text;
+    width: 300px;
+    height: 32px;   
+    text-align: left;
+    border: 1.5px solid lightgray;
+    background-color: #EEF2F8;
+    box-shadow: 0 2px 10px rgba(84, 137, 250, 0.1);
+    transition: border-color 0.3s;
+    border-radius: 6px;
+
+}
 
 /* headerbelowheaderbelow */
 #totalRecords{
@@ -263,6 +317,14 @@ body {
     word-wrap: break-word;
     word-break: break-word;
 }
+
+#dataContainer img {
+    width: 250px;  /* Adjust the width as needed */
+    height: 250px;  /* Keep aspect ratio */
+    display: block;  /* Prevent any extra space around the image */
+    margin: 0 auto;  /* Center the image horizontally */
+  }
+
 
 .data-row:hover {
     background-color: #F7F9FB;

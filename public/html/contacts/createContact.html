@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Create Lead - Zoho CRM</title>
+  <title>Create Contact - Zoho CRM</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="/assets/tabCRM.png" type="image/x-icon">
   <link rel="stylesheet" href="./../../css/contacts/createContact.css">
@@ -40,7 +40,7 @@
         <form id="contactForm" class="two-column-form">
             <div class="form-group">
                 <label for="contactOwner">Contact Owner</label>
-                <input type="text" id="contactOwner" name="contactOwner">
+                <input type="text" id="contactOwner" name="contactOwner" value="  Abidh">
             </div>
             <div class="form-group">
                 <label for="leadSource">Lead Source</label>
@@ -127,7 +127,11 @@
                 <label for="secondaryEmail">Secondary Email</label>
                 <input type="email" id="secondaryEmail" name="secondaryEmail">
             </div>
-            <br>
+            <div class="form-group">
+                <label for="dateTime">Creating Date</label>
+                <input type="text" id="dateTime" readonly  style="color: #C2B9B4; cursor:not-allowed;">
+                <input type="text" id="modified" hidden>
+            </div><br>
 
             <p id="heading">Address Information</p><br>
             <div class="form-group">

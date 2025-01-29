@@ -396,4 +396,4 @@ function formatCustomDate(dateString) {
             tag.nextElementSibling.innerHTML="";
             tag.style.border="1px solid black";
 
-    }
+}

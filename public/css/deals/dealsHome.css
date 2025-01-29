@@ -148,6 +148,7 @@ body {
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     margin: 10px; 
+    font-size: 14px;
     padding: 4px; 
     box-sizing: border-box;
     text-align: left; /* Ensures all text inside is left-aligned */

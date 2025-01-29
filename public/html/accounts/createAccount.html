@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Create Account - Zoho CRM</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/assets/tabCRM.png" type="image/x-icon">
+  <link rel="stylesheet" href="./../../css/accounts/createAccount.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="./../../js/account/createAccount.js" defer></script>
+</head>
+
+<body>
+  <custom-header></custom-header>
+  <script src="../../js/customs/header.js"></script>
+  <div class="toast hide"></div>
+    <div class="recBox">
+        <div class="b1">
+            <p id="txt">Create Account</p>
+            <a id="link" href="EditPageLayout">Edit Page Layout</a>
+        </div>
+        <div class="b2">
+            <button id="btn1">Cancel</button>
+            <button  id="btn2">Save And New</button>
+            <button id="save" >Save</button>
+        </div>
+    </div>
+    <div id="img">
+        <p id="heading">Acconunt Image</p>
+        <label id="fileInput">
+            <input type="file" accept="image/*" />
+            <img id="uploadedImage" />
+            <svg id="buildingIcon" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 4h12M6 4v16M6 4H5m13 0v16m0-16h1m-1 16H6m12 0h1M6 20H5M9 7h1v1H9V7Zm5 0h1v1h-1V7Zm-5 4h1v1H9v-1Zm5 0h1v1h-1v-1Zm-3 4h2a1 1 0 0 1 1 1v4h-4v-4a1 1 0 0 1 1-1Z"/>
+              </svg>
+        </label>
+    </div>
+    
+    <div class="form-container">
+        <p id="heading">Account Information</p>
+        <form id="accountForm" class="two-column-form">
+            <div class="form-group">
+                <label for="accountOwner">Account Owner</label>
+                <input type="text" id="accountOwner" name="accountOwner" value="  Abidh">
+            </div>
+            <div class="form-group">
+                <label for="rating">Rating</label>
+                <select id="rating" name="rating">
+                  <option value="">-None-</option>
+                  <option value="Acquired">Acquired</option>
+                  <option value="Active">Active</option>
+                  <option value="Market Failed">Market Failed</option>
+                  <option value="Project Cancelled">Project Cancelled</option>
+                  <option value="Shut Down">Shut Down</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="accoutName">Account Name</label>
+                <input type="text" id="accountName" name="accountName">
+                <span class="error-message" id="accountNameError"></span>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Phone</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="accountSite">Account Site</label>
+                <input type="text" id="accountSite" name="accountSite">
+            </div>
+            <div class="form-group">
+                <label for="fax">Fax</label>
+                <input type="text" id="fax" name="fax">
+            </div>
+            <div class="form-group">
+                <label for="parentAccount">Parent Account</label>
+                <input type="text" id="parentAccount" name="parentAccount" >
+            </div>
+            <div class="form-group">
+                <label for="website">Website</label>
+                <input type="text" id="website" name="website">
+            </div>
+            <div class="form-group">
+                <label for="accountNumber">Account Number</label>
+                <input type="number" id="accountNumber" name="accountNumber">
+            </div>
+            <div class="form-group">
+                <label for="tickerSymbol">Ticker Symbol</label>
+                <input type="text" id="tickerSymbol" name="tickerSymbol">
+            </div>
+            <div class="form-group">
+                <label for="accountType">Account Type</label>
+                <select id="accountType">
+                    <option value="">-None-</option>
+                    <option value="Analyst">Analyst</option>
+                    <option value="Competitor">Competitor</option>
+                    <option value="Customer">Customer</option>
+                    <option value="Distributor">Distributor</option>
+                    <option value="Integrator">Integrator</option>
+                    <option value="Investor">Investor</option>
+                    <option value="Other">Other</option>
+                    <option value="Partner">Partner</option>
+                    <option value="Press">Press</option>
+                    <option value="Prospect">Prospect</option>
+                    <option value="Reseller">Reseller</option>
+                    <option value="Supplier">Supplier</option>
+                    <option value="Vendor">Vendor</option>
+                  </select>                  
+              </div>
+              <div class="form-group">
+                <label for="Ownership">Ownership</label>
+                <select id="ownership">
+                    <option value="">-None-</option>
+                    <option value="Analyst">Analyst</option>
+                    <option value="Competitor">Competitor</option>
+                    <option value="Customer">Customer</option>
+                    <option value="Distributor">Distributor</option>
+                    <option value="Integrator">Integrator</option>
+                    <option value="Investor">Investor</option>
+                    <option value="Other">Other</option>
+                    <option value="Partner">Partner</option>
+                    <option value="Press">Press</option>
+                    <option value="Prospect">Prospect</option>
+                    <option value="Reseller">Reseller</option>
+                    <option value="Supplier">Supplier</option>
+                    <option value="Vendor">Vendor</option>
+                    <option value="Private">Private</option>
+                    <option value="Public">Public</option>
+                    <option value="Subsidiary">Subsidiary</option>
+                    <option value="Partnership">Partnership</option>
+                    <option value="Government">Government</option>
+                    <option value="Privately Held">Privately Held</option>
+                    <option value="Public Company">Public Company</option>
+                  </select>                  
+              </div>
+              <div class="form-group">
+                <label for="Industry">Industry</label>
+                <select id="industry">
+                    <option value="">-None-</option>
+                    <option value="Analyst">Analyst</option>
+                    <option value="Competitor">Competitor</option>
+                    <option value="Customer">Customer</option>
+                    <option value="Distributor">Distributor</option>
+                    <option value="Integrator">Integrator</option>
+                    <option value="Investor">Investor</option>
+                    <option value="Other">Other</option>
+                    <option value="Partner">Partner</option>
+                    <option value="Press">Press</option>
+                    <option value="Prospect">Prospect</option>
+                    <option value="Reseller">Reseller</option>
+                    <option value="Supplier">Supplier</option>
+                    <option value="Vendor">Vendor</option>
+                    <option value="Private">Private</option>
+                    <option value="Public">Public</option>
+                    <option value="Subsidiary">Subsidiary</option>
+                    <option value="Partnership">Partnership</option>
+                    <option value="Government">Government</option>
+                    <option value="Privately Held">Privately Held</option>
+                    <option value="Public Company">Public Company</option>
+                    <option value="ASP">ASP (Application Service Provider)</option>
+                    <option value="Data/Telecom OEM">Data/Telecom OEM</option>
+                    <option value="ERP">ERP (Enterprise Resource Planning)</option>
+                    <option value="Government/Military">Government/Military</option>
+                    <option value="Large Enterprise">Large Enterprise</option>
+                    <option value="ManagementISV">ManagementISV</option>
+                    <option value="MSP">MSP (Management Service Provider)</option>
+                    <option value="Network Equipment Enterprise">Network Equipment Enterprise</option>
+                    <option value="Non-management ISV">Non-management ISV</option>
+                    <option value="Optical Networking">Optical Networking</option>
+                    <option value="Service Provider">Service Provider</option>
+                    <option value="Small/Medium Enterprise">Small/Medium Enterprise</option>
+                    <option value="Storage Equipment">Storage Equipment</option>
+                    <option value="Storage Service Provider">Storage Service Provider</option>
+                    <option value="Systems Integrator">Systems Integrator</option>
+                    <option value="Wireless Industry">Wireless Industry</option>
+                    <option value="Financial Services">Financial Services</option>
+                    <option value="Education">Education</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Real Estate">Real Estate</option>
+                    <option value="Consulting">Consulting</option>
+                    <option value="Communications">Communications</option>
+                    <option value="Manufacturing">Manufacturing</option>
+                  </select>                
+              </div>            
+            <div class="form-group">
+                <label for="employee">Employee</label>
+                <input type="text" id="employee" name="employee">
+            </div>
+            <div class="form-group">
+                <label for="annualRevenue">Annual Revenue</label>
+                <input type="text" id="annualRevenue" name="annualRevenue" placeholder="$" oninput="formatRevenue(this)">
+            </div>
+            <div class="form-group">
+                <label for="SICCode">SIC Code</label>
+                <input type="text" id="SICCode" name="SICCode">
+            </div>
+            <div class="form-group">
+                <label for="dateTime" hidden>Creating Date</label>
+                <input type="text" id="dateTime" readonly  style="color: #C2B9B4; cursor:not-allowed;" hidden>
+                <input type="text" id="modified" hidden>
+            </div><br>
+
+            <p id="heading">Address Information</p><br>
+            <div class="form-group">
+                <label for="billingStreet">Billing Street </label>
+                <input type="text" id="billingStreet" name="billingStreet">
+            </div>
+            <div class="form-group">
+                <label for="shippingStreet">Shipping Street </label>
+                <input type="text" id="shippingStreet" name="shippingStreet">
+            </div>
+            <div class="form-group">
+                <label for="billingCity">Billing City</label>
+                <input type="text" id="billingCity" name="billingCity">
+            </div>
+            <div class="form-group">
+                <label for="shippingCity">Shipping City</label>
+                <input type="text" id="shippingCity" name="shippingCity">
+            </div>
+            <div class="form-group">
+                <label for="billingState">Billing State</label>
+                <input type="text" id="billingState" name="billingState">
+            </div>
+            <div class="form-group">
+                <label for="shippingState">Shipping State</label>
+                <input type="text" id="shippingState" name="shippingState">
+            </div>
+            <div class="form-group">
+                <label for="billingZip">Billing Zip</label>
+                <input type="text" id="billingZip" name="billingZip">
+            </div>
+            <div class="form-group">
+                <label for="shippingZip">Shipping Zip</label>
+                <input type="text" id="shippingZip" name="shippingZip">
+            </div>
+            <div class="form-group">
+                <label for="billingCountry">Billing Country</label>
+                <input type="text" id="billingCountry" name="billingCountry">
+            </div>
+            <div class="form-group">
+                <label for="shippingCountry">Shipping Country</label>
+                <input type="text" id="shippingCountry" name="shippingCountry">
+            </div><br>
+
+        </form>
+            <p id="heading">Description Information</p><br>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description"></textarea>
+            </div><br>
+            <!-- <button type="submit">Submit</button><br> -->
+    </div>
+</body>
+</html>

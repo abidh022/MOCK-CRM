@@ -114,7 +114,7 @@ body {
 }
 #actionbtn {
     padding: 8px 32px 8px 20px;
-    text-align: end;
+    text-align: start;
     cursor: pointer;
     color: #313949;
     font-size: 14px;
@@ -203,6 +203,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     margin: 10px; 
     padding: 4px; 
+    font-size: 14px;
     box-sizing: border-box;
     text-align: left; /* Ensures all text inside is left-aligned */
 }

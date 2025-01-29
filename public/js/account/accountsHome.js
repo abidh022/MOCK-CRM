@@ -1,5 +1,5 @@
 document.querySelector('#createButton')?.addEventListener('click', () => {
-    window.location.href = '/html/contacts/createContact.html';
+    window.location.href = '/html/accounts/createAccount.html';
 });
 
 let contacts = []; 

@@ -21,15 +21,19 @@ router.use(
     },
   })
 );
-
+let dt ={
+  us :'com',
+  in: 'in'
+}
 // receive the tokens and user info
 router.get("/", async (req, res) => {
   const { code } = req.query;
-
+  const location = req.query.location;
+  let loc = dt[location];
   if (code) {
     try {
       const tokenResponse = await fetch(
-        "https://accounts.zoho.in/oauth/v2/token",
+        `https://accounts.zoho.${loc}/oauth/v2/token`,
         {
           method: "POST",
           headers: {
@@ -51,8 +55,8 @@ router.get("/", async (req, res) => {
         console.log("Access Token:", tokenData.access_token);
         console.log("Refresh Token:", tokenData.refresh_token);
 
-        req.session.userId = "user_" + Date.now();
-        const userId = req.session.userId;
+        const userId = "user_" + Date.now();
+        req.session.userId = userId;
 
         req.session.tokens = req.session.tokens || {}; // Initialize if not set
         req.session.tokens[userId] = {
@@ -62,7 +66,7 @@ router.get("/", async (req, res) => {
 
         // Fetch user information from Zoho
         const userInfoResponse = await fetch(
-          "https://meeting.zoho.in/api/v2/user.json",
+          `https://meeting.zoho.${loc}/api/v2/user.json`,
           {
             method: "GET",
             headers: {
@@ -188,11 +192,10 @@ router.delete("/deletemeeting", async (req, res) => {
   const zsoid = req.session.user ? req.session.user.userDetails.zsoid : null;
   const accessToken =
     req.session.tokens && req.session.tokens[req.session.userId]
-      ? req.session.tokens[req.session.userId].accessToken
-      : null;
-  console.log(zsoid);
-  console.log(accessToken);
-  console.log(meetingKey);
+      ? req.session.tokens[req.session.userId].accessToken : null;
+      console.log(zsoid);
+      console.log(accessToken);
+      console.log(meetingKey);
 
   if (!accessToken || !zsoid || !meetingKey) {
     console.log("Missing parameters");

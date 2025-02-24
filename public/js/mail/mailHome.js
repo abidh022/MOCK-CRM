@@ -4,13 +4,18 @@ document.getElementById("compose").onclick = function() {
 };
 
 document.getElementById("token").onclick = function() {
-    const clientId = "1000.S610TJ281EO27RRU7M6P0EQJ50ADLT";  
-    const redirectUri = "https://mock-crm.vercel.app/mail"; 
+    // const clientId = "1000.S610TJ281EO27RRU7M6P0EQJ50ADLT";  //vercel
+    const clientId = "1000.Z4UWL3MAKX12X6WX4VGIQF51TPWV1Z";  //local
+
+    const service = 'mail';  // Service type (mail)
+    const redirectUri = "http://localhost:5000/oauth/callback";  // The single redirect URI you set in the API Console
     const scope = "ZohoMail.messages.READ,ZohoMail.messages.CREATE,ZohoMail.folders.ALL,ZohoMail.accounts.READ,ZohoMail.messages.ALL,ZohoMail.partner.organization.ALL,ZohoMail.accounts.READ,ZohoMail.folders.CREATE,ZohoCRM.users.READ,ZohoCRM.modules.ALL,ZohoMeeting.manageOrg.READ,ZohoCRM.org.READ";
     const accessType = "offline";
     const responseType = "code";
+
+    const state = JSON.stringify({ service: service });  // Pass the service type (mail or meeting)
   
-    const authUrl = `https://accounts.zoho.in/oauth/v2/auth?scope=${scope}&client_id=${clientId}&response_type=${responseType}&access_type=${accessType}&redirect_uri=${redirectUri}`;
+    const authUrl = `https://accounts.zoho.com/oauth/v2/auth?scope=${scope}&client_id=${clientId}&response_type=${responseType}&access_type=${accessType}&redirect_uri=${redirectUri}&state=${encodeURIComponent(state)}`;
     window.location.href = authUrl;
   };    
 
@@ -80,7 +85,7 @@ function createNewTab(tabName, folderId) {
     // Make fetchMailList an async function
     async function fetchMailList(folderId) {
         try {
-            const response = await axios.get(`/mail/mailList?folderId=${folderId}`);
+            const response = await axios.get(`/oauth/mailList?folderId=${folderId}`);
             console.log("full response", response);
 
             const emails = response.data.data;
@@ -175,7 +180,7 @@ function createNewTab(tabName, folderId) {
                 console.log('Fetching email with messageId:', currentMessageId, 'and folderId:', currentFolderId);
 
                 // Use axios to fetch the email content
-                        axios.get(`/mail/getDetailedMail?messageId=${currentMessageId}&folderId=${currentFolderId}`)
+                        axios.get(`/oauth/getDetailedMail?messageId=${currentMessageId}&folderId=${currentFolderId}`)
                         .then(response => {
                             console.log("Fetched email :", response.data);
                             console.log("Fetched email content:", response.data.data.content);

@@ -27,7 +27,7 @@
 
 
     window.onload = function() {
-      const currentPage = window.location.pathname;
+      const currentPage = window.location.pathname; 
       if (currentPage.includes("myMeeting.html")) {
         document.getElementById('upcoming').classList.add('active');
       } else if (currentPage.includes("past.html")) {

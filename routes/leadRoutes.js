@@ -8,9 +8,9 @@ const client = new MongoClient(URI);
 
 let leadsCollection;
 
-const mainFunction = async () => {
-  leadsCollection = await getlead();
-};
+  const mainFunction = async () => {
+    leadsCollection = await getlead();
+  };
 
 router.use(async (req, res, next) => {
   await mainFunction();
@@ -31,7 +31,6 @@ async function getlead() {
     let fetchLeadFromDB = leadData?.find({}).toArray();
     return fetchLeadFromDB;
 
-    // contactsCollection = db.collection("contacts");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
   }

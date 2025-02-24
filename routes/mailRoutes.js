@@ -14,7 +14,8 @@ const path = require('path');
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const REDIRECT_URI = process.env.REDIRECT_URI;
+// const REDIRECT_URI = process.env.REDIRECT_URI;
+const REDIRECT_URI = "http://localhost:5000/oauth/callback";
 
 router.use(
   session({
@@ -29,12 +30,16 @@ router.use(
 );
 
 // receive the tokens and user info
-router.get("/", async (req, res) => {
+router.get("/oauth/callback", async (req, res) => {
   console.log('its coming for getting access token');
   
-  const { code } = req.query;
+  const { code, state } = req.query; // Extract 'code' and 'state' from the callback URL
+  const { service } = JSON.parse(decodeURIComponent(state));  // Decode and parse the 'state' to get service type (mail/meeting)
 
-  if (code) {
+  console.log('Received state:', service); // 'mail' or 'meeting'
+  console.log('Authorization code:', code);  // OAuth code to exchange for tokens
+
+  if (code && service) {
     try {
       const tokenResponse = await fetch("https://accounts.zoho.com/oauth/v2/token",
         {
@@ -57,7 +62,7 @@ router.get("/", async (req, res) => {
       if (tokenData.access_token && tokenData.refresh_token) {
         console.log("Access Token:", tokenData.access_token);
         console.log("Refresh Token:", tokenData.refresh_token);
-
+        if (service === 'mail') {
         const accountInfoResponse = await fetch("https://mail.zoho.com/api/accounts", {
           method: "GET",
           headers: {
@@ -134,7 +139,7 @@ router.get("/", async (req, res) => {
                         window.sessionStorage.setItem('mailaddress', '${mailaddress}');
                         window.location.href = '/html/mail/mailHome.html';  
                     </script>
-                `);
+                `)};
       } else {
         console.error(
           "Failed to get access token and refresh token:",

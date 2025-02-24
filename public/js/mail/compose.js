@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const response = await fetch('/mail/getMailAddress');
+        const response = await fetch('/oauth/callback/getMailAddress');
         const data = await response.json();
 
         if (data.mailaddress) {
@@ -75,7 +75,7 @@ document.querySelector('#send').addEventListener('click', async () => {
         const formData = new FormData();
         formData.append('file', file);
     
-        const fileUploadResponse = await fetch('/mail/uploadAttachment', {
+        const fileUploadResponse = await fetch('/oauth/callback/uploadAttachment', {
             method: 'POST',
             body: formData
         });
@@ -95,7 +95,7 @@ document.querySelector('#send').addEventListener('click', async () => {
     }
 
     try {
-        const response = await fetch('/mail/sendMail', {
+        const response = await fetch('/oauth/sendMail', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -132,7 +132,7 @@ const actionType = urlParams.get('actionType');
 console.log(replyToMessageId,folderId,actionType);
 
 if (replyToMessageId) {
-    axios.get(`/mail/getReplyMail?messageId=${replyToMessageId}&folderId=${folderId}`)    
+    axios.get(`/oauth/getReplyMail?messageId=${replyToMessageId}&folderId=${folderId}`)    
     .then(response => {
         console.log("Email data fetched:", response.data);
         const emailContent = response.data.content.data.content;
